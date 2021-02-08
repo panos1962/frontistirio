@@ -1,2 +1,3 @@
 *.swp
 local/*
+panos[0-9]*
