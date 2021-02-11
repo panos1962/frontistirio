@@ -3,7 +3,6 @@
 const Selida = {};
 
 $(document).ready(function() {
-console.log('>>' + Selida.xristis + '<<');
 	Selida.selidaSetup();
 });
 
@@ -26,30 +25,73 @@ Selida.toolbarSetup = function() {
 	appendTo(Selida.bodyDOM);
 
 	Selida.toolbarDOM.
-	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft').text('LEFT')).
+	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
 	append(Selida.toolbarRightDOM = $('<div>').attr('id', 'toolbarRight'));
 
 	if (Selida.xristis) {
 		Selida.toolbarRightDOM.
-		append(Selida.xristis).
-		append('Έξοδος');
+		append(Selida.tabCreate({
+			'text': Selida.xristis,
+			'href': 'profile',
+		})).
+		append(Selida.tabCreate({
+			'text': 'Έξοδος',
+			'href': function() {
+				alert('asdasd');
+			},
+		}));
 	}
 
 	else {
 		Selida.toolbarRightDOM.
-		append($('<div>').addClass('toolbarTab').text('Εγγραφή')).
-		append($('<div>').addClass('toolbarTab').text('Είσοδος'));
+		append(Selida.tabCreate({
+			'text': 'Εγγραφή',
+			'href': 'egrafi',
+		})).
+		append(Selida.tabCreate({
+			'text': 'Είσοδος',
+			'href': 'isodos',
+		}));
 	}
 
 	return Selida;
 };
+
+Selida.tabCreate = function(opts) {
+	if (!opts)
+	opts = {};
+
+	if (!opts.hasOwnProperty('text'))
+	opts.text = '';
+
+	if (!opts.hasOwnProperty('target'))
+	opts.target = '_self';
+
+	const tab = $('<a>').
+	addClass('tab').
+	text(opts.text);
+
+	if (typeof(opts.href) === 'string')
+	tab.attr('href', opts.href);
+
+	else {
+		tab.attr('href', '#');
+		tab.on('click', function() {
+			opts.href();
+			return false;
+		});
+	}
+
+	return tab;
+};
+	
 
 Selida.ofelimoSetup = function() {
 	Selida.ofelimoDOM = $('<div>').
 	attr('id', 'ofelimo').
 	appendTo(Selida.bodyDOM);
 
-	$(window).on('resize', function() {
+	Selida.windowDOM.on('resize', function() {
 		Selida.ofelimoHeightSetup();
 	});
 
@@ -60,6 +102,10 @@ Selida.ribbonSetup = function() {
 	Selida.ribbonDOM = $('<div>').
 	attr('id', 'ribbon').
 	appendTo(Selida.bodyDOM);
+
+	Selida.ribbonDOM.
+	append(Selida.ribbonLeftDOM = $('<div>').attr('id', 'ribbonLeft')).
+	append(Selida.ribbonRightDOM = $('<div>').attr('id', 'ribbonRight'));
 
 	return Selida;
 };
