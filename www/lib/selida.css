@@ -1,0 +1,54 @@
+body {
+	margin: 0;
+}
+
+#toolbar {
+	padding-top: 2px;
+	height: 2em;
+	background-color: #ffeaae;
+	border-style: none none solid none;
+	border-width: 2px;
+	border-color: grey;
+}
+
+#toolbar div {
+	display: inline-block;
+}
+
+#toolbarLeft {
+	float: left;
+	text-align: left;
+}
+
+#toolbarRight {
+	float: right;
+	text-align: right;
+}
+
+.toolbarTab {
+	margin: 0 4px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.toolbarTab:before {
+	content: '[';
+	margin-right: 2px;
+}
+
+.toolbarTab:after {
+	content: ']';
+	margin-left: 2px;
+}
+
+#ribbon {
+	height: 2em;
+	background-color: #ffeaae;
+	border-style: solid none none none;
+	border-width: 2px;
+	border-color: grey;
+}
+
+#ofelimo {
+	background-color: #e7fffe;
+}

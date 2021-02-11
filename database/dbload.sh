@@ -8,15 +8,19 @@ progname="$(basename $0)"
 }
 
 usage() {
-	echo "usage: ${progname}" >&2
+	echo "usage: ${progname} -p" >&2
 	exit 1
 }
 
 errs=
+mysqlopts=
 
-while getopts ":" opt
+while getopts ":p" opt
 do
 	case "${opt}" in
+	p)
+		mysqlopts="${mysqlopts} -p"
+		;;
 	?)
 		echo "${progname}: -$OPTARG; invalid option" >&2
 		errs=1
@@ -35,4 +39,4 @@ cd "${datadir}" 2>/dev/null || {
 	exit 4
 }
 
-mysql -u root -p frontistirio <"${FRONTISTIRIO_BASEDIR}/database/dbload.sql"
+mysql -u root ${mysqlopts} frontistirio <"${FRONTISTIRIO_BASEDIR}/database/dbload.sql"

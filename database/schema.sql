@@ -89,6 +89,19 @@ CREATE TABLE `simetoxi` (
 COMMENT 'Πίνακας διδασκόντων ανά μάθημα'
 ;
 
+CREATE TABLE `xristis` (
+	`login`		CHARACTER(32) NOT NULL COMMENT 'Login name',
+	`onomateponimo`	CHARACTER(64) NOT NULL COMMENT 'Ονοματεπώνυμο',
+	`password`	CHARACTER(40) NOT NULL COMMENT 'Password in SHA-1',
+
+	PRIMARY KEY (
+		`login`
+	) USING BTREE
+)
+
+COMMENT 'Πίνακας χρηστών της εφαρμογής'
+;
+
 COMMIT WORK
 ;
 
