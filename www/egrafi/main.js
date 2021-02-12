@@ -25,10 +25,10 @@ Egrafi.formaCreate = function() {
 	append(Egrafi.onomateponimoDOM = $('<input>').attr('id', 'onomateponimo')).
 	append($('<br>')).
 	append($('<div>').addClass('prompt').text('Password')).
-	append(Egrafi.password1DOM = $('<input>')).
+	append(Egrafi.password1DOM = $('<input>').attr('type', 'password')).
 	append($('<br>')).
 	append($('<div>').addClass('prompt').text('Repeat')).
-	append(Egrafi.password2DOM = $('<input>'));
+	append(Egrafi.password2DOM = $('<input>').attr('type', 'password'));
 
 /*
 */
