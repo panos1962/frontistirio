@@ -4,6 +4,9 @@ const Selida = {};
 
 $(document).ready(function() {
 	Selida.selidaSetup();
+
+	if (Selida.hasOwnProperty('selidaInit'))
+	Selida.selidaInit();
 });
 
 Selida.selidaSetup = function() {
@@ -37,16 +40,24 @@ Selida.toolbarSetup = function() {
 		append(Selida.tabCreate({
 			'text': 'Έξοδος',
 			'href': function() {
-				alert('asdasd');
+				$.post({
+					'url': Selida.baseUrl + '/lib/exodos.php',
+					'success': function() {
+						self.location = Selida.baseUrl;
+					},
+					'fail': function(err) {
+						console.error(err);
+					},
+				});
 			},
 		}));
 	}
 
 	else {
 		Selida.toolbarRightDOM.
-		append(Selida.tabCreate({
+		append(Selida.egrafiTabDOM = Selida.tabCreate({
 			'text': 'Εγγραφή',
-			'href': 'egrafi',
+			'href': Selida.baseUrl + '/egrafi',
 		})).
 		append(Selida.tabCreate({
 			'text': 'Είσοδος',

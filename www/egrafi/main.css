@@ -1,0 +1,32 @@
+#egrafiForma {
+	position: absolute;
+	top: 100px;
+	right: 100px;
+}
+
+.prompt {
+	width: 9.2em;
+	margin: 4px 4px 4px 0px;
+}
+
+input {
+	width: 10em;
+}
+
+#login {
+	width: 20em;
+}
+
+#onomateponimo {
+	width: 20em;
+}
+
+#panel {
+	margin-top: 8px;
+	text-align: center;
+}
+
+#panel input {
+	width: auto;
+	margin: 0px 16px;
+}
