@@ -17,7 +17,12 @@ Selida.selidaSetup = function() {
 	toolbarSetup().
 	ofelimoSetup().
 	ribbonSetup().
-	ofelimoHeightSetup();
+	ofelimoHeightSetup(false);
+
+	setTimeout(function() {
+		Selida.
+		ofelimoHeightSetup();
+	}, 200);
 
 	return Selida;
 };
@@ -133,13 +138,14 @@ Selida.ribbonSetup = function() {
 	return Selida;
 };
 
-Selida.ofelimoHeightSetup = function() {
+Selida.ofelimoHeightSetup = function(scroll) {
 	const pad = 1;
 
+	Selida.bodyDOM.css('overflow-y', 'hidden');
 	Selida.ofelimoDOM.css({
 		'padding-top': pad + 'px',
 		'padding-bottom': pad + 'px',
-		'height': 'auto',
+		'min-height': 0,
 	});
 
 	const th = Selida.toolbarDOM.outerHeight();
@@ -147,7 +153,10 @@ Selida.ofelimoHeightSetup = function() {
 	const wh = Selida.windowDOM.height();
 	const oh = wh - th - rh - pad - pad;
 
-	Selida.ofelimoDOM.css('height', oh + 'px');
+	Selida.ofelimoDOM.css('min-height', oh + 'px');
+
+	if (scroll !== false)
+	Selida.bodyDOM.css('overflow-y', '');
 
 	return Selida;
 };
