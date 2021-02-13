@@ -11,7 +11,7 @@ add:
 	@git add .
 
 commit:
-	@git commit -m "modifications" .
+	@git commit -m "modifications" .; exit 0
 
 push:
 	@git push
