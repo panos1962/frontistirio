@@ -14,7 +14,8 @@ push:
 	@git push
 
 git:
-	@make commit && make push
+	@make commit || exit 0
+	@make push
 
 pull:
 	@git pull
