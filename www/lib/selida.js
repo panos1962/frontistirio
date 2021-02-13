@@ -31,6 +31,9 @@ Selida.toolbarSetup = function() {
 	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
 	append(Selida.toolbarRightDOM = $('<div>').attr('id', 'toolbarRight'));
 
+	Selida.toolbarLeftDOM.
+	prepend(Selida.arxikiTabDOM = Selida.tabArxiki());
+
 	if (Selida.xristis) {
 		Selida.toolbarRightDOM.
 		append(Selida.tabCreate({

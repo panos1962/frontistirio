@@ -4,7 +4,7 @@ const Isodos = {};
 
 Selida.init = function() {
 	Selida.isodosTabDOM.remove();
-	Selida.tabArxiki().appendTo(Selida.toolbarRightDOM);
+	Selida.arxikiTabDOM.appendTo(Selida.toolbarRightDOM);
 
 	Isodos.formaCreate();
 };

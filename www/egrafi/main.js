@@ -4,7 +4,7 @@ const Egrafi = {};
 
 Selida.init = function() {
 	Selida.egrafiTabDOM.remove();
-	Selida.tabArxiki().prependTo(Selida.toolbarRightDOM);
+	Selida.arxikiTabDOM.prependTo(Selida.toolbarRightDOM);
 
 	Egrafi.formaCreate();
 };
