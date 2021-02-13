@@ -14,8 +14,7 @@ push:
 	@git push
 
 git:
-	@make -s commit
-	@make -s push
+	@git commit -m "modifications" . && git push
 
 pull:
 	@git pull
