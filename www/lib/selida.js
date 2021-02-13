@@ -5,8 +5,8 @@ const Selida = {};
 $(document).ready(function() {
 	Selida.selidaSetup();
 
-	if (Selida.hasOwnProperty('selidaInit'))
-	Selida.selidaInit();
+	if (Selida.hasOwnProperty('init'))
+	Selida.init();
 });
 
 Selida.selidaSetup = function() {

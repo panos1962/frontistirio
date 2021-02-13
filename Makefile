@@ -7,6 +7,9 @@ status:
 diff:
 	@git diff
 
+add:
+	@git add .
+
 commit:
 	@git commit -m "modifications" .
 

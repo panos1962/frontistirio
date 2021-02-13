@@ -2,7 +2,7 @@
 
 const Egrafi = {};
 
-Selida.selidaInit = function() {
+Selida.init = function() {
 	Selida.egrafiTabDOM.remove();
 	Selida.tabArxiki().prependTo(Selida.toolbarRightDOM);
 

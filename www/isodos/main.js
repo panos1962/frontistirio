@@ -2,7 +2,7 @@
 
 const Isodos = {};
 
-Selida.selidaInit = function() {
+Selida.init = function() {
 	Selida.isodosTabDOM.remove();
 	Selida.tabArxiki().appendTo(Selida.toolbarRightDOM);
 

@@ -1,4 +1,4 @@
 <?php
-session_start();
-unset($_SESSION["xristis"]);
+require_once("selida.php");
+Selida::anonimi_xrisi();
 ?>

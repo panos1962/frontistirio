@@ -18,6 +18,6 @@ exit(0);
 if (Selida::$db->affected_rows !== 1)
 exit(0);
 
-$_SESSION["xristis"] = $_POST["login"];
+Selida::eponimi_xrisi($_POST["login"]);
 exit("OK");
 ?>
