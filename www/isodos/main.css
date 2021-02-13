@@ -1,4 +1,4 @@
-#egrafiForma {
+#isodosForma {
 	position: absolute;
 	top: 100px;
 	right: 100px;
@@ -13,10 +13,6 @@ input {
 }
 
 #login {
-	width: 20em;
-}
-
-#onomateponimo {
 	width: 20em;
 }
 

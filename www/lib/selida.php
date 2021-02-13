@@ -10,36 +10,58 @@ class Selida {
 
 ///////////////////////////////////////////////////////////////////////////////@
 
-static public function css($file) {
-?>
-<link rel="stylesheet" href="<?php print $file; ?>.css">
-<?php
+public static function eponimi_xrisi($xristis) {
+	$_SESSION["xristis"] = $xristis;
+	return __CLASS__;
 }
 
-static public function javascript($file) {
-?>
-<script src="<?php print $file; ?>.js"></script>
-<?php
+public static function anonimi_xrisi() {
+	unset($_SESSION["xristis"]);
+	return __CLASS__;
 }
 
 ///////////////////////////////////////////////////////////////////////////////@
 
-static public function head_open() {
+public static function css($file) {
+?>
+<link rel="stylesheet" href="<?php print $file; ?>.css">
+<?php
+	return __CLASS__;
+}
+
+public static function javascript($file) {
+?>
+<script src="<?php print $file; ?>.js"></script>
+<?php
+	return __CLASS__;
+}
+
+///////////////////////////////////////////////////////////////////////////////@
+
+// Η function "head_open" εκτυπώνει το αρχικό μέρος της σελίδας, δηλαδή ανοίγει
+// το html section και αμέσως μετά ανοίγει το head section στο οποίο μάλιστα
+// εισάγει και κάποια βασικά στοιχεία που είναι κοινά σε όλες τις σελίδες που
+// διαχειρίζεται η εφαρμογή, π.χ. favicon, βιβλιοθήκη jQuery κλπ. Σημαντική
+// είναι, επίσης, η μεταφορά στοιχείων από τον server στον client με την
+// εμφύτευση στη σελίδα Javascript snippet που κατασκευάζεται on the fly.
+
+public static function head_open() {
 ?>
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="icon" type="image/png" href="<?php print BASE_URL; ?>/ikona/frontistirio.png">
 <?php
-selida::css(BASE_URL . "/lib/selida");
-selida::javascript(BASE_URL . "/lib/selida");
+Selida::
+css(BASE_URL . "/lib/selida")::
+javascript(BASE_URL . "/lib/selida");
 ?>
 <script>
-Selida.baseUrl = '<?php print BASE_URL; ?>';
+Selida.baseUrl = <?php print Selida::json_string(BASE_URL); ?>;
 <?php
 if (array_key_exists("xristis", $_SESSION)) {
 ?>
-Selida.xristis = '<?php print $_SESSION["xristis"]; ?>';
+Selida.xristis = <?php print Selida::json_string($_SESSION["xristis"]); ?>;
 <?php
 }
 else {
@@ -50,9 +72,33 @@ delete Selida.xristis;
 ?>
 </script>
 <?php
+	if (file_exists("main.css"))
+	Selida::css("main");
+
+	if (file_exists("main.js"))
+	Selida::javascript("main");
+
+	return __CLASS__;
 }
 
-static public function titlos($titlos) {
+// Η function "head_close" «κλείνει» το head section και το html section.
+// Την χρησιμοποιούμε σε σελίδες στις οποίες το body section είναι κενό.
+
+public static function head_close() {
+?>
+</head>
+<body>
+</body>
+</html>
+<?php
+	return __CLASS__;
+}
+
+// Η function "titlos" δέχεται ένα string και το θέτει ως τίτλο στην τρέχουσα
+// σελίδα μέσω του titlos HTML tag. Υπενθυμίζουμε ότι ο τίτλος εμφανίζεται
+// στο tab της σελίδας.
+
+public static function titlos($titlos) {
 ?>
 <title>
 <?php
@@ -60,55 +106,122 @@ print $titlos;
 ?>
 </title>
 <?php
+	return __CLASS__;
 }
 
-static public function body_open() {
+// Η function "body_open" «κλείνει» το head section της σελίδας και «ανοίγει»
+// το body section.
+
+public static function body_open() {
 ?>
 </head>
 <body>
 <?php
+	return __CLASS__;
 }
 
-static public function close() {
+// Η function "body_close" «κλείνει» το body section και το html section.
+// Συνήθως είναι η τελευταία function που καλούμε κατά την προετοιμασία
+// οποιασδήποτε σελίδας.
+
+public static function body_close() {
 ?>
 </body>
 </html>
 <?php
+	return __CLASS__;
 }
 
 ///////////////////////////////////////////////////////////////////////////////@
 
-static public $db = NULL;
+// Ακολουθούν properties και functions που σχετίζονται με τη διαχείριση της
+// database. Θυμίζουμε ότι ως RDBMS χρησιμοποιούμε είτε το MySQL, είτε το
+// MariaDB.
 
-static public function dbopen() {
+// Για τη διαχείριση της database θα χρειαστούμε έναν database handler τον
+// οποίο να τον γνωρίζουμε globaly. Για το σκοπό αυτό ορίζουμε την property
+// "db" η οποία αρχικά τίθεται null αλλά μπορεί να καταστεί database handler
+// μέσω της function "dbopen".
+
+public static $db = NULL;
+
+// Η function "dbopen" διαβάζει από συγκεκριμένο αρχείο της εφαρμογής το
+// password του γενικού λογαριασμού "frontistirio" μέσω του οποίου συνδεόμαστε
+// στην database. Ο λογαριασμός έχει πλήρη DML δικαιώματα, τουτέστιν select,
+// insert, update και delete.
+
+public static function dbopen() {
+	// Αν υπάρχει ήδη σύνδεση με την database επιστρέφουμε πάραυτα.
+
+	if (self::$db)
+	return __CLASS__;
+
 	$pass = rtrim(file_get_contents(BASE_DIR . "/local/secret/sesami.txt"));
 	self::$db = new mysqli("localhost", "frontistirio", $pass, "frontistirio");
 
 	if (self::$db->connect_errno) {
+		$errmsg = self::$db->connect_error;
 		self::$db = NULL;
-		exit(1);
+		throw new Exception($errmsg);
 	}
 
-	if (!self::$db->set_charset("utf8mb4"))
-	exit(1);
+	self::$db->set_charset("utf8mb4");
 
-	return TRUE;
+	if (self::$db->errno)
+	throw new Exception(self::$db->error);
 }
 
-static public function dbclose() {
+// Η function "dbclose" καταργεί τη σύνδεση με την database και καλείται
+// συνήθως αυτόματα κατά την έξοδο από το πρόγραμμα. Ο global database
+// handler "db" μας δείχνει αν υπάρχει ενεργή σύνδεση με την database,
+// οπότε φροντίζουμε μετά την αποσύνδεση του προγράμματος από την database
+// τον επαναφέρουμε σε null.
+
+public static function dbclose() {
 	if (!isset(self::$db))
-	return;
+	return __CLASS__;
 
 	self::$db->close();
 	self::$db = NULL;
+	return __CLASS__;
 }
 
-static public function sql_string($s) {
-	return "'" . self::$db->real_escape_string($s) . "'";
+// Η function "sql_string" είναι χρήσιμη στην εμφύτευση strings μέσα σε SQL
+// scripts. Πιο συγκεκριμένα, κάνει escaping σε ειδικούς χαρακτήρες, π.χ.
+// backslashes, quotes κλπ, και επιστρέφει το string μέσα σε απλά quotes.
+// Αν δεν επιθυμούμε τα quotes γύρω από το string, μπορούμε να περάσουμε
+// ως δεύτερη παράμετρο ένα κενό string.
+
+public static function sql_string($s, $quote = "'") {
+	self::dbopen();
+	return $quote . self::$db->real_escape_string($s) . $quote;
+}
+
+// Η function "query" επιχειρεί να εκτελέσει το query που περνάμε ως μοναδική
+// παράμετρο και επιστρέφει το αποτέλεσμα.
+
+public static function query($query) {
+	self::dbopen();
+	return self::$db->query($query);
+}
+
+///////////////////////////////////////////////////////////////////////////////@
+
+// Η function "json_string" δέχεται ένα string και το επιστρέφει σε μορφή
+// ασφαλή προκειμένου να χρησιμοποιηθεί ως json string value, π.χ. το string
+// panos επιστρέφεται ως "panos", ενώ το string p"ano"s επιστρέφεται ως
+// "p\"ano\"s".
+
+public static function json_string($s) {
+	return json_encode($s,
+	JSON_FORCE_OBJECT |
+	JSON_UNESCAPED_UNICODE);
 }
 
 ///////////////////////////////////////////////////////////////////////////////@
 }
+
+// Κατά την έξοδο από το πρόγραμμα κλείνουμε τυχόν σύνδεσή μας με την database.
 
 register_shutdown_function('Selida::dbclose');
 ?>

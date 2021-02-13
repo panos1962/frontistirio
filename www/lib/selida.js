@@ -59,9 +59,9 @@ Selida.toolbarSetup = function() {
 			'text': 'Εγγραφή',
 			'href': Selida.baseUrl + '/egrafi',
 		})).
-		append(Selida.tabCreate({
+		append(Selida.isodosTabDOM = Selida.tabCreate({
 			'text': 'Είσοδος',
-			'href': 'isodos',
+			'href': Selida.baseUrl + '/isodos',
 		}));
 	}
 
@@ -83,7 +83,10 @@ Selida.tabCreate = function(opts) {
 	text(opts.text);
 
 	if (typeof(opts.href) === 'string')
-	tab.attr('href', opts.href);
+	tab.attr({
+		'href': opts.href,
+		'target': opts.target,
+	});
 
 	else {
 		tab.attr('href', '#');
@@ -95,7 +98,13 @@ Selida.tabCreate = function(opts) {
 
 	return tab;
 };
-	
+
+Selida.tabArxiki = function() {
+	return Selida.tabCreate({
+		'href': Selida.baseUrl,
+		'text': 'Αρχική',
+	});
+};
 
 Selida.ofelimoSetup = function() {
 	Selida.ofelimoDOM = $('<div>').
@@ -130,6 +139,22 @@ Selida.ofelimoHeightSetup = function() {
 	const oh = wh - th - rh;
 
 	Selida.ofelimoDOM.css('height', oh + 'px');
+
+	return Selida;
+};
+
+Selida.widthFix = function(dom, selector) {
+	let cl = dom.children(selector);
+	let cw = 0;
+
+	cl.each(function() {
+		let w = $(this).innerWidth();
+
+		if (w > cw)
+		cw = w;
+	});
+
+	cl.css('width', cw + 'px');
 
 	return Selida;
 };

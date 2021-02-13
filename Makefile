@@ -13,6 +13,10 @@ commit:
 push:
 	@git push
 
+git:
+	@make commit
+	@make push
+
 pull:
 	@git pull
 

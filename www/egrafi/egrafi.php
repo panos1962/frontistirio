@@ -1,8 +1,6 @@
 <?php
 require_once("../lib/selida.php");
-unset($_SESSION["xristis"]);
-
-Selida::dbopen();
+Selida::anonimi_xrisi();
 
 $query = "INSERT INTO `xristis` (" .
 	"`login`, " .
@@ -14,11 +12,11 @@ $query = "INSERT INTO `xristis` (" .
 	Selida::sql_string(sha1($_POST["password"])) .
 ")";
 
-if (!Selida::$db->query($query))
-exit();
+if (!Selida::query($query))
+exit(0);
 
 if (Selida::$db->affected_rows !== 1)
-exit();
+exit(0);
 
 $_SESSION["xristis"] = $_POST["login"];
 exit("OK");
