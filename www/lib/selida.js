@@ -134,12 +134,18 @@ Selida.ribbonSetup = function() {
 };
 
 Selida.ofelimoHeightSetup = function() {
-	Selida.ofelimoDOM.css('height', 'auto');
+	const pad = 1;
+
+	Selida.ofelimoDOM.css({
+		'padding-top': pad + 'px',
+		'padding-bottom': pad + 'px',
+		'height': 'auto',
+	});
 
 	const th = Selida.toolbarDOM.outerHeight();
 	const rh = Selida.ribbonDOM.outerHeight();
 	const wh = Selida.windowDOM.height();
-	const oh = wh - th - rh;
+	const oh = wh - th - rh - pad - pad;
 
 	Selida.ofelimoDOM.css('height', oh + 'px');
 

@@ -44,6 +44,14 @@ public static function anonimi_xrisi() {
 	return __CLASS__;
 }
 
+public static function is_xristis() {
+	return array_key_exists("xristis", $_SESSION);
+}
+
+public static function no_xristis() {
+	return !self::is_xristis();
+}
+
 ///////////////////////////////////////////////////////////////////////////////@
 
 // Η function "css" διαβάζει διευκολύνει την εμφύτευση css αρχείων στη σελίδα.
@@ -79,6 +87,8 @@ public static function head_open() {
 ?>
 <html>
 <head>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="icon" type="image/png" href="<?php print BASE_URL; ?>/ikona/frontistirio.png">
 <?php
