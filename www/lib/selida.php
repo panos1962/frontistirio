@@ -3,8 +3,19 @@ session_start();
 
 ///////////////////////////////////////////////////////////////////////////////@
 
-define("BASE_DIR", "/home/panos/Desktop/frontistirio");
-define("BASE_URL", $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . "/frontistirio");
+// Εντοπίζουμε το directory στο οποίο βρίσκεται η παρούσα βιβλιοθήκη δηλαδή
+// το αρχείο "www/lib/selida.php". Αυτό το directory αποτελεί το directory
+// βάσης της εφαρμογής και το κρατάμε στη συμβολική σταθερά "BASE_DIR"
+// προκειμένου να έχουμε εύκολη και ασφαλή πρόσβαση σε οποιοδήποτε αρχείο
+// της εφαρμογής, χρησιμοποιώντας absolute pathnames.
+
+define("BASE_DIR", preg_replace("/\/www\/lib\/selida\.php$/", "", __FILE__));
+
+// Στο αρχείο "local/conf.php" γράφουμε per site στοιχεία, τουτέστιν στοιχεία
+// που αφορούν στην εκάστοτε εγκατάσταση της εφαρμογής, π.χ. άλλα στοιχεία για
+// το developemnt και άλλα για το production σύστημα.
+
+require_once(BASE_DIR . "/local/conf.php");
 
 class Selida {
 
