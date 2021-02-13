@@ -1,5 +1,5 @@
 all:
-	@echo "make { status | diff | commit | push | pull | dbrefresh | test }"
+	@echo "make { status | diff | add | commit | push | pull | git | dbrefresh | test }"
 
 status:
 	@git status
