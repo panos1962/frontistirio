@@ -17,14 +17,27 @@ define("BASE_DIR", preg_replace("/\/www\/lib\/selida\.php$/", "", __FILE__));
 
 require_once(BASE_DIR . "/local/conf.php");
 
-class Selida {
+// Στο σημείο αυτό δημιουργούμε το singleton "Selida" το οποίο θα εξοπλίσουμε
+// με properties και functions (methods) που θα μας διευκολύνουν στη γραφή
+// των PHP προγραμμάτων της εφαρμογής.
 
+class Selida {
 ///////////////////////////////////////////////////////////////////////////////@
+
+// Η function "eponimi_xrisi" θέτει το session στοιχείο "xristis" στο login
+// name του χρήστη που έχει πραγματοποιήσει επιτυχημένη είσοδο στο σύστημα
+// με τα credentials που έχουν καταχωρηθεί στην database κατά την εγγραφή
+// του χρήστη στο σύστημα, ή μετά από τυχόν αλλαγές που θα πραγματοποιήσει
+// ο χρήστης μέσω της σχετικής σελίδας της εφαρμογής.
 
 public static function eponimi_xrisi($xristis) {
 	$_SESSION["xristis"] = $xristis;
 	return __CLASS__;
 }
+
+// Η function "anonimi_xrisi" αφαιρεί το session στοιχείο "xristis" οπότε
+// τα web προγράμματα της εφαρμογής θεωρούμε ότι λειτουργούν σε ανώνυμη
+// χρήση.
 
 public static function anonimi_xrisi() {
 	unset($_SESSION["xristis"]);
@@ -33,12 +46,18 @@ public static function anonimi_xrisi() {
 
 ///////////////////////////////////////////////////////////////////////////////@
 
+// Η function "css" διαβάζει διευκολύνει την εμφύτευση css αρχείων στη σελίδα.
+// Πρόκειται για wrapper γύρω από την αντίστοιχη HTML εντολή.
+
 public static function css($file) {
 ?>
 <link rel="stylesheet" href="<?php print $file; ?>.css">
 <?php
 	return __CLASS__;
 }
+
+// Η function "javascript" είναι παρόμοια με τη function "css" αλλά αφορά σε
+// javascript files.
 
 public static function javascript($file) {
 ?>
