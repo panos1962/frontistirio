@@ -8,7 +8,7 @@ diff:
 	@git diff
 
 commit:
-	@git commit -m "modifications" .; exit 0
+	@git commit -m "modifications" .
 
 push:
 	@git push
