@@ -8,12 +8,9 @@
 	margin: 4px 4px 4px 0px;
 }
 
-input {
-	width: 10em;
-}
-
-#login {
-	width: 20em;
+#login,
+#password {
+	width: 12em;
 }
 
 #panel {

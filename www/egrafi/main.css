@@ -8,16 +8,14 @@
 	margin: 4px 4px 4px 0px;
 }
 
-input {
-	width: 10em;
-}
-
-#login {
-	width: 20em;
-}
-
 #onomateponimo {
 	width: 20em;
+}
+
+#login,
+#password1,
+#password2 {
+	width: 12em;
 }
 
 #panel {

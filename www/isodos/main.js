@@ -18,7 +18,10 @@ Isodos.formaCreate = function() {
 	append(Isodos.loginDOM = $('<input>').attr('id', 'login')).
 	append($('<br>')).
 	append($('<div>').addClass('prompt').text('Password')).
-	append(Isodos.passwordDOM = $('<input>').attr('type', 'password'));
+	append(Isodos.passwordDOM = $('<input>').attr({
+		'id': 'password',
+		'type': 'password'
+	}));
 
 	const panel = $('<div>').attr('id', 'panel').appendTo(forma);
 
