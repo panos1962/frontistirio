@@ -2,11 +2,11 @@
 
 const Egrafi = {};
 
-Selida.init = function() {
+Selida.init.push(function() {
 	Selida.egrafiTabDOM.remove();
 	Selida.arxikiTabDOM.prependTo(Selida.toolbarRightDOM);
 	Egrafi.formaCreate();
-};
+});
 
 Egrafi.formaCreate = function() {
 	const forma = $('<form>').

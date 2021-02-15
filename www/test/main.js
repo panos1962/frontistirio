@@ -1,3 +1,3 @@
-Selida.init = function() {
+Selida.init.push(function() {
 	console.log('XXX');
-};
+});

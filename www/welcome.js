@@ -1,5 +1,5 @@
-Selida.init = function() {
+Selida.init.push(function() {
 	$('#welcome').
 	appendTo(Selida.ofelimoDOM).
 	css('display', 'block');
-};
+});

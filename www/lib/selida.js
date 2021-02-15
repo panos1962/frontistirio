@@ -1,12 +1,14 @@
 "use strict";
 
 const Selida = {};
+Selida.init = [];
 
 $(document).ready(function() {
 	Selida.selidaSetup();
 
-	if (Selida.hasOwnProperty('init'))
-	Selida.init();
+	Selida.init.forEach(function(x) {
+		x();
+	});
 });
 
 Selida.selidaSetup = function() {

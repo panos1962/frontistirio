@@ -2,11 +2,11 @@
 
 const Isodos = {};
 
-Selida.init = function() {
+Selida.init.push(function() {
 	Selida.isodosTabDOM.remove();
 	Selida.arxikiTabDOM.appendTo(Selida.toolbarRightDOM);
 	Isodos.formaCreate();
-};
+});
 
 Isodos.formaCreate = function() {
 	const forma = $('<form>').
