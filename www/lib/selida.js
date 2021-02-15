@@ -50,7 +50,8 @@ Selida.toolbarSetup = function() {
 			'href': function() {
 				$.post({
 					'url': Selida.baseUrl + '/lib/exodos.php',
-					'success': function() {
+					'success': function(rsp) {
+						if (rsp === 'OK')
 						self.location = Selida.baseUrl;
 					},
 					'fail': function(err) {

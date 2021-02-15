@@ -5,7 +5,6 @@ const Egrafi = {};
 Selida.init = function() {
 	Selida.egrafiTabDOM.remove();
 	Selida.arxikiTabDOM.prependTo(Selida.toolbarRightDOM);
-
 	Egrafi.formaCreate();
 };
 
@@ -27,13 +26,6 @@ Egrafi.formaCreate = function() {
 	append($('<div>').addClass('prompt').text('Repeat')).
 	append(Egrafi.password2DOM = $('<input>').attr('type', 'password'));
 		
-/*
-*/
-Egrafi.loginDOM.val('nikos');
-Egrafi.onomateponimoDOM.val('Νίκος Χατζηνικολάου');
-Egrafi.password1DOM.val('xxx');
-Egrafi.password2DOM.val('xxx');
-
 	const panel = $('<div>').attr('id', 'panel').appendTo(forma);
 
 	panel.
@@ -44,6 +36,8 @@ Egrafi.password2DOM.val('xxx');
 	append($('<input>').attr({
 		'type': 'reset',
 		'value': 'Clear',
+	}).on('click', function() {
+		Egrafi.loginDOM.focus();
 	})).
 	append($('<input>').attr({
 		'type': 'button',
@@ -70,7 +64,7 @@ Egrafi.submitData = function() {
 		return false;
 	}
 
-	if (!login.match(/^[0-9a-zA-Z@.-]+$/)) {
+	if (!login.match(/^[A-Za-z][0-9a-zA-Z_@.-]*$/)) {
 		Egrafi.loginDOM.focus();
 		return false;
 	}

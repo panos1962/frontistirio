@@ -1,5 +1,6 @@
 <?php
 require_once("../lib/selida.php");
+
 Selida::anonimi_xrisi();
 
 $query = "SELECT `login` FROM `xristis`" .

@@ -99,7 +99,7 @@ javascript(BASE_URL . "/lib/selida");
 <script>
 Selida.baseUrl = <?php print Selida::json_string(BASE_URL); ?>;
 <?php
-if (array_key_exists("xristis", $_SESSION)) {
+if (self::is_xristis()) {
 ?>
 Selida.xristis = <?php print Selida::json_string($_SESSION["xristis"]); ?>;
 <?php
@@ -121,19 +121,6 @@ delete Selida.xristis;
 	return __CLASS__;
 }
 
-// Η function "head_close" «κλείνει» το head section και το html section.
-// Την χρησιμοποιούμε σε σελίδες στις οποίες το body section είναι κενό.
-
-public static function head_close() {
-?>
-</head>
-<body>
-</body>
-</html>
-<?php
-	return __CLASS__;
-}
-
 // Η function "titlos" δέχεται ένα string και το θέτει ως τίτλο στην τρέχουσα
 // σελίδα μέσω του titlos HTML tag. Υπενθυμίζουμε ότι ο τίτλος εμφανίζεται
 // στο tab της σελίδας.
@@ -145,6 +132,19 @@ public static function titlos($titlos) {
 print $titlos;
 ?>
 </title>
+<?php
+	return __CLASS__;
+}
+
+// Η function "head_close" «κλείνει» το head section και το html section.
+// Την χρησιμοποιούμε σε σελίδες στις οποίες το body section είναι κενό.
+
+public static function head_close() {
+?>
+</head>
+<body>
+</body>
+</html>
 <?php
 	return __CLASS__;
 }

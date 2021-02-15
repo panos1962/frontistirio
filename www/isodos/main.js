@@ -5,7 +5,6 @@ const Isodos = {};
 Selida.init = function() {
 	Selida.isodosTabDOM.remove();
 	Selida.arxikiTabDOM.appendTo(Selida.toolbarRightDOM);
-
 	Isodos.formaCreate();
 };
 
@@ -31,6 +30,8 @@ Isodos.formaCreate = function() {
 	append($('<input>').attr({
 		'type': 'reset',
 		'value': 'Clear',
+	}).on('click', function() {
+		Isodos.loginDOM.focus();
 	})).
 	append($('<input>').attr({
 		'type': 'button',
@@ -70,7 +71,7 @@ Isodos.submitData = function() {
 			self.location = Selida.baseUrl;
 
 			else
-			Isodos.passwordDOM.focus();
+			Isodos.passwordDOM.select();
 		},
 		'error': function(err) {
 			console.error(err);
