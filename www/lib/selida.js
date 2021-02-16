@@ -43,9 +43,9 @@ Selida.toolbarSetup = function() {
 
 	if (Selida.xristis) {
 		Selida.toolbarRightDOM.
-		append(Selida.tabCreate({
+		append(Selida.xristisTabDOM = Selida.tabCreate({
 			'text': Selida.xristis,
-			'href': 'profile',
+			'href': Selida.baseUrl + '/egrafi?update',
 		})).
 		append(Selida.tabCreate({
 			'text': 'Έξοδος',

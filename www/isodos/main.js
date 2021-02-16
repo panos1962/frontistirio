@@ -9,11 +9,11 @@ Selida.init.push(function() {
 });
 
 Isodos.formaCreate = function() {
-	const forma = $('<form>').
+	Isodos.formaDOM = $('<form>').
 	addClass('forma').
 	attr('id', 'isodosForma');
 
-	forma.
+	Isodos.formaDOM.
 	append($('<div>').addClass('prompt').text('Login')).
 	append(Isodos.loginDOM = $('<input>').attr('id', 'login')).
 	append($('<br>')).
@@ -23,7 +23,7 @@ Isodos.formaCreate = function() {
 		'type': 'password'
 	}));
 
-	const panel = $('<div>').attr('id', 'panel').appendTo(forma);
+	const panel = $('<div>').attr('id', 'panel').appendTo(Isodos.formaDOM);
 
 	panel.
 	append($('<input>').attr({
@@ -43,14 +43,16 @@ Isodos.formaCreate = function() {
 		self.location = Selida.baseUrl;
 	}));
 
-	forma.on('submit', function() {
+	Isodos.formaDOM.on('submit', function() {
 		Isodos.submitData();
 		return false;
 	});
 
-	forma.appendTo(Selida.ofelimoDOM);
-	Selida.widthFix(forma, '.prompt');
+	Isodos.formaDOM.appendTo(Selida.ofelimoDOM);
+	Selida.widthFix(Isodos.formaDOM, '.prompt');
 	Isodos.loginDOM.focus();
+
+	return Isodos;
 };
 
 Isodos.submitData = function() {
@@ -63,6 +65,7 @@ Isodos.submitData = function() {
 
 	const password = Isodos.passwordDOM.val();
 
+	Isodos.suspend(true);
 	$.post({
 		'url': 'isodos.php',
 		'data': {
@@ -74,11 +77,18 @@ Isodos.submitData = function() {
 			self.location = Selida.baseUrl;
 
 			else
-			Isodos.passwordDOM.select();
+			Isodos.suspend(false).passwordDOM.select();
 		},
 		'error': function(err) {
 			console.error(err);
-			Isodos.loginDOM.focus();
+			Isodos.suspend(false).loginDOM.focus();
 		},
 	});
+
+	return Isodos;
+};
+
+Isodos.suspend = function(suspend) {
+	Isodos.formaDOM.find('input').prop('disabled', suspend);
+	return Isodos;
 };

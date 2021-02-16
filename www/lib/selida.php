@@ -39,8 +39,10 @@ public static function eponimi_xrisi($xristis) {
 // τα web προγράμματα της εφαρμογής θεωρούμε ότι λειτουργούν σε ανώνυμη
 // χρήση.
 
-public static function anonimi_xrisi() {
+public static function anonimi_xrisi($update = FALSE) {
+	if (!$update)
 	unset($_SESSION["xristis"]);
+
 	return __CLASS__;
 }
 
