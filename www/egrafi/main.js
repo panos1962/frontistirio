@@ -59,12 +59,6 @@ Egrafi.formaCreate = function() {
 		'value': 'Submit',
 	})).
 	append($('<input>').attr({
-		'type': 'reset',
-		'value': 'Clear',
-	}).on('click', function() {
-		Egrafi.loginDOM.focus();
-	})).
-	append($('<input>').attr({
 		'type': 'button',
 		'value': 'Cancel',
 	}).on('click', function() {
