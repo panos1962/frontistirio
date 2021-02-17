@@ -89,6 +89,6 @@ Isodos.submitData = function() {
 };
 
 Isodos.suspend = function(suspend) {
-	Isodos.formaDOM.find('input').prop('disabled', suspend);
+	Selida.formSuspend(Isodos.formaDOM, suspend);
 	return Isodos;
 };

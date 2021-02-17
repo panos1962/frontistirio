@@ -3,7 +3,7 @@
 const Account = {};
 
 Selida.init.push(function() {
-	if (Account.updateMode && (!Selida.xristis))
+	if (Account.updateMode && Selida.noXristis())
 	return self.location = Selida.baseUrl;
 
 	Account.egrafiMode = !Account.updateMode;
@@ -175,10 +175,10 @@ Account.submitData = function() {
 		return false;
 	}
 
-	const data = {};
-
-	data.login = login;
-	data.onomateponimo = onomateponimo;
+	const data = {
+		'login': login,
+		'onomateponimo': onomateponimo,
+	};
 
 	if (Account.updateMode) {
 		data.mode = 'update';
@@ -220,7 +220,7 @@ Account.submitData = function() {
 };
 
 Account.suspend = function(suspend) {
-	Account.formaDOM.find('input').prop('disabled', suspend);
+	Selida.formSuspend(Account.formaDOM, suspend);
 
 	if (suspend)
 	return Account;

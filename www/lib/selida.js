@@ -41,7 +41,7 @@ Selida.toolbarSetup = function() {
 	Selida.toolbarLeftDOM.
 	prepend(Selida.arxikiTabDOM = Selida.tabArxiki());
 
-	if (Selida.xristis) {
+	if (Selida.isXristis()) {
 		Selida.toolbarRightDOM.
 		append(Selida.xristisTabDOM = Selida.tabCreate({
 			'text': Selida.xristis,
@@ -178,4 +178,16 @@ Selida.widthFix = function(dom, selector) {
 	cl.css('width', cw + 'px');
 
 	return Selida;
+};
+
+Selida.formSuspend = function(forma, suspend) {
+	forma.find('input').prop('disabled', suspend);
+};
+
+Selida.isXristis = function() {
+	return Selida.xristis;
+};
+
+Selida.noXristis = function() {
+	return !Selida.isXristis();
 };
