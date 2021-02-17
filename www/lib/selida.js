@@ -19,7 +19,6 @@ Selida.selidaSetup = function() {
 	toolbarSetup().
 	ofelimoSetup().
 	ribbonSetup().
-	//ofelimoHeightSetup(false).
 	ofelimoHeightSetup();
 
 	return Selida;
@@ -35,9 +34,13 @@ Selida.toolbarSetup = function() {
 	append(Selida.toolbarRightDOM = $('<div>').attr('id', 'toolbarRight'));
 
 	Selida.toolbarLeftDOM.
-	prepend(Selida.arxikiTabDOM = Selida.tabArxiki());
+	append(Selida.arxikiTabDOM = Selida.arxikiTab());
 
 	if (Selida.isXristis()) {
+		Selida.toolbarLeftDOM.
+		append(Selida.mathimataTabDOM = Selida.mathimataTab()).
+		append(Selida.kathigitesTabDOM = Selida.kathigitesTab());
+
 		Selida.toolbarRightDOM.
 		append(Selida.xristisTabDOM = Selida.tabCreate({
 			'text': Selida.xristis,
@@ -106,11 +109,29 @@ Selida.tabCreate = function(opts) {
 	return tab;
 };
 
-Selida.tabArxiki = function() {
+Selida.arxikiTab = function() {
 	return Selida.tabCreate({
 		'href': Selida.baseUrl,
 		'text': 'Αρχική',
 	});
+
+	return Selida;
+};
+
+Selida.mathimataTab = function() {
+	return Selida.tabCreate({
+		'text': 'Μαθήματα',
+		'href': Selida.baseUrl + '/mathimata',
+		'target': '_self',
+	}).appendTo(Selida.toolbarLeftDOM);
+};
+
+Selida.kathigitesTab = function() {
+	return Selida.tabCreate({
+		'text': 'Καθηγητές',
+		'href': Selida.baseUrl + '/kathigites',
+		'target': '_self',
+	}).appendTo(Selida.toolbarLeftDOM);
 };
 
 Selida.ofelimoSetup = function() {
@@ -137,10 +158,10 @@ Selida.ribbonSetup = function() {
 	return Selida;
 };
 
-Selida.ofelimoHeightSetup = function(scroll) {
+Selida.ofelimoHeightSetup = function() {
 	const pad = 1;
 
-	Selida.bodyDOM.css('overflow-y', 'hidden');
+	Selida.bodyDOM.css('overflow-y', 'scroll');
 	Selida.ofelimoDOM.css({
 		'padding-top': pad + 'px',
 		'padding-bottom': pad + 'px',
@@ -153,9 +174,6 @@ Selida.ofelimoHeightSetup = function(scroll) {
 	const oh = wh - th - rh - pad - pad;
 
 	Selida.ofelimoDOM.css('min-height', oh + 'px');
-
-	if (scroll !== false)
-	Selida.bodyDOM.css('overflow-y', '');
 
 	return Selida;
 };
