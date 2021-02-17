@@ -199,18 +199,22 @@ Account.submitData = function() {
 			if (rsp === 'OK')
 			return self.location = Selida.baseUrl;
 
-			if (Account.egrafiMode)
-			return Account.suspend(false).loginDOM.focus();
+			Account.suspend(false);
 
-			Account.suspend(false).passwordDOM.focus();
+			if (Account.egrafiMode)
+			return Account.loginDOM.focus();
+
+			Account.passwordDOM.focus();
 		},
 		'error': function(err) {
 			console.error(err);
 
-			if (Account.egrafiMode)
-			return Account.suspend(false).loginDOM.focus();
+			Account.suspend(false);
 
-			return Account.suspend(false).passwordDOM.focus();
+			if (Account.egrafiMode)
+			return Account.loginDOM.focus();
+
+			return Account().passwordDOM.focus();
 		},
 	});
 };

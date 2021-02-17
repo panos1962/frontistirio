@@ -30,6 +30,12 @@ Isodos.formaCreate = function() {
 		'type': 'submit',
 		'value': 'Submit',
 	})).
+	append(Isodos.clearDOM = $('<input>').attr({
+		'type': 'reset',
+		'value': 'Clear',
+	}).on('click', function() {
+		Isodos.loginDOM.focus();
+	})).
 	append($('<input>').attr({
 		'type': 'button',
 		'value': 'Cancel',
