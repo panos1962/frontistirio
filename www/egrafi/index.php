@@ -10,7 +10,7 @@ head_open();
 if ($update) {
 ?>
 <script>
-Egrafi.updateMode = true;
+Account.updateMode = true;
 </script>
 <?php
 }

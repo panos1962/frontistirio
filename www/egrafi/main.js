@@ -1,153 +1,177 @@
 "use strict";
 
-const Egrafi = {};
+const Account = {};
 
 Selida.init.push(function() {
-	Egrafi.egrafiMode = !Egrafi.updateMode;
+	if (Account.updateMode && (!Selida.xristis))
+	return self.location = Selida.baseUrl;
 
-	if (Egrafi.updateMode)
+	Account.egrafiMode = !Account.updateMode;
+
+	if (Account.updateMode)
 	Selida.xristisTabDOM.remove();
 
 	else
 	Selida.egrafiTabDOM.remove();
 
 	Selida.arxikiTabDOM.prependTo(Selida.toolbarRightDOM);
-	Egrafi.formaCreate();
+	Account.formaCreate();
 });
 
-Egrafi.formaCreate = function() {
-	Egrafi.formaDOM = $('<form>').
+Account.formaCreate = function() {
+	Account.formaDOM = $('<form>').
 	addClass('forma').
 	attr('id', 'egrafiForma');
 
-	Egrafi.formaDOM.
+	Account.formaDOM.
 	append($('<div>').addClass('prompt').text('Login')).
-	append(Egrafi.loginDOM = $('<input>').attr('id', 'login')).
+	append(Account.loginDOM = $('<input>').attr('id', 'login')).
 	append($('<br>')).
 	append($('<div>').addClass('prompt').text('Ονοματεπώνυμο')).
-	append(Egrafi.onomateponimoDOM = $('<input>').attr('id', 'onomateponimo')).
+	append(Account.onomateponimoDOM = $('<input>').attr('id', 'onomateponimo')).
 	append($('<br>'));
 
-	if (Egrafi.updateMode)
-	Egrafi.formaDOM.
+	if (Account.updateMode)
+	Account.formaDOM.
 	append($('<div>').addClass('prompt').text('Τρέχων κωδικός')).
-	append(Egrafi.passwordDOM = $('<input>').attr({
+	append(Account.passwordDOM = $('<input>').attr({
 		'id': 'password',
 		'type': 'password'
 	})).
 	append($('<br>'));
 
-	Egrafi.formaDOM.
+	Account.formaDOM.
 	append($('<div>').addClass('prompt').
-	text(Egrafi.updateMode ? 'Νέος Κωδικός' : 'Κωδικός')).
-	append(Egrafi.password1DOM = $('<input>').attr({
+	text(Account.updateMode ? 'Νέος Κωδικός' : 'Κωδικός')).
+	append(Account.password1DOM = $('<input>').attr({
 		'id': 'password1',
 		'type': 'password'
 	})).
 	append($('<br>')).
 	append($('<div>').addClass('prompt').text('Επανάληψη')).
-	append(Egrafi.password2DOM = $('<input>').attr({
+	append(Account.password2DOM = $('<input>').attr({
 		'id': 'password2',
 		'type': 'password'
 	}));
 		
-	const panel = $('<div>').attr('id', 'panel').appendTo(Egrafi.formaDOM);
+	const panel = $('<div>').attr('id', 'panel').appendTo(Account.formaDOM);
 
 	panel.
 	append($('<input>').attr({
 		'type': 'submit',
 		'value': 'Submit',
 	})).
-	append($('<input>').attr({
+	append(Account.clearDOM = $('<input>').attr({
+		'type': 'reset',
+		'value': 'Clear',
+	}).on('click', function() {
+		if (Account.updateMode) {
+			setTimeout(function() {
+				Account.loginDOM.val(Selida.xristis);
+			}, 0);
+			Account.onomateponimoDOM.focus();
+		}
+
+		else
+		Account.loginDOM.focus();
+	})).
+	append(Account.cancelDOM = $('<input>').attr({
 		'type': 'button',
 		'value': 'Cancel',
 	}).on('click', function() {
 		self.location = Selida.baseUrl;
 	}));
 
-	Egrafi.formaDOM.on('submit', function() {
-		Egrafi.submitData();
+	Account.formaDOM.on('submit', function() {
+		Account.submitData();
 		return false;
 	});
 
-	if (Egrafi.updateMode)
-	Egrafi.fillFormData();
+	Account.formaDOM.appendTo(Selida.ofelimoDOM);
+	Selida.widthFix(Account.formaDOM, '.prompt');
 
-	Egrafi.formaDOM.appendTo(Selida.ofelimoDOM);
-	Selida.widthFix(Egrafi.formaDOM, '.prompt');
+	if (Account.updateMode)
+	return Account.formaFill();
 
-	if (Egrafi.updateMode)
-	Egrafi.onomateponimoDOM.focus();
-
-	else
-	Egrafi.loginDOM.focus();
+	Account.loginDOM.focus();
+	return Account;
 };
 
-Egrafi.fillFormData = function() {
-	Egrafi.loginDOM.prop('disabled', true);
+Account.formaFill = function() {
+	Account.suspend(true);
+	Account.loginDOM.prop('disabled', true);
 	$.post({
 		'url': 'xristis.php',
 		'success': function(rsp) {
-			if (rsp.hasOwnProperty('login') &&
-				(rsp.login === Selida.xristis)) {
-				Egrafi.loginDOM.val(rsp.login).prop('disabled', true);
-				Egrafi.onomateponimoDOM.val(rsp.onomateponimo);
-				return;
-			}
-
-			self.location = Selida.baseUrl;
+			Account.formaDataFill(rsp);
 		},
 		'fail': function(err) {
 			cosnole.error(err);
-			self.location = Selida.baseUrl;
 		},
 	});
 
-	return Egrafi;
-}
+	return Account;
+};
 
-Egrafi.submitData = function() {
-	const login = Egrafi.loginDOM.val().trim();
+Account.formaDataFill = function(data) {
+	Account.cancelDOM.prop('disabled', false);
+
+	if (data.hasOwnProperty('error'))
+	return;
+
+	if (!data.hasOwnProperty('login'))
+	return;
+
+	if (data.login !== Selida.xristis)
+	return;
+
+	Account.suspend(false);
+	Account.loginDOM.val(data.login).prop('disabled', true);
+	Account.onomateponimoDOM.val(data.onomateponimo).focus();
+};
+
+Account.submitData = function() {
+	const login = Account.loginDOM.val().trim();
 
 	if (login === '') {
-		Egrafi.loginDOM.focus();
+		Account.loginDOM.focus();
 		return false;
 	}
 
 	if (!login.match(/^[A-Za-z][0-9a-zA-Z_@.-]*$/)) {
-		Egrafi.loginDOM.focus();
+		Account.loginDOM.focus();
 		return false;
 	}
 
-	const onomateponimo = Egrafi.onomateponimoDOM.val().trim();
+	const onomateponimo = Account.onomateponimoDOM.val().trim();
 
 	if (onomateponimo === '') {
-		Egrafi.onomateponimoDOM.focus();
+		Account.onomateponimoDOM.focus();
 		return false;
 	}
 
 	let password;
 
-	if (Egrafi.updateMode) {
-		password = Egrafi.passwordDOM.val();
+	if (Account.updateMode) {
+		password = Account.passwordDOM.val();
 
 		if (password === '') {
-			Egrafi.passwordDOM.focus();
+			Account.passwordDOM.focus();
 			return false;
 		}
 	}
 
-	const password1 = Egrafi.password1DOM.val();
+	const password1 = Account.password1DOM.val();
 
 	if (Selida.egrafiMode && (password1 === '')) {
-		Egrafi.password1DOM.focus();
+		Account.password1DOM.focus();
 		return false;
 	}
 
-	const password2 = Egrafi.password2DOM.val();
+	const password2 = Account.password2DOM.val();
 
 	if (password1 !== password2) {
-		Egrafi.password1DOM.focus();
+		Account.password1DOM.focus();
 		return false;
 	}
 
@@ -156,7 +180,7 @@ Egrafi.submitData = function() {
 	data.login = login;
 	data.onomateponimo = onomateponimo;
 
-	if (Egrafi.updateMode) {
+	if (Account.updateMode) {
 		data.mode = 'update';
 		data.password = password;
 		data.password1 = password1;
@@ -167,41 +191,39 @@ Egrafi.submitData = function() {
 		data.password = password1;
 	}
 
-	Egrafi.suspend(true);
+	Account.suspend(true);
 	$.post({
 		'url': 'egrafi.php',
 		'data': data,
 		'success': function(rsp) {
 			if (rsp === 'OK')
-			self.location = Selida.baseUrl;
+			return self.location = Selida.baseUrl;
 
-			else if (Egrafi.egrafiMode)
-			Egrafi.suspend(false).loginDOM.focus();
+			if (Account.egrafiMode)
+			return Account.suspend(false).loginDOM.focus();
 
-			else
-			Egrafi.suspend(false).passwordDOM.focus();
+			Account.suspend(false).passwordDOM.focus();
 		},
 		'error': function(err) {
 			console.error(err);
 
-			if (Egrafi.egrafiMode)
-			Egrafi.suspend(false).loginDOM.focus();
+			if (Account.egrafiMode)
+			return Account.suspend(false).loginDOM.focus();
 
-			else
-			Egrafi.suspend(false).passwordDOM.focus();
+			return Account.suspend(false).passwordDOM.focus();
 		},
 	});
 };
 
-Egrafi.suspend = function(suspend) {
-	Egrafi.formaDOM.find('input').prop('disabled', suspend);
+Account.suspend = function(suspend) {
+	Account.formaDOM.find('input').prop('disabled', suspend);
 
 	if (suspend)
-	return Egrafi;
+	return Account;
 
-	if (Egrafi.egrafiMode)
-	return Egrafi;
+	if (Account.egrafiMode)
+	return Account;
 
-	Egrafi.loginDOM.prop('disabled', true);
-	return Egrafi;
+	Account.loginDOM.prop('disabled', true);
+	return Account;
 };

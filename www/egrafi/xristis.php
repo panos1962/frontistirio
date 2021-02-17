@@ -3,7 +3,7 @@ header('Content-Type: application/json; charset=utf8;');
 require_once("../lib/selida.php");
 
 if (Selida::no_xristis())
-exit(0);
+Selida::error_exit_json("Ανώνυμη χρήση");
 
 $query = "SELECT * FROM `xristis`" .
 	" WHERE `login` = " . Selida::sql_string($_SESSION["xristis"]);
@@ -11,7 +11,7 @@ $query = "SELECT * FROM `xristis`" .
 $result = Selida::query($query);
 
 if (!$result)
-exit(0);
+error_exit_json("SQL error");
 
 $xristis = NULL;
 
@@ -21,8 +21,13 @@ $xristis = $row;
 $result->close();
 
 if (!isset($xristis))
-exit(0);
+error_exit_json("account not found");
 
 unset($xristis["password"]);
 print Selida::json_string($xristis);
+
+function error_exit_json($msg) {
+	Selida::anonimi_xrisi();
+	exit('{"error":' . Selida::json_string($msg) . '}');
+}
 ?>
