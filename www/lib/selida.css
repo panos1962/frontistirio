@@ -3,7 +3,7 @@
 body {
 	margin: 0;
 	height: 100%;
-	font-family: 'Roboto Condensed', sans-serif;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 }
 
 /******************************************************************************/
@@ -120,3 +120,5 @@ body {
 .prompt:after {
 	content: ':';
 }
+
+/******************************************************************************/

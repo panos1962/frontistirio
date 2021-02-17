@@ -2,7 +2,7 @@
 require_once("../lib/selida.php");
 
 if (!array_key_exists("mode", $_POST))
-exit(0);
+$mode = "egrafi";
 
 $mode = $_POST["mode"];
 
