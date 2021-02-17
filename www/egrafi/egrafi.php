@@ -1,16 +1,17 @@
 <?php
 require_once("../lib/selida.php");
 
-if (!array_key_exists("mode", $_POST))
-$mode = "egrafi";
-
+if (array_key_exists("mode", $_POST))
 $mode = $_POST["mode"];
 
-if ($mode === "update")
-xristis_update();
+else
+$mode = "egrafi";
+
+if ($mode === "egrafi")
+xristis_egrafi();
 
 else
-xristis_egrafi();
+xristis_update();
 
 function xristis_egrafi() {
 	Selida::anonimi_xrisi();

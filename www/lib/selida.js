@@ -19,12 +19,8 @@ Selida.selidaSetup = function() {
 	toolbarSetup().
 	ofelimoSetup().
 	ribbonSetup().
-	ofelimoHeightSetup(false);
-
-	setTimeout(function() {
-		Selida.
-		ofelimoHeightSetup();
-	}, 200);
+	//ofelimoHeightSetup(false).
+	ofelimoHeightSetup();
 
 	return Selida;
 };
@@ -191,3 +187,13 @@ Selida.isXristis = function() {
 Selida.noXristis = function() {
 	return !Selida.isXristis();
 };
+
+///////////////////////////////////////////////////////////////////////////////@
+
+const Mathima = function(attrs) {
+	for (let i in attrs) {
+		this[i] = attrs[i];
+	}
+};
+
+///////////////////////////////////////////////////////////////////////////////@
