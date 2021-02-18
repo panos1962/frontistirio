@@ -1,0 +1,53 @@
+.prompt {
+	margin-left: 1em;
+}
+
+#formaFiltra {
+	padding: 8px;
+}
+
+#eponimoFiltro {
+	width: 10em;
+}
+
+#onomaFiltro {
+	width: 10em;
+}
+
+#patronimoFiltro {
+	width: 10em;
+}
+
+input {
+	margin: 0 8px;
+}
+
+#kathigitesWrapper {
+	padding: 1em;
+	width: 50em;
+	background-color: #d3d3d338;
+}
+
+#kathigites {
+	width: 100%;
+
+	border-collapse: collapse;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+#kathigites td {
+	padding: 0.2em;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+}
+
+#kathigites > tr:nth-child(odd) {
+	background-color: #fffae7;
+}
+
+#kathigites > tr:nth-child(even) {
+	background-color: #fff7d8;
+}
