@@ -206,12 +206,48 @@ Selida.noXristis = function() {
 	return !Selida.isXristis();
 };
 
+Selida.strpush = function(s, t, r) {
+	if (t === undefined)
+	return s;
+
+	if (t === '')
+	return s;
+
+	if (r === undefined)
+	r = ' ';
+
+	if (s !== '')
+	s += r;
+
+	s += t
+
+	return s;
+};
+
 ///////////////////////////////////////////////////////////////////////////////@
 
 const Mathima = function(attrs) {
 	for (let i in attrs) {
 		this[i] = attrs[i];
 	}
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+const Kathigitis = function(attrs) {
+	for (let i in attrs) {
+		this[i] = attrs[i];
+	}
+};
+
+Kathigitis.prototype.onomateponimoGet = function() {
+	let x = '';
+
+	x = Selida.strpush(x, this.eponimo);
+	x = Selida.strpush(x, this.onoma);
+	x = Selida.strpush(x, this.patronimo.substr(0, 3));
+
+	return x;
 };
 
 ///////////////////////////////////////////////////////////////////////////////@

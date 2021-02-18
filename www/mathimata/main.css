@@ -18,8 +18,14 @@ input {
 	margin: 0 8px;
 }
 
+#mathimataWrapper {
+	padding: 1em;
+	width: 50em;
+	background-color: #d3d3d338;
+}
+
 #mathimata {
-	margin: 8px;
+	width: 100%;
 
 	border-collapse: collapse;
 	border-style: solid;

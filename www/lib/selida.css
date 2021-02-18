@@ -129,15 +129,40 @@ body {
 	text-align: right;
 }
 
+/*
 .mathimaPerigrafi {
 	width: 50em;
 }
+*/
 
 .mathimaApo {
 	width: 6em;
 }
 
 .mathimaEos {
+	width: 6em;
+}
+
+/******************************************************************************/
+
+.kathigitisId {
+	width: 3em;
+	text-align: right;
+}
+
+.kathigitisOnomateponimo {
+	width: 20em;
+}
+
+.kathigitisGenisi {
+	width: 6em;
+}
+
+.kathigitisEgrafi {
+	width: 6em;
+}
+
+.kathigitisApoxorisi {
 	width: 6em;
 }
 

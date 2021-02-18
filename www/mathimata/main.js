@@ -66,9 +66,10 @@ Mathimata.filtraCreate = function() {
 };
 
 Mathimata.mathimataCreate = function() {
-	Mathimata.mathimataDOM = $('<table>').
-	attr('id', 'mathimata').
-	appendTo(Selida.ofelimoDOM);
+	Selida.ofelimoDOM.
+	append($('<div>').attr('id', 'mathimataWrapper').resizable().
+	append(Mathimata.mathimataDOM = $('<table>').
+	attr('id', 'mathimata')));
 
 	return Mathimata;
 };
@@ -79,9 +80,6 @@ Mathimata.mathimataDisplay = function(mlist) {
 		domCreate().
 		appendTo(Mathimata.mathimataDOM);
 	}
-
-	Selida.ofelimoDOM.
-	append(Mathimata.mathimataDOM);
 
 	return Mathimata;
 };

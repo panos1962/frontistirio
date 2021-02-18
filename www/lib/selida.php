@@ -67,6 +67,14 @@ public static function no_xristis() {
 	return !self::is_xristis();
 }
 
+public static function must_eponimi_xrisi() {
+	if (Selida::is_xristis())
+	return __CLASS__;
+
+	header('Location: ' . BASE_URL);
+	exit(0);
+}
+
 ///////////////////////////////////////////////////////////////////////////////@
 
 // Η function "css" διαβάζει διευκολύνει την εμφύτευση css αρχείων στη σελίδα.
@@ -102,8 +110,10 @@ public static function head_open() {
 ?>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="icon" type="image/png" href="<?php print BASE_URL; ?>/ikona/frontistirio.png">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <?php
 Selida::
 css(BASE_URL . "/lib/selida")::
