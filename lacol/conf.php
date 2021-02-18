@@ -11,4 +11,6 @@ define("BASE_URL", "http://localhost/frontistirio");
 // Ακολουθεί παράδειγμα του βασικού url για πιθανό production περιβάλλον.
 
 define("BASE_URL", "http://frontistirio.gr");
+
+define("DFLTROWS", 20);
 ?>

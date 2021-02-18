@@ -8,15 +8,15 @@ exit(0);
 $etos = $_POST["etos"];
 $perigrafi = $_POST["perigrafi"];
 
-$query = "SELECT * FROM `mathima` WHERE (1 = 1) ";
+$query = "SELECT * FROM `mathima` WHERE (1 = 1)";
 
 if ($etos)
-$query .= "AND (`apo` BETWEEN '" . $etos . "-01-01' AND '" . $etos . "-12-31') ";
+$query .= " AND (`apo` BETWEEN '" . $etos . "-01-01' AND '" . $etos . "-12-31')";
 
 if ($perigrafi)
-$query .= "AND (`perigrafi` LIKE '%" . $perigrafi . "%') ";
+$query .= " AND (`perigrafi` LIKE '%" . $perigrafi . "%')";
 
-$query .= "ORDER BY `apo`, `eos`, `id`";
+$query .= " ORDER BY `apo`, `eos`, `id`";
 
 $result = Selida::query($query);
 
@@ -24,10 +24,12 @@ if (!$result)
 exit(0);
 
 print "[";
+
 while ($row = $result->fetch_assoc())
 print Selida::json_string($row) . ",";
 
 $result->close();
+
 print "null]";
 exit(0);
 ?>

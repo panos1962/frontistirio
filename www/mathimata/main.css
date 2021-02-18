@@ -28,7 +28,16 @@ input {
 }
 
 #mathimata td {
+	padding: 0.2em;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #000000;
+}
+
+#mathimata > tr:nth-child(odd) {
+	background-color: #fffae7;
+}
+
+#mathimata > tr:nth-child(even) {
+	background-color: #fff7d8;
 }

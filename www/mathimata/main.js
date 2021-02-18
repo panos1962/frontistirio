@@ -45,6 +45,7 @@ Mathimata.filtraCreate = function() {
 		data.etos = Mathimata.etosFiltroDOM.val();
 		data.perigrafi = Mathimata.perigrafiFiltroDOM.val();
 
+		Mathimata.mathimataDOM.empty();
 		$.post({
 			'url': 'mathimata.php',
 			'data': data,
@@ -73,9 +74,6 @@ Mathimata.mathimataCreate = function() {
 };
 
 Mathimata.mathimataDisplay = function(mlist) {
-	if (Mathimata.mathimataDOM)
-	Mathimata.mathimataDOM.empty();
-
 	for (let i = 0; i < mlist.length; i++) {
 		(new Mathima(mlist[i])).
 		domCreate().
@@ -92,10 +90,10 @@ Mathimata.mathimataDisplay = function(mlist) {
 
 Mathima.prototype.domCreate = function() {
 	return $('<tr>').
-	append($('<td>').text(this.id)).
-	append($('<td>').text(this.perigrafi)).
-	append($('<td>').text(this.apo)).
-	append($('<td>').text(this.eos));
+	append($('<td>').addClass('mathimaId').text(this.id)).
+	append($('<td>').addClass('mathimaPerigrafi').text(this.perigrafi)).
+	append($('<td>').addClass('mathimaApo').text(this.apo)).
+	append($('<td>').addClass('mathimaEos').text(this.eos));
 
 	return dom;
 };

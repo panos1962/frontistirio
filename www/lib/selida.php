@@ -21,8 +21,21 @@ require_once(BASE_DIR . "/local/conf.php");
 // με properties και functions (methods) που θα μας διευκολύνουν στη γραφή
 // των PHP προγραμμάτων της εφαρμογής.
 
+if (!defined("DFLTROWS"))
+defined("DFLTROWS", 20);
+
 class Selida {
 ///////////////////////////////////////////////////////////////////////////////@
+
+public static function is_post($tag, $strict = FALSE) {
+	if (!array_key_exists($tag, $_POST))
+	return FALSE;
+
+	if ($strict)
+	return TRUE;
+
+	return $_POST[$tag];
+}
 
 // Η function "eponimi_xrisi" θέτει το session στοιχείο "xristis" στο login
 // name του χρήστη που έχει πραγματοποιήσει επιτυχημένη είσοδο στο σύστημα
@@ -98,6 +111,7 @@ javascript(BASE_URL . "/lib/selida");
 ?>
 <script>
 Selida.baseUrl = <?php print Selida::json_string(BASE_URL); ?>;
+Selida.dfltRows = <?php print DFLTROWS; ?>;
 <?php
 if (self::is_xristis()) {
 ?>
