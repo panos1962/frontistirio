@@ -1,6 +1,7 @@
 Mathimata = {};
 
 Selida.init.push(function() {
+	Selida.mathimataTabDOM.remove();
 	Mathimata.
 	filtraCreate().
 	mathimataCreate();
