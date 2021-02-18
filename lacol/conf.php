@@ -12,5 +12,9 @@ define("BASE_URL", "http://localhost/frontistirio");
 
 define("BASE_URL", "http://frontistirio.gr");
 
+// Η σταθερά "DFLTROWS" μπορεί να χρησιμοποιηθεί ως όριο επιστροφής
+// γραμμών σε SQL queries κατά τη διαδικασία επιστροφής τμηματικών
+// αποτελεσμάτων.
+
 define("DFLTROWS", 20);
 ?>
