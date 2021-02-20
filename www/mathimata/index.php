@@ -16,8 +16,10 @@ body_open();
 <div class="prompt">Περιγραφή</div>
 <input id="perigrafiFiltro" type="text" value="ext">
 
+<div class="formaPanel">
 <input type="reset" value="Clear">
 <input type="submit" value="Go!">
+</div>
 
 </form>
 
@@ -26,8 +28,27 @@ body_open();
 </table>
 </div>
 
-<div id="mathimaForma" title="Φόρμα ενημέρωσης μαθήματος">
-xxx
+<div id="mathimaDialog" title="Φόρμα ενημέρωσης μαθήματος">
+<form id="mathimaForma">
+
+<div class="formaInputLine">
+<div class="prompt">Id</div>
+<input id="mathimaFormaId" disabled="yes">
+</div>
+
+<div class="formaInputLine">
+<div class="prompt">Περιγραφή</div>
+<textarea id="mathimaFormaPerigrafi" rows="3" cols="44" maxlength="128">
+</textarea>
+</div>
+
+<div class="formaPanel">
+<input type="reset" value="Clear">
+<input type="submit" value="Go!">
+<input type="button" value="Cancel">
+</div>
+
+</form>
 </div>
 
 <?php

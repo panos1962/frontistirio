@@ -112,14 +112,26 @@ body {
 	border-radius: 4px;
 }
 
+.formaInputLine {
+	padding: 0.2em;
+}
+
 .prompt {
 	display: inline-block;
+	margin: 4px;
 	text-align: right;
-	margin-right: 4px;
 }
 
 .prompt:after {
 	content: ':';
+}
+
+.formaPanel {
+	display: inline-block;
+}
+
+.formaPanel input {
+	margin-left: 24px;
 }
 
 /******************************************************************************/

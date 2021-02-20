@@ -49,7 +49,7 @@ Mathimata.mathimataSetup = function() {
 	on('click', 'tr', function(e) {
 		Mathimata.mathimataDOM.find('tr').removeClass('mathimaTrexon');
 		$(this).addClass('mathimaTrexon');
-		Mathimata.mathimaFormaDOM.
+		Mathimata.mathimaDialogDOM.
 		dialog('close').
 		dialog('open');
 	});
@@ -58,27 +58,35 @@ Mathimata.mathimataSetup = function() {
 };
 
 Mathimata.mathimaSetup = function() {
-	Mathimata.mathimaFormaDOM = $('#mathimaForma').
+	Mathimata.mathimaFormaDOM = $('#mathimaForma');
+	Mathimata.mathimaFormaIdDOM = $('#mathimaFormaId');
+	Mathimata.mathimaFormaPerigrafiDOM = $('#mathimaFormaPerigrafi');
+
+	Mathimata.mathimaDialogDOM = $('#mathimaDialog').
 	appendTo(Selida.ofelimoDOM).
 	dialog({
 		'autoOpen': false,
-		'open': Mathimata.mathimaFormaOpen,
+		'open': Mathimata.mathimaDialogOpen,
 		'position': {
 			'my': 'right-10 top+40',
 			'at': 'right top',
 		},
+		'width': 'auto',
+		'resizable': false,
 	});
 
 	return Mathimata;
 };
 
-Mathimata.mathimaFormaOpen = function() {
+Mathimata.mathimaDialogOpen = function() {
 	const dom = Mathimata.mathimataDOM.find('.mathimaTrexon');
+	const mathima = dom.data('mathima');
 
-	Mathimata.mathimaFormaDOM.dialog('open');
-	Mathimata.mathimaFormaDOM.
-	empty().
-	append(dom.data('mathima').id);
+	Mathimata.mathimaFormaIdDOM.val(mathima.id);
+	Mathimata.mathimaFormaPerigrafiDOM.val(mathima.perigrafi);
+
+	Mathimata.mathimaDialogDOM.dialog('open');
+	Selida.widthFix(Mathimata.mathimaFormaDOM, '.prompt');
 };
 
 Mathimata.mathimataDisplay = function(mlist) {

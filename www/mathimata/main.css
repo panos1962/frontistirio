@@ -1,7 +1,3 @@
-.prompt {
-	margin-left: 1em;
-}
-
 #formaFiltra {
 	padding: 8px;
 }
@@ -12,10 +8,6 @@
 
 #pergrafiFiltro {
 	width: 20em;
-}
-
-input {
-	margin: 0 8px;
 }
 
 #mathimataWrapper {
@@ -55,5 +47,22 @@ input {
 	background-color: yellow !important;
 }
 
-#mathimaForma {
+#mathimaDialog {
+	padding: 0.2em;
+	background-color: #fffeee;
+	font-size: 90%;
+}
+
+#mathimaForma > .formaPanel {
+	padding-top: 1em;
+}
+
+#mathimaFormaId {
+	width: 8em;
+}
+
+#mathimaFormaPerigrafi {
+	vertical-align: top;
+	width: 28em;
+	resize: none;
 }

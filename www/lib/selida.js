@@ -179,7 +179,7 @@ Selida.ofelimoHeightSetup = function() {
 };
 
 Selida.widthFix = function(dom, selector) {
-	let cl = dom.children(selector);
+	let cl = dom.find(selector);
 	let cw = 0;
 
 	cl.each(function() {
