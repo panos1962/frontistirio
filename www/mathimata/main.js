@@ -3,42 +3,19 @@ Mathimata = {};
 Selida.init.push(function() {
 	Selida.mathimataTabDOM.remove();
 	Mathimata.
-	filtraCreate().
-	mathimataCreate();
+	filtraSetup().
+	mathimataSetup().
+	mathimaSetup();
 
 	Mathimata.filtraDOM.trigger('submit');
 });
 
-Mathimata.filtraCreate = function() {
-	Mathimata.filtraDOM = $('<form>').
-	attr('id', 'formaFiltra').
+Mathimata.filtraSetup = function() {
+	Mathimata.filtraDOM = $('#formaFiltra').appendTo(Selida.ofelimoDOM);
+	Mathimata.etosFiltroDOM = $('#etosFiltro');
+	Mathimata.perigrafiFiltroDOM = $('#perigrafiFiltro');
 
-	append($('<div>').addClass('prompt').text('Έτος')).
-	append(Mathimata.etosFiltroDOM = $('<input>').attr({
-		'id': 'etosFiltro',
-		'type': 'number',
-		'value': (new Date()).getFullYear(),
-	})).
-
-	append($('<div>').addClass('prompt').text('Περιγραφή')).
-	append(Mathimata.perigrafiFiltroDOM = $('<input>').attr({
-		'id': 'perigrafiFiltro',
-		'type': 'text',
-		'value': 'pproa',
-	})).
-
-	append($('<input>').attr({
-		'type': 'reset',
-		'value': 'Clear',
-	})).
-
-	append($('<input>').attr({
-		'type': 'submit',
-		'value': 'Go!',
-	}));
-
-	Selida.ofelimoDOM.
-	append(Mathimata.filtraDOM).
+	Mathimata.filtraDOM.
 	on('submit', function() {
 		const data = {};
 
@@ -65,18 +42,43 @@ Mathimata.filtraCreate = function() {
 	return Mathimata;
 };
 
-Mathimata.mathimataCreate = function() {
-	Selida.ofelimoDOM.
-	append($('<div>').attr('id', 'mathimataWrapper').
-	append(Mathimata.mathimataDOM = $('<table>').
-	attr('id', 'mathimata')));
+Mathimata.mathimataSetup = function() {
+	$('#mathimataWrapper').appendTo(Selida.ofelimoDOM);
 
-	Mathimata.mathimataDOM.on('click', 'tr', function(e) {
+	Mathimata.mathimataDOM = $('#mathimata').
+	on('click', 'tr', function(e) {
 		Mathimata.mathimataDOM.find('tr').removeClass('mathimaTrexon');
 		$(this).addClass('mathimaTrexon');
+		Mathimata.mathimaFormaDOM.
+		dialog('close').
+		dialog('open');
 	});
 
 	return Mathimata;
+};
+
+Mathimata.mathimaSetup = function() {
+	Mathimata.mathimaFormaDOM = $('#mathimaForma').
+	appendTo(Selida.ofelimoDOM).
+	dialog({
+		'autoOpen': false,
+		'open': Mathimata.mathimaFormaOpen,
+		'position': {
+			'my': 'right-10 top+40',
+			'at': 'right top',
+		},
+	});
+
+	return Mathimata;
+};
+
+Mathimata.mathimaFormaOpen = function() {
+	const dom = Mathimata.mathimataDOM.find('.mathimaTrexon');
+
+	Mathimata.mathimaFormaDOM.dialog('open');
+	Mathimata.mathimaFormaDOM.
+	empty().
+	append(dom.data('mathima').id);
 };
 
 Mathimata.mathimataDisplay = function(mlist) {
@@ -93,6 +95,7 @@ Mathimata.mathimataDisplay = function(mlist) {
 
 Mathima.prototype.domCreate = function() {
 	return $('<tr>').
+	data('mathima', this).
 	append($('<td>').addClass('mathimaId').text(this.id)).
 	append($('<td>').addClass('mathimaPerigrafi').text(this.perigrafi)).
 	append($('<td>').addClass('mathimaApo').text(this.apo)).
