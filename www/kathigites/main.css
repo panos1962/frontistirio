@@ -24,8 +24,6 @@ input {
 
 #kathigitesWrapper {
 	padding: 1em;
-	width: 50em;
-	background-color: #d3d3d338;
 }
 
 #kathigites {
@@ -50,4 +48,9 @@ input {
 
 #kathigites > tr:nth-child(even) {
 	background-color: #fff7d8;
+}
+
+#kathigites > tr:hover {
+	background-color: #ffd67b;
+	cursor: pointer;
 }

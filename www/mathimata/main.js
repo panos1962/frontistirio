@@ -24,7 +24,7 @@ Mathimata.filtraCreate = function() {
 	append(Mathimata.perigrafiFiltroDOM = $('<input>').attr({
 		'id': 'perigrafiFiltro',
 		'type': 'text',
-		'value': 'pproa%diagn',
+		'value': 'pproa',
 	})).
 
 	append($('<input>').attr({
@@ -67,9 +67,14 @@ Mathimata.filtraCreate = function() {
 
 Mathimata.mathimataCreate = function() {
 	Selida.ofelimoDOM.
-	append($('<div>').attr('id', 'mathimataWrapper').resizable().
+	append($('<div>').attr('id', 'mathimataWrapper').
 	append(Mathimata.mathimataDOM = $('<table>').
 	attr('id', 'mathimata')));
+
+	Mathimata.mathimataDOM.on('click', 'tr', function(e) {
+		Mathimata.mathimataDOM.find('tr').removeClass('mathimaTrexon');
+		$(this).addClass('mathimaTrexon');
+	});
 
 	return Mathimata;
 };

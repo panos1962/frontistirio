@@ -13,13 +13,17 @@ usage() {
 }
 
 errs=
-mysqlopts=
+mysqlprompt=
+
+[ -z "${MYSQL_PWD}" ] &&
+mysqlprompt="yes"
 
 while getopts ":p" opt
 do
 	case "${opt}" in
 	p)
 		mysqlopts="${mysqlopts} -p"
+		mysqlprompt="yes"
 		;;
 	?)
 		echo "${progname}: -$OPTARG; invalid option" >&2
@@ -39,6 +43,10 @@ sesami="${FRONTISTIRIO_BASEDIR}/local/secret/sesami.txt"
 	echo "${progname}: ${sesami}: cannot read" >&2
 	exit 3
 }
+
+[ -z "${mysqlprompt}" ] &&
+[ -z "${MYSQL_PWD}" ] &&
+mysqlopts="${mysqlopts} -p"
 
 pass="$(cat "${sesami}")"
 sed "s;__PASS__;${pass};g" "${FRONTISTIRIO_BASEDIR}/database/schema.sql" |

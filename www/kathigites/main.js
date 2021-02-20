@@ -101,10 +101,7 @@ Kathigites.filtraCreate = function() {
 
 Kathigites.kathigitesCreate = function() {
 	Selida.ofelimoDOM.
-	append($('<div>').
-	attr('id', 'kathigitesWrapper').
-	resizable().
-
+	append($('<div>').attr('id', 'kathigitesWrapper').
 	append(Kathigites.kathigitesDOM = $('<table>').
 	attr('id', 'kathigites')));
 

@@ -20,8 +20,6 @@ input {
 
 #mathimataWrapper {
 	padding: 1em;
-	width: 50em;
-	background-color: #d3d3d338;
 }
 
 #mathimata {
@@ -46,4 +44,13 @@ input {
 
 #mathimata > tr:nth-child(even) {
 	background-color: #fff7d8;
+}
+
+#mathimata > tr:hover {
+	background-color: #ffd67b;
+	cursor: pointer;
+}
+
+.mathimaTrexon {
+	background-color: yellow !important;
 }

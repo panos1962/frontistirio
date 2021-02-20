@@ -22,7 +22,7 @@ require_once(BASE_DIR . "/local/conf.php");
 // των PHP προγραμμάτων της εφαρμογής.
 
 if (!defined("DFLTROWS"))
-defined("DFLTROWS", 20);
+define("DFLTROWS", 20);
 
 class Selida {
 ///////////////////////////////////////////////////////////////////////////////@
