@@ -232,6 +232,11 @@ const Mathima = function(attrs) {
 	}
 };
 
+Mathima.prototype.perigrafiSet = function(s) {
+	this.perigrafi = s.replace(/[\n\t]/g, " ").trim();
+	return this;
+};
+
 ///////////////////////////////////////////////////////////////////////////////@
 
 const Kathigitis = function(attrs) {

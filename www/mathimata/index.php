@@ -38,14 +38,14 @@ body_open();
 
 <div class="formaInputLine">
 <div class="prompt">Περιγραφή</div>
-<textarea id="mathimaFormaPerigrafi" rows="3" cols="44" maxlength="128">
+<textarea id="mathimaFormaPerigrafi" rows="5" cols="44" maxlength="128">
 </textarea>
 </div>
 
 <div class="formaPanel">
-<input type="reset" value="Clear">
 <input type="submit" value="Go!">
-<input type="button" value="Cancel">
+<input type="reset" id="mathimaFormaClear" value="Clear">
+<input type="button" id="mathimaFormaCancel" value="Cancel">
 </div>
 
 </form>

@@ -52,9 +52,13 @@ Account.formaCreate = function() {
 	append(Account.password2DOM = $('<input>').attr({
 		'id': 'password2',
 		'type': 'password'
-	}));
+	})).
+	append('<br>');
 		
-	const panel = $('<div>').attr('id', 'panel').appendTo(Account.formaDOM);
+	const panel = $('<div>').
+	addClass('formaPanel').
+	attr('id', 'panel').
+	appendTo(Account.formaDOM);
 
 	panel.
 	append($('<input>').attr({

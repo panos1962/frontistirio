@@ -50,11 +50,15 @@
 #mathimaDialog {
 	padding: 0.2em;
 	background-color: #fffeee;
-	font-size: 90%;
+	font-size: 80%;
+}
+
+#mathimaForma {
+	margin: 0;
 }
 
 #mathimaForma > .formaPanel {
-	padding-top: 1em;
+	padding: 0.5em 0 0.5em 0;
 }
 
 #mathimaFormaId {

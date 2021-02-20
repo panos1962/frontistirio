@@ -47,8 +47,10 @@ Mathimata.mathimataSetup = function() {
 
 	Mathimata.mathimataDOM = $('#mathimata').
 	on('click', 'tr', function(e) {
-		Mathimata.mathimataDOM.find('tr').removeClass('mathimaTrexon');
-		$(this).addClass('mathimaTrexon');
+		if (Mathimata.mathimaTrexonDOM)
+		Mathimata.mathimaTrexonDOM.removeClass('mathimaTrexon');
+
+		Mathimata.mathimaTrexonDOM = $(this).addClass('mathimaTrexon');
 		Mathimata.mathimaDialogDOM.
 		dialog('close').
 		dialog('open');
@@ -73,6 +75,28 @@ Mathimata.mathimaSetup = function() {
 		},
 		'width': 'auto',
 		'resizable': false,
+	});
+
+	Mathimata.mathimaFormaDOM.
+	on('submit', function() {
+		const mathima = Mathimata.mathimaTrexonDOM.data('mathima');
+
+		mathima.perigrafiSet(Mathimata.mathimaFormaPerigrafiDOM.val());
+		mathima.domUpdate(Mathimata.mathimaTrexonDOM);
+
+		Mathimata.mathimaDialogDOM.dialog('close');
+		return false;
+	});
+
+	Mathimata.mathimaFormaClearDOM = $('#mathimaFormaClear').
+	on('click', function() {
+		Mathimata.mathimaFormaPerigrafiDOM.val('');
+		return false;
+	});
+
+	Mathimata.mathimaFormaCancelDOM = $('#mathimaFormaCancel').
+	on('click', function() {
+		Mathimata.mathimaDialogDOM.dialog('close');
 	});
 
 	return Mathimata;
@@ -102,8 +126,12 @@ Mathimata.mathimataDisplay = function(mlist) {
 ///////////////////////////////////////////////////////////////////////////////@
 
 Mathima.prototype.domCreate = function() {
-	return $('<tr>').
-	data('mathima', this).
+	return this.domUpdate($('<tr>').data('mathima', this));
+};
+
+Mathima.prototype.domUpdate = function(dom) {
+	dom.
+	empty().
 	append($('<td>').addClass('mathimaId').text(this.id)).
 	append($('<td>').addClass('mathimaPerigrafi').text(this.perigrafi)).
 	append($('<td>').addClass('mathimaApo').text(this.apo)).
