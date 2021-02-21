@@ -5,6 +5,25 @@ body {
 	height: 100%;
 	overflow-y: scroll;
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+
+.ui-widget {
+	position: fixed;
+	font-size: 1em;
+}
+
+input, textarea {
+	font-size: 90%;
+}
+
+input[type=radio] {
+	vertical-align: middle;
+}
+
+.ui-widget input,
+.ui-widget textarea {
+	font-size: 90%;
 }
 
 /******************************************************************************/

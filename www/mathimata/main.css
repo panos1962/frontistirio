@@ -1,4 +1,5 @@
 #formaFiltra {
+	margin: 0;
 	padding: 8px;
 }
 
@@ -50,7 +51,6 @@
 #mathimaDialog {
 	padding: 0.2em;
 	background-color: #fffeee;
-	font-size: 80%;
 }
 
 #mathimaForma {

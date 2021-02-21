@@ -14,7 +14,7 @@ body_open();
 <input id="etosFiltro" type="number" value="<?php print date("Y"); ?>">
 
 <div class="prompt">Περιγραφή</div>
-<input id="perigrafiFiltro" type="text" value="ext">
+<input id="perigrafiFiltro" type="text" value="ex">
 
 <div class="formaPanel">
 <input type="reset" value="Clear">
@@ -42,9 +42,19 @@ body_open();
 </textarea>
 </div>
 
+<div class="formaInputLine">
+<div class="prompt">Από</div>
+<input id="mathimaFormaApo" type="date">
+</div>
+
+<div class="formaInputLine">
+<div class="prompt">Έως</div>
+<input id="mathimaFormaEos" type="date">
+</div>
+
 <div class="formaPanel">
-<input type="submit" value="Go!">
-<input type="reset" id="mathimaFormaClear" value="Clear">
+<input type="submit" value="Υποβολή">
+<input type="button" id="mathimaFormaInsert" value="Νέο">
 <input type="button" id="mathimaFormaCancel" value="Cancel">
 </div>
 

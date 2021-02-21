@@ -108,6 +108,7 @@ public static function javascript($file) {
 
 public static function head_open() {
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 <link rel="icon" type="image/png" href="<?php print BASE_URL; ?>/ikona/frontistirio.png">

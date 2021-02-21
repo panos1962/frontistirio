@@ -28,7 +28,9 @@ Mathimata.filtraSetup = function() {
 			'data': data,
 			'success': function(rsp) {
 				rsp.pop();
-				Mathimata.mathimataDisplay(rsp);
+				rsp.forEach((x) => (new Mathima(x)).
+				domCreate().
+				appendTo(Mathimata.mathimataDOM));
 			},
 			'fail': function(err) {
 				console.error(err);
@@ -63,6 +65,8 @@ Mathimata.mathimaSetup = function() {
 	Mathimata.mathimaFormaDOM = $('#mathimaForma');
 	Mathimata.mathimaFormaIdDOM = $('#mathimaFormaId');
 	Mathimata.mathimaFormaPerigrafiDOM = $('#mathimaFormaPerigrafi');
+	Mathimata.mathimaFormaApoDOM = $('#mathimaFormaApo');
+	Mathimata.mathimaFormaEosDOM = $('#mathimaFormaEos');
 
 	Mathimata.mathimaDialogDOM = $('#mathimaDialog').
 	appendTo(Selida.ofelimoDOM).
@@ -79,19 +83,16 @@ Mathimata.mathimaSetup = function() {
 
 	Mathimata.mathimaFormaDOM.
 	on('submit', function() {
-		const mathima = Mathimata.mathimaTrexonDOM.data('mathima');
-
-		mathima.perigrafiSet(Mathimata.mathimaFormaPerigrafiDOM.val());
-		mathima.domUpdate(Mathimata.mathimaTrexonDOM);
-
-		Mathimata.mathimaDialogDOM.dialog('close');
+		Mathimata.mathimaFormaSubmit();
 		return false;
 	});
 
-	Mathimata.mathimaFormaClearDOM = $('#mathimaFormaClear').
-	on('click', function() {
-		Mathimata.mathimaFormaPerigrafiDOM.val('');
-		return false;
+	$('#mathimaFormaInsert').on('click', function() {
+		Mathimata.mathimaTrexonDOM.removeClass('mathimaTrexon');
+		delete Mathimata.mathimaTrexonDOM;
+
+		Mathimata.mathimaFormaIdDOM.val('');
+		Mathimata.mathimaFormaPerigrafiDOM.select();
 	});
 
 	Mathimata.mathimaFormaCancelDOM = $('#mathimaFormaCancel').
@@ -102,25 +103,60 @@ Mathimata.mathimaSetup = function() {
 	return Mathimata;
 };
 
+Mathimata.mathimaFormaSubmit = function() {
+	const data = {};
+
+	data.id = Mathimata.mathimaFormaIdDOM.val();
+	data.perigrafi = Mathimata.mathimaFormaPerigrafiDOM.val();
+	data.apo = Mathimata.mathimaFormaApoDOM.val();
+	data.eos = Mathimata.mathimaFormaEosDOM.val();
+
+	$.post({
+		'url': 'mathima.php',
+		'data': data,
+		'success': function(rsp) {
+			const mathima = new Mathima(rsp);
+
+			if (Mathimata.mathimaTrexonDOM)
+			Mathimata.mathimaUpdate(mathima);
+
+			else
+			Mathimata.mathimaInsert(mathima);
+		},
+		'fail': function(err) {
+			console.error(err);
+		},
+	});
+
+	return Mathimata;
+};
+
+Mathimata.mathimaUpdate = function(mathima) {
+	Mathimata.mathimaTrexonDOM.data('mathima', mathima);
+	mathima.domUpdate(Mathimata.mathimaTrexonDOM);
+};
+
+Mathimata.mathimaInsert = function(mathima) {
+	Mathimata.mathimaFormaIdDOM.val(mathima.id);
+	Mathimata.mathimaTrexonDOM = mathima.
+	domCreate().
+	data('mathima', mathima).
+	addClass('mathimaTrexon').
+	appendTo(Mathimata.mathimataDOM);
+	Selida.windowDOM.scrollTop(10000);
+};
+
 Mathimata.mathimaDialogOpen = function() {
 	const dom = Mathimata.mathimataDOM.find('.mathimaTrexon');
 	const mathima = dom.data('mathima');
 
 	Mathimata.mathimaFormaIdDOM.val(mathima.id);
 	Mathimata.mathimaFormaPerigrafiDOM.val(mathima.perigrafi);
+	Mathimata.mathimaFormaApoDOM.val(mathima.apo);
+	Mathimata.mathimaFormaEosDOM.val(mathima.eos);
 
 	Mathimata.mathimaDialogDOM.dialog('open');
 	Selida.widthFix(Mathimata.mathimaFormaDOM, '.prompt');
-};
-
-Mathimata.mathimataDisplay = function(mlist) {
-	for (let i = 0; i < mlist.length; i++) {
-		(new Mathima(mlist[i])).
-		domCreate().
-		appendTo(Mathimata.mathimataDOM);
-	}
-
-	return Mathimata;
 };
 
 ///////////////////////////////////////////////////////////////////////////////@
