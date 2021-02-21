@@ -14,7 +14,7 @@ body_open();
 <input id="etosFiltro" type="number" value="<?php print date("Y"); ?>">
 
 <div class="prompt">Περιγραφή</div>
-<input id="perigrafiFiltro" type="text" value="ex">
+<input id="perigrafiFiltro" type="text">
 
 <div class="formaPanel">
 <input type="reset" value="Clear">
@@ -56,10 +56,19 @@ body_open();
 <input type="submit" value="Υποβολή">
 <input type="button" id="mathimaFormaInsert" value="Νέο">
 <input type="button" id="mathimaFormaDelete" value="Διαγραφή">
-<input type="button" id="mathimaFormaCancel" value="Cancel">
+<input type="button" id="mathimaFormaCancel" value="Άκυρο">
 </div>
 
 </form>
+</div>
+
+<div id="confirmDelete" title="Επιβεβαίωση διαγραφής">
+Μετά τη διαγραφή του μαθήματος δεν υπάρχει τρόπος επαναφοράς.
+Παρακαλώ επιβεβαιώστε τη διαγραφή.
+<div class="formaPanel">
+<input type="button" id="confirmDeleteDelete" value="Διαγραφή">
+<input type="button" id="confirmDeleteCancel" value="Ακύρωση">
+</div>
 </div>
 
 <?php

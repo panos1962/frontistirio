@@ -6,8 +6,6 @@ Selida.init.push(function() {
 	filtraSetup().
 	mathimataSetup().
 	mathimaSetup();
-
-	Mathimata.filtraDOM.trigger('submit');
 });
 
 Mathimata.filtraSetup = function() {
@@ -58,6 +56,50 @@ Mathimata.mathimataSetup = function() {
 		dialog('open');
 	});
 
+	Mathimata.confirmDeleteDOM = $('#confirmDelete').
+	appendTo(Selida.ofelimoDOM).
+	dialog({
+		'autoOpen': false,
+		'position': {
+			'my': 'left+10 top+40',
+			'at': 'left top',
+		},
+		'minHeight': 0,
+		'height': 'auto',
+		'width': '30em',
+		'resizable': false,
+		'modal': true,
+	});
+
+	Mathimata.confirmDeleteDeleteDOM = $('#confirmDeleteDelete').
+	on('click', function() {
+		$.post({
+			'url': 'mathimaDelete.php',
+			'data': {
+				"id": Mathimata.mathimaTrexonDOM.
+					data('mathima').id,
+			},
+			'success': function(rsp) {
+				if (rsp !== 'OK')
+				return;
+
+				if (Mathimata.mathimaTrexonDOM)
+				Mathimata.mathimaTrexonDOM.remove();
+
+				delete Mathimata.mathimaTrexonDOM;
+				Mathimata.mathimaFormaClear();
+				Mathimata.confirmDeleteDOM.dialog('close');
+			},
+			'fail': function(err) {
+				console.error(err);
+			},
+		});
+	});
+
+	$('#confirmDeleteCancel').on('click', function() {
+		Mathimata.confirmDeleteDOM.dialog('close');
+	});
+
 	return Mathimata;
 };
 
@@ -78,6 +120,7 @@ Mathimata.mathimaSetup = function() {
 			'at': 'right top',
 		},
 		'width': 'auto',
+		'height': 'auto',
 		'resizable': false,
 	});
 
@@ -96,31 +139,8 @@ Mathimata.mathimaSetup = function() {
 	});
 
 	$('#mathimaFormaDelete').on('click', function() {
-		if (!Mathimata.mathimaTrexonDOM)
-		return;
-
-		$.post({
-			'url': 'mathimaDelete.php',
-			'data': {
-				"id": Mathimata.mathimaTrexonDOM.
-					data('mathima').id,
-			},
-			'success': function(rsp) {
-				if (rsp !== 'OK')
-				return;
-
-				if (Mathimata.mathimaTrexonDOM)
-				Mathimata.mathimaTrexonDOM.remove();
-
-				delete Mathimata.mathimaTrexonDOM;
-				Mathimata.mathimaFormaClear();
-			},
-			'fail': function(err) {
-				console.error(err);
-			},
-		});
-
-		return Mathimata;
+		if (Mathimata.mathimaTrexonDOM)
+		Mathimata.confirmDeleteDOM.dialog('open');
 	});
 
 	Mathimata.mathimaFormaCancelDOM = $('#mathimaFormaCancel').

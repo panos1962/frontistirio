@@ -70,3 +70,7 @@
 	width: 28em;
 	resize: none;
 }
+
+#confirmDelete > .formaPanel {
+	padding: 0.5em 0 0.1em 0;
+}
