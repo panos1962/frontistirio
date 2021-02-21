@@ -55,6 +55,7 @@ body_open();
 <div class="formaPanel">
 <input type="submit" value="Υποβολή">
 <input type="button" id="mathimaFormaInsert" value="Νέο">
+<input type="button" id="mathimaFormaDelete" value="Διαγραφή">
 <input type="button" id="mathimaFormaCancel" value="Cancel">
 </div>
 

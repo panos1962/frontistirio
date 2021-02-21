@@ -37,6 +37,10 @@ public static function is_post($tag, $strict = FALSE) {
 	return $_POST[$tag];
 }
 
+public static function no_post($tag) {
+	return !self::is_post($tag);
+}
+
 // Η function "eponimi_xrisi" θέτει το session στοιχείο "xristis" στο login
 // name του χρήστη που έχει πραγματοποιήσει επιτυχημένη είσοδο στο σύστημα
 // με τα credentials που έχουν καταχωρηθεί στην database κατά την εγγραφή

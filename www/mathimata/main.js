@@ -88,17 +88,52 @@ Mathimata.mathimaSetup = function() {
 	});
 
 	$('#mathimaFormaInsert').on('click', function() {
+		if (Mathimata.mathimaTrexonDOM)
 		Mathimata.mathimaTrexonDOM.removeClass('mathimaTrexon');
-		delete Mathimata.mathimaTrexonDOM;
 
-		Mathimata.mathimaFormaIdDOM.val('');
-		Mathimata.mathimaFormaPerigrafiDOM.select();
+		delete Mathimata.mathimaTrexonDOM;
+		Mathimata.mathimaFormaClear();
+	});
+
+	$('#mathimaFormaDelete').on('click', function() {
+		if (!Mathimata.mathimaTrexonDOM)
+		return;
+
+		$.post({
+			'url': 'mathimaDelete.php',
+			'data': {
+				"id": Mathimata.mathimaTrexonDOM.
+					data('mathima').id,
+			},
+			'success': function(rsp) {
+				if (rsp !== 'OK')
+				return;
+
+				if (Mathimata.mathimaTrexonDOM)
+				Mathimata.mathimaTrexonDOM.remove();
+
+				delete Mathimata.mathimaTrexonDOM;
+				Mathimata.mathimaFormaClear();
+			},
+			'fail': function(err) {
+				console.error(err);
+			},
+		});
+
+		return Mathimata;
 	});
 
 	Mathimata.mathimaFormaCancelDOM = $('#mathimaFormaCancel').
 	on('click', function() {
 		Mathimata.mathimaDialogDOM.dialog('close');
 	});
+
+	return Mathimata;
+};
+
+Mathimata.mathimaFormaClear = function() {
+	Mathimata.mathimaFormaIdDOM.val('');
+	Mathimata.mathimaFormaPerigrafiDOM.select();
 
 	return Mathimata;
 };
