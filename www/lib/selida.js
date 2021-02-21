@@ -224,6 +224,10 @@ Selida.strpush = function(s, t, r) {
 	return s;
 };
 
+Selida.strstrip = function(s) {
+	return s.replace(/[\n\t]/g, " ").trim();
+};
+
 ///////////////////////////////////////////////////////////////////////////////@
 
 const Mathima = function(attrs) {
@@ -233,7 +237,7 @@ const Mathima = function(attrs) {
 };
 
 Mathima.prototype.perigrafiSet = function(s) {
-	this.perigrafi = s.replace(/[\n\t]/g, " ").trim();
+	this.perigrafi = Selida.strstrip(s);
 	return this;
 };
 

@@ -107,7 +107,7 @@ Mathimata.mathimaFormaSubmit = function() {
 	const data = {};
 
 	data.id = Mathimata.mathimaFormaIdDOM.val();
-	data.perigrafi = Mathimata.mathimaFormaPerigrafiDOM.val();
+	data.perigrafi = Selida.strstrip(Mathimata.mathimaFormaPerigrafiDOM.val());
 	data.apo = Mathimata.mathimaFormaApoDOM.val();
 	data.eos = Mathimata.mathimaFormaEosDOM.val();
 
@@ -122,6 +122,8 @@ Mathimata.mathimaFormaSubmit = function() {
 
 			else
 			Mathimata.mathimaInsert(mathima);
+
+			Mathimata.mathimaFormaPerigrafiDOM.focus();
 		},
 		'fail': function(err) {
 			console.error(err);
