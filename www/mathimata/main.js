@@ -212,7 +212,6 @@ Mathimata.mathimaDialogOpen = function() {
 	Mathimata.mathimaFormaApoDOM.val(mathima.apo);
 	Mathimata.mathimaFormaEosDOM.val(mathima.eos);
 
-	Mathimata.mathimaDialogDOM.dialog('open');
 	Selida.widthFix(Mathimata.mathimaFormaDOM, '.prompt');
 };
 

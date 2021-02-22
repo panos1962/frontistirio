@@ -36,6 +36,8 @@ Selida.toolbarSetup = function() {
 	Selida.toolbarLeftDOM.
 	append(Selida.arxikiTabDOM = Selida.arxikiTab());
 
+	Selida.klisimoTabDOM = Selida.klisimoTab();
+
 	if (Selida.isXristis()) {
 		Selida.toolbarLeftDOM.
 		append(Selida.mathimataTabDOM = Selida.mathimataTab()).
@@ -45,8 +47,9 @@ Selida.toolbarSetup = function() {
 		append(Selida.xristisTabDOM = Selida.tabCreate({
 			'text': Selida.xristis,
 			'href': Selida.baseUrl + '/egrafi?update',
+			'target': '_blank',
 		})).
-		append(Selida.tabCreate({
+		append(Selida.exodosTabDOM = Selida.tabCreate({
 			'text': 'Έξοδος',
 			'href': function() {
 				$.post({
@@ -113,6 +116,17 @@ Selida.arxikiTab = function() {
 	return Selida.tabCreate({
 		'href': Selida.baseUrl,
 		'text': 'Αρχική',
+	});
+
+	return Selida;
+};
+
+Selida.klisimoTab = function() {
+	return Selida.tabCreate({
+		'href': function() {
+			self.close();
+		},
+		'text': 'Κλείσιμο',
 	});
 
 	return Selida;

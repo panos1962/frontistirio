@@ -3,66 +3,19 @@ Kathigites = {};
 Selida.init.push(function() {
 	Selida.kathigitesTabDOM.remove();
 	Kathigites.
-	filtraCreate().
-	kathigitesCreate();
+	filtraSetup().
+	kathigitesCreate().
+	kathigitisFormaSetup();
 
 	Kathigites.filtraDOM.trigger('submit');
 });
 
-Kathigites.filtraCreate = function() {
-	Kathigites.filtraDOM = $('<form>').
-	attr('id', 'formaFiltra').
-
-	append($('<div>').addClass('prompt').text('Επώνυμο')).
-	append(Kathigites.eponimoFiltroDOM = $('<input>').attr({
-		'id': 'eponimoFiltro',
-		'type': 'text',
-		'value': 'ro',
-	})).
-
-	append($('<div>').addClass('prompt').text('Όνομα')).
-	append(Kathigites.onomaFiltroDOM = $('<input>').attr({
-		'id': 'onomaFiltro',
-		'type': 'text',
-		'value': '',
-	})).
-
-	append($('<div>').addClass('prompt').text('Πατρώνυμο')).
-	append(Kathigites.patronimoFiltroDOM = $('<input>').attr({
-		'id': 'patronimoFiltro',
-		'type': 'text',
-		'value': '',
-	})).
-
-	append($('<div>').addClass('prompt').text('Ενεργοί')).
-	append(Kathigites.energosFiltroDOM = $('<input>').
-	attr({
-		'id': 'energosFiltro',
-		'name': 'katastasi',
-		'type': 'radio',
-		'value': 'energos',
-	}).
-	prop({
-		'checked': true,
-	})).
-
-	append($('<div>').addClass('prompt').text('Όλοι')).
-	append(Kathigites.oloiFiltroDOM = $('<input>').attr({
-		'id': 'oloiFiltro',
-		'name': 'katastasi',
-		'type': 'radio',
-		'value': 'oloi',
-	})).
-
-	append($('<input>').attr({
-		'type': 'reset',
-		'value': 'Clear',
-	})).
-
-	append($('<input>').attr({
-		'type': 'submit',
-		'value': 'Go!',
-	}));
+Kathigites.filtraSetup = function() {
+	Kathigites.filtraDOM = $('#formaFiltra');
+	Kathigites.eponimoFiltroDOM = $('#eponimoFiltro');
+	Kathigites.onomaFiltroDOM = $('#onomaFiltro');
+	Kathigites.patronimoFiltroDOM = $('#patronimoFiltro');
+	Kathigites.energosFiltroDOM = $('#energosFiltro');
 
 	Selida.ofelimoDOM.
 	append(Kathigites.filtraDOM).
@@ -105,7 +58,35 @@ Kathigites.kathigitesCreate = function() {
 	append(Kathigites.kathigitesDOM = $('<table>').
 	attr('id', 'kathigites')));
 
+	Kathigites.kathigitesDOM.
+	on('click', 'tr', function() {
+		const kathigitis = $(this).data('kathigitis');
+
+		Kathigites.kathigitisFormaIdDOM.val(kathigitis.id);
+		Kathigites.kathigitisFormaEponimoDOM.val(kathigitis.eponimo);
+		Kathigites.kathigitisFormaOnomaDOM.val(kathigitis.onoma);
+		Kathigites.kathigitisFormaPatronimoDOM.val(kathigitis.patronimo);
+
+		Kathigites.kathigitisFormaDOM.dialog('open');
+	});
+
 	return Kathigites;
+};
+
+Kathigites.kathigitisFormaSetup = function() {
+	Kathigites.kathigitisFormaIdDOM = $('#kathigitisFormaId');
+	Kathigites.kathigitisFormaEponimoDOM = $('#kathigitisFormaEponimo');
+	Kathigites.kathigitisFormaOnomaDOM = $('#kathigitisFormaOnoma');
+	Kathigites.kathigitisFormaPatronimoDOM = $('#kathigitisFormaPatronimo');
+
+	Kathigites.kathigitisFormaDOM = $('#kathigitisFormaWrapper').
+	dialog({
+		'autoOpen': false,
+		'position': {
+			'my': 'right top', 
+			'at': 'right-10 top+40',
+		},
+	});
 };
 
 Kathigites.kathigitesDisplay = function(klist) {
@@ -122,6 +103,7 @@ Kathigites.kathigitesDisplay = function(klist) {
 
 Kathigitis.prototype.domCreate = function() {
 	return $('<tr>').
+	data('kathigitis', this).
 	append($('<td>').addClass('kathigitisId').text(this.id)).
 	append($('<td>').addClass('kathigitisEgrafi').text(this.egrafi)).
 	append($('<td>').addClass('kathigitiOnomateponimo').text(this.onomateponimoGet())).

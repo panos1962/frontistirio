@@ -8,13 +8,20 @@ Selida.init.push(function() {
 
 	Account.egrafiMode = !Account.updateMode;
 
-	if (Account.updateMode)
-	Selida.xristisTabDOM.remove();
+	if (Account.updateMode) {
+		Selida.xristisTabDOM.remove();
+		Selida.exodosTabDOM.remove();
+		Selida.arxikiTabDOM.remove();
+		Selida.mathimataTabDOM.remove();
+		Selida.kathigitesTabDOM.remove();
+		Selida.klisimoTabDOM.prependTo(Selida.toolbarRightDOM);
+	}
 
-	else
-	Selida.egrafiTabDOM.remove();
+	else {
+		Selida.egrafiTabDOM.remove();
+		Selida.arxikiTabDOM.prependTo(Selida.toolbarRightDOM);
+	}
 
-	Selida.arxikiTabDOM.prependTo(Selida.toolbarRightDOM);
 	Account.formaCreate();
 });
 
@@ -200,8 +207,14 @@ Account.submitData = function() {
 		'url': 'egrafi.php',
 		'data': data,
 		'success': function(rsp) {
-			if (rsp === 'OK')
-			return self.location = Selida.baseUrl;
+			if (rsp === 'OK') {
+				if (Account.egrafiMode)
+				return self.location = Selida.baseUrl;
+
+				Account.formaDOM.empty().
+				append('Τα στοιχεία ενημερώθηκαν επιτυχώς!');
+				return;
+			}
 
 			Account.suspend(false);
 
