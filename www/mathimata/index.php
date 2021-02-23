@@ -32,23 +32,23 @@ body_open();
 <form id="mathimaForma">
 
 <div class="formaInputLine">
-<div class="prompt">Id</div>
+<div class="prompt farea_A">Id</div>
 <input id="mathimaFormaId" disabled="yes">
 </div>
 
 <div class="formaInputLine">
-<div class="prompt">Περιγραφή</div>
+<div class="prompt farea_A">Περιγραφή</div>
 <textarea id="mathimaFormaPerigrafi" rows="5" cols="44" maxlength="128">
 </textarea>
 </div>
 
 <div class="formaInputLine">
-<div class="prompt">Από</div>
+<div class="prompt farea_A">Από</div>
 <input id="mathimaFormaApo" type="date">
 </div>
 
 <div class="formaInputLine">
-<div class="prompt">Έως</div>
+<div class="prompt farea_A">Έως</div>
 <input id="mathimaFormaEos" type="date">
 </div>
 

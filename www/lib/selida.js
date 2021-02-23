@@ -192,6 +192,16 @@ Selida.ofelimoHeightSetup = function() {
 	return Selida;
 };
 
+Selida.isXristis = function() {
+	return Selida.xristis;
+};
+
+Selida.noXristis = function() {
+	return !Selida.isXristis();
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
 Selida.widthFix = function(dom, selector) {
 	let cl = dom.find(selector);
 	let cw = 0;
@@ -212,13 +222,7 @@ Selida.formSuspend = function(forma, suspend) {
 	forma.find('input').prop('disabled', suspend);
 };
 
-Selida.isXristis = function() {
-	return Selida.xristis;
-};
-
-Selida.noXristis = function() {
-	return !Selida.isXristis();
-};
+///////////////////////////////////////////////////////////////////////////////@
 
 Selida.strpush = function(s, t, r) {
 	if (t === undefined)
