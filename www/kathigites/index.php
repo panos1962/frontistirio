@@ -11,7 +11,7 @@ body_open();
 <form id="formaFiltra">
 
 <div class="prompt">Επώνυμο</div>
-<input id="eponimoFiltro" value="ro">
+<input id="eponimoFiltro">
 
 <div class="prompt">Όνομα</div>
 <input id="onomaFiltro">
@@ -35,7 +35,7 @@ body_open();
 
 <div class="formaInputLine">
 <div class="prompt farea_A">Id</div>
-<input id="kathigitisFormaId" maxlength="4">
+<input id="kathigitisFormaId" maxlength="4" disabled="yes">
 </div>
 
 <div class="formaInputLine">
@@ -51,6 +51,21 @@ body_open();
 <div class="formaInputLine">
 <div class="prompt farea_A">Πατρώνυμο</div>
 <input id="kathigitisFormaPatronimo" maxlength="20">
+</div>
+
+<div class="formaInputLine">
+<div class="prompt farea_A">Ημ. γέννησης</div>
+<input id="kathigitisFormaGenisi" class="kathigitisFormaImerominia" maxlength="10">
+</div>
+
+<div class="formaInputLine">
+<div class="prompt farea_A">Εγγραφή</div>
+<input id="kathigitisFormaEgrafi" class="kathigitisFormaImerominia" maxlength="10">
+</div>
+
+<div class="formaInputLine">
+<div class="prompt farea_A">Αποχώρηση</div>
+<input id="kathigitisFormaApoxorisi" class="kathigitisFormaImerominia" maxlength="10">
 </div>
 
 <div class="formaPanel">

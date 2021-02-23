@@ -78,6 +78,9 @@ Kathigites.kathigitisDialogOpen = function() {
 	Kathigites.kathigitisFormaEponimoDOM.val(kathigitis.eponimo);
 	Kathigites.kathigitisFormaOnomaDOM.val(kathigitis.onoma);
 	Kathigites.kathigitisFormaPatronimoDOM.val(kathigitis.patronimo);
+	Kathigites.kathigitisFormaGenisiDOM.val(kathigitis.genisi);
+	Kathigites.kathigitisFormaEgrafiDOM.val(kathigitis.egrafi);
+	Kathigites.kathigitisFormaApoxorisiDOM.val(kathigitis.apoxorisi);
 
 	Selida.fareaFix(Kathigites.kathigitisFormaDOM);
 };
@@ -88,6 +91,9 @@ Kathigites.kathigitisFormaSetup = function() {
 	Kathigites.kathigitisFormaEponimoDOM = $('#kathigitisFormaEponimo');
 	Kathigites.kathigitisFormaOnomaDOM = $('#kathigitisFormaOnoma');
 	Kathigites.kathigitisFormaPatronimoDOM = $('#kathigitisFormaPatronimo');
+	Kathigites.kathigitisFormaGenisiDOM = $('#kathigitisFormaGenisi').datepicker();
+	Kathigites.kathigitisFormaEgrafiDOM = $('#kathigitisFormaEgrafi').datepicker();
+	Kathigites.kathigitisFormaApoxorisiDOM = $('#kathigitisFormaApoxorisi').datepicker();
 
 	Kathigites.kathigitisDialogDOM = $('#kathigitisFormaDialog').
 	dialog({
@@ -100,12 +106,50 @@ Kathigites.kathigitisFormaSetup = function() {
 		'resizable': false,
 		'autoOpen': false,
 	});
+
+	Kathigites.kathigitisFormaDOM.
+	on('submit', Kathigites.kathigitisFormaSubmit);
+
+	return Kathigites;
+};
+
+Kathigites.kathigitisFormaSubmit = function() {
+	const data = {};
+
+	data.id = Kathigites.kathigitisFormaIdDOM.val();
+	data.eponimo = Kathigites.kathigitisFormaEponimoDOM.val();
+	data.onoma = Kathigites.kathigitisFormaOnomaDOM.val();
+	data.patronimo = Kathigites.kathigitisFormaPatronimoDOM.val();
+	data.genisi = Kathigites.kathigitisFormaGenisiDOM.val();
+	data.egrafi = Kathigites.kathigitisFormaEgrafiDOM.val();
+	data.apoxorisi = Kathigites.kathigitisFormaApoxorisiDOM.val();
+
+	$.post({
+		'url': 'kathigitisUpdate.php',
+		'data': data,
+		'success': function(rsp) {
+			if (rsp !== 'OK')
+			return;
+
+			const kathigitis = new Kathigitis(data);
+			kathigitis.domUpdate(Kathigites.kathigitisTrexonDOM);
+		},
+		'fail': function(err) {
+			console.error(err);
+		},
+	});
+
+	return false;
 };
 
 Kathigites.kathigitesDisplay = function(klist) {
 	for (let i = 0; i < klist.length; i++) {
-		(new Kathigitis(klist[i])).
-		domCreate().
+		const kathigitis = new Kathigitis(klist[i]);
+		const dom = kathigitis.domCreate();
+
+		kathigitis.domUpdate(dom);
+
+		dom.
 		appendTo(Kathigites.kathigitesDOM);
 	}
 
@@ -115,8 +159,13 @@ Kathigites.kathigitesDisplay = function(klist) {
 ///////////////////////////////////////////////////////////////////////////////@
 
 Kathigitis.prototype.domCreate = function() {
-	return $('<tr>').
+	return $('<tr>');
+};
+
+Kathigitis.prototype.domUpdate = function(dom) {
+	dom.
 	data('kathigitis', this).
+	empty().
 	append($('<td>').addClass('kathigitisId').text(this.id)).
 	append($('<td>').addClass('kathigitisEgrafi').text(this.egrafi)).
 	append($('<td>').addClass('kathigitiOnomateponimo').text(this.onomateponimoGet())).

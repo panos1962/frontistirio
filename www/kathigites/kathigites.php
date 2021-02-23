@@ -10,7 +10,15 @@ $onoma = $_POST["onoma"];
 $patronimo = $_POST["patronimo"];
 $katastasi = $_POST["katastasi"];
 
-$query = "SELECT * FROM `kathigitis` WHERE (1 = 1)";
+$query = "SELECT " .
+	"`id`, " .
+	"`eponimo`, " .
+	"`onoma`, " .
+	"`patronimo`, " .
+	"DATE_FORMAT(`genisi`, '%d-%m-%Y') AS `genisi`, " .
+	"DATE_FORMAT(`egrafi`, '%d-%m-%Y') AS `egrafi`, " .
+	"DATE_FORMAT(`apoxorisi`, '%d-%m-%Y') AS `apoxorisi` " .
+	"FROM `kathigitis` WHERE (1 = 1)";
 
 if ($eponimo)
 $query .= " AND (`eponimo` LIKE '%" . $eponimo . "%')";
