@@ -51,9 +51,7 @@ Mathimata.mathimataSetup = function() {
 		Mathimata.mathimaTrexonDOM.removeClass('mathimaTrexon');
 
 		Mathimata.mathimaTrexonDOM = $(this).addClass('mathimaTrexon');
-		Mathimata.mathimaDialogDOM.
-		dialog('close').
-		dialog('open');
+		Mathimata.mathimaDialogDOM.dialog('close').dialog('open');
 	});
 
 	Mathimata.confirmDeleteDOM = $('#confirmDelete').
@@ -113,15 +111,14 @@ Mathimata.mathimaSetup = function() {
 	Mathimata.mathimaDialogDOM = $('#mathimaDialog').
 	appendTo(Selida.ofelimoDOM).
 	dialog({
-		'autoOpen': false,
 		'open': Mathimata.mathimaDialogOpen,
 		'position': {
-			'my': 'right-10 top+40',
-			'at': 'right top',
+			'my': 'right top',
+			'at': 'right-10 top+40',
 		},
-		'width': 'auto',
-		'height': 'auto',
+		'width': '34em',
 		'resizable': false,
+		'autoOpen': false,
 	});
 
 	Mathimata.mathimaFormaDOM.
@@ -204,15 +201,15 @@ Mathimata.mathimaInsert = function(mathima) {
 };
 
 Mathimata.mathimaDialogOpen = function() {
-	const dom = Mathimata.mathimataDOM.find('.mathimaTrexon');
-	const mathima = dom.data('mathima');
+	const mathima = Mathimata.mathimataDOM.
+	find('.mathimaTrexon').data('mathima');
 
 	Mathimata.mathimaFormaIdDOM.val(mathima.id);
 	Mathimata.mathimaFormaPerigrafiDOM.val(mathima.perigrafi);
 	Mathimata.mathimaFormaApoDOM.val(mathima.apo);
 	Mathimata.mathimaFormaEosDOM.val(mathima.eos);
 
-	Selida.widthFix(Mathimata.mathimaFormaDOM, '.prompt');
+	Selida.fareaFix(Mathimata.mathimaFormaDOM);
 };
 
 ///////////////////////////////////////////////////////////////////////////////@

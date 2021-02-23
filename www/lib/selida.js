@@ -202,6 +202,35 @@ Selida.noXristis = function() {
 
 ///////////////////////////////////////////////////////////////////////////////@
 
+Selida.fareaList = [ 'A', 'B', 'C', 'D', 'E', 'F' ];
+
+Selida.fareaFix = function(form) {
+	if (form.data('fareaFixed'))
+	return Selida;
+
+	Selida.fareaList.forEach(function(area) {
+		const alist = form.find('.farea_' + area);
+		let wmax = 0;
+
+		alist.each(function(s) {
+			const w = $(this).innerWidth();
+
+			if (w > wmax)
+			wmax = w;
+		});
+
+		alist.css('width', wmax + 'px');
+	});
+
+	form.data('fareaFixed', true);
+	return Selida;
+};
+
+Selida.fareaFixReset = function(form) {
+	form.removeData('fareaFixed');
+	return Selida;
+};
+
 Selida.widthFix = function(dom, selector) {
 	let cl = dom.find(selector);
 	let cw = 0;
@@ -221,6 +250,7 @@ Selida.widthFix = function(dom, selector) {
 Selida.formSuspend = function(forma, suspend) {
 	forma.find('input').prop('disabled', suspend);
 };
+
 
 ///////////////////////////////////////////////////////////////////////////////@
 

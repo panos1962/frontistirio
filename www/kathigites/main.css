@@ -54,3 +54,19 @@ input {
 	background-color: #ffd67b;
 	cursor: pointer;
 }
+
+#kathigitisFormaId {
+	width: 4em;
+}
+
+#kathigitisFormaEponimo {
+	width: 20em;
+}
+
+#kathigitisFormaOnoma {
+	width: 10em;
+}
+
+#kathigitisFormaPatronimo {
+	width: 10em;
+}

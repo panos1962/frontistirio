@@ -16,10 +16,8 @@ body_open();
 <div class="prompt">Περιγραφή</div>
 <input id="perigrafiFiltro" type="text">
 
-<div class="formaPanel">
-<input type="reset" value="Clear">
-<input type="submit" value="Go!">
-</div>
+<input type="reset" class="panelButton" value="Clear">
+<input type="submit" class="panelButton" value="Go!">
 
 </form>
 
@@ -53,21 +51,23 @@ body_open();
 </div>
 
 <div class="formaPanel">
-<input type="submit" value="Υποβολή">
-<input type="button" id="mathimaFormaInsert" value="Νέο">
-<input type="button" id="mathimaFormaDelete" value="Διαγραφή">
-<input type="button" id="mathimaFormaCancel" value="Άκυρο">
+<input type="submit" class="panelButton" value="Υποβολή">
+<input type="button" class="panelButton" id="mathimaFormaInsert" value="Νέο">
+<input type="button" class="panelButton" id="mathimaFormaDelete" value="Διαγραφή">
+<input type="button" class="panelButton" id="mathimaFormaCancel" value="Άκυρο">
 </div>
 
 </form>
 </div>
 
 <div id="confirmDelete" title="Επιβεβαίωση διαγραφής">
+<div id="confirmDeleteText">
 Μετά τη διαγραφή του μαθήματος δεν υπάρχει τρόπος επαναφοράς.
 Παρακαλώ επιβεβαιώστε τη διαγραφή.
+</div>
 <div class="formaPanel">
-<input type="button" id="confirmDeleteDelete" value="Διαγραφή">
-<input type="button" id="confirmDeleteCancel" value="Ακύρωση">
+<input type="button" class="panelButton" id="confirmDeleteDelete" value="Διαγραφή">
+<input type="button" class="panelButton" id="confirmDeleteCancel" value="Ακύρωση">
 </div>
 </div>
 

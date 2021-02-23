@@ -10,29 +10,19 @@ body_open();
 
 <form id="formaFiltra">
 
-<div class="prompt">
-Επώνυμο
-</div>
+<div class="prompt">Επώνυμο</div>
 <input id="eponimoFiltro" value="ro">
 
-<div class="prompt">
-Όνομα
-</div>
+<div class="prompt">Όνομα</div>
 <input id="onomaFiltro">
 
-<div class="prompt">
-Πατρώνυμο
-</div>
+<div class="prompt">Πατρώνυμο</div>
 <input id="patronimoFiltro">
 
-<div class="prompt">
-Ενεργοί
-</div>
+<div class="prompt">Ενεργοί</div>
 <input name="katastasi" id="energosFiltro" type="radio" value="energos" checked="yes">
 
-<div class="prompt">
-Όλοι
-</div>
+<div class="prompt">Όλοι</div>
 <input name="katastasi" id="oloiFiltro" type="radio" value="oloi">
 
 <input id="clearFiltro" type="reset" value="Clear">
@@ -40,28 +30,35 @@ body_open();
 
 </form>
 
-<div id="kathigitisFormaWrapper">
+<div id="kathigitisFormaDialog" title="Φόρμα ενημέρωσης καθηγητή">
 <form id="kathigitisForma">
 
-<div class="prompt">
-Id
+<div class="formaInputLine">
+<div class="prompt farea_A">Id</div>
+<input id="kathigitisFormaId" maxlength="4">
 </div>
-<input id="kathigitisFormaId">
 
-<div class="prompt">
-Επώνυμο
+<div class="formaInputLine">
+<div class="prompt farea_A">Επώνυμο</div>
+<input id="kathigitisFormaEponimo" maxlength="30">
 </div>
-<input id="kathigitisFormaEponimo">
 
-<div class="prompt">
-Όνομα
+<div class="formaInputLine">
+<div class="prompt farea_A">Όνομα</div>
+<input id="kathigitisFormaOnoma" maxlength="20">
 </div>
-<input id="kathigitisFormaOnoma">
 
-<div class="prompt">
-Πατρώνυμο
+<div class="formaInputLine">
+<div class="prompt farea_A">Πατρώνυμο</div>
+<input id="kathigitisFormaPatronimo" maxlength="20">
 </div>
-<input id="kathigitisFormaPatronimo">
+
+<div class="formaPanel">
+<input type="submit" class="panelButton" value="Υποβολή">
+<input type="button" class="panelButton" id="mathimaFormaInsert" value="Νέος">
+<input type="button" class="panelButton" id="mathimaFormaDelete" value="Διαγραφή">
+<input type="button" class="panelButton" id="mathimaFormaCancel" value="Άκυρο">
+</div>
 
 </form>
 </div>

@@ -60,32 +60,45 @@ Kathigites.kathigitesCreate = function() {
 
 	Kathigites.kathigitesDOM.
 	on('click', 'tr', function() {
-		const kathigitis = $(this).data('kathigitis');
+		if (Kathigites.kathigitisTrexonDOM)
+		Kathigites.kathigitisTrexonDOM.removeClass('kathigitisTrexon');
 
-		Kathigites.kathigitisFormaIdDOM.val(kathigitis.id);
-		Kathigites.kathigitisFormaEponimoDOM.val(kathigitis.eponimo);
-		Kathigites.kathigitisFormaOnomaDOM.val(kathigitis.onoma);
-		Kathigites.kathigitisFormaPatronimoDOM.val(kathigitis.patronimo);
-
-		Kathigites.kathigitisFormaDOM.dialog('open');
+		Kathigites.kathigitisTrexonDOM = $(this).addClass('kathigitisTrexon');
+		Kathigites.kathigitisDialogDOM.dialog('close').dialog('open');
 	});
 
 	return Kathigites;
 };
 
+Kathigites.kathigitisDialogOpen = function() {
+	const kathigitis = Kathigites.kathigitesDOM.
+	find('.kathigitisTrexon').data('kathigitis');
+
+	Kathigites.kathigitisFormaIdDOM.val(kathigitis.id);
+	Kathigites.kathigitisFormaEponimoDOM.val(kathigitis.eponimo);
+	Kathigites.kathigitisFormaOnomaDOM.val(kathigitis.onoma);
+	Kathigites.kathigitisFormaPatronimoDOM.val(kathigitis.patronimo);
+
+	Selida.fareaFix(Kathigites.kathigitisFormaDOM);
+};
+
 Kathigites.kathigitisFormaSetup = function() {
+	Kathigites.kathigitisFormaDOM = $('#kathigitisForma');
 	Kathigites.kathigitisFormaIdDOM = $('#kathigitisFormaId');
 	Kathigites.kathigitisFormaEponimoDOM = $('#kathigitisFormaEponimo');
 	Kathigites.kathigitisFormaOnomaDOM = $('#kathigitisFormaOnoma');
 	Kathigites.kathigitisFormaPatronimoDOM = $('#kathigitisFormaPatronimo');
 
-	Kathigites.kathigitisFormaDOM = $('#kathigitisFormaWrapper').
+	Kathigites.kathigitisDialogDOM = $('#kathigitisFormaDialog').
 	dialog({
-		'autoOpen': false,
+		'open': Kathigites.kathigitisDialogOpen,
 		'position': {
 			'my': 'right top', 
 			'at': 'right-10 top+40',
 		},
+		'width': '32em',
+		'resizable': false,
+		'autoOpen': false,
 	});
 };
 
