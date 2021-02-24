@@ -33,6 +33,10 @@ input[type=radio] {
 	padding: 0.4em 0 0 0;
 }
 
+.imerominiaInput {
+	width: 8em;
+}
+
 /******************************************************************************/
 
 #toolbar {

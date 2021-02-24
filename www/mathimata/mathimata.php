@@ -5,19 +5,7 @@ require_once("../lib/selida.php");
 if (Selida::no_xristis())
 exit(0);
 
-$etos = $_POST["etos"];
-$perigrafi = $_POST["perigrafi"];
-
-$query = "SELECT * FROM `mathima` WHERE (1 = 1)";
-
-if ($etos)
-$query .= " AND (`apo` BETWEEN '" . $etos . "-01-01' AND '" . $etos . "-12-31')";
-
-if ($perigrafi)
-$query .= " AND (`perigrafi` LIKE '%" . $perigrafi . "%')";
-
-$query .= " ORDER BY `apo`, `eos`, `id`";
-
+$query = "SELECT * FROM `mathima` " . where_clause() . " ORDER BY `apo`, `eos`, `id`";
 $result = Selida::query($query);
 
 if (!$result)
@@ -32,4 +20,30 @@ $result->close();
 
 print "null]";
 exit(0);
+
+function where_clause() {
+	$id = $_POST["id"];
+	$etos = $_POST["etos"];
+	$perigrafi = $_POST["perigrafi"];
+
+	$con = "WHERE ";
+
+	if ($id)
+	return $con . "`id` = " . $id;
+
+	$s = "";
+
+	if ($etos) {
+		$s .= $con . "(`apo` BETWEEN '" . $etos . "-01-01' AND '" . $etos . "-12-31')";
+		$con = " AND ";
+	}
+
+	if ($perigrafi) {
+		$s .= $con . "(`perigrafi` LIKE '%" . $perigrafi . "%')";
+		$con = " AND ";
+	}
+
+	return $s;
+}
+
 ?>

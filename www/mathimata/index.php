@@ -16,6 +16,9 @@ body_open();
 <div class="prompt">Περιγραφή</div>
 <input id="perigrafiFiltro" type="text">
 
+<div class="prompt">ID</div>
+<input id="idFiltro" type="text">
+
 <input type="reset" class="panelButton" value="Clear">
 <input type="submit" class="panelButton" value="Go!">
 
@@ -32,6 +35,8 @@ body_open();
 <div class="formaInputLine">
 <div class="prompt farea_A">Id</div>
 <input id="mathimaFormaId" disabled="yes">
+<div id="mathimaFormaTabs">
+</div>
 </div>
 
 <div class="formaInputLine">
@@ -42,12 +47,12 @@ body_open();
 
 <div class="formaInputLine">
 <div class="prompt farea_A">Από</div>
-<input id="mathimaFormaApo" type="date">
+<input id="mathimaFormaApo" class="imerominiaInput">
 </div>
 
 <div class="formaInputLine">
 <div class="prompt farea_A">Έως</div>
-<input id="mathimaFormaEos" type="date">
+<input id="mathimaFormaEos" class="imerominiaInput">
 </div>
 
 <div class="formaPanel">

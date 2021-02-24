@@ -14,6 +14,7 @@ $(document).ready(function() {
 Selida.selidaSetup = function() {
 	Selida.windowDOM = $(window);
 	Selida.bodyDOM = $(document.body);
+	$('.imerominiaInput').datepicker();
 
 	Selida.
 	toolbarSetup().
@@ -274,6 +275,36 @@ Selida.strpush = function(s, t, r) {
 
 Selida.strstrip = function(s) {
 	return s.replace(/[\n\t]/g, " ").trim();
+};
+
+Selida.dmy2ymd = function(d) {
+	if (!d)
+	return '';
+
+	const dmy = d.split(/[^0-9]/);
+
+	if (dmy.length !== 3)
+	return '';
+
+	if (!(new Date(dmy[2], dmy[1] - 1, dmy[0])))
+	return '';
+
+	return dmy[2] + '-' + dmy[1] + '-' + dmy[0];
+};
+
+Selida.ymd2dmy = function(d) {
+	if (!d)
+	return '';
+
+	const dmy = d.split(/[^0-9]/);
+
+	if (dmy.length !== 3)
+	return '';
+
+	if (!(new Date(dmy[0], dmy[1] - 1, dmy[2])))
+	return '';
+
+	return dmy[2] + '-' + dmy[1] + '-' + dmy[0];
 };
 
 ///////////////////////////////////////////////////////////////////////////////@
