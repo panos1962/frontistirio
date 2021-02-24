@@ -4,8 +4,8 @@ Selida.init.push(function() {
 	Selida.mathimataTabDOM.remove();
 	Mathimata.
 	filtraSetup().
-	mathimataSetup().
-	mathimaSetup();
+	mathimaSetup().
+	mathimataSetup();
 Mathimata.filtraDOM.trigger('submit');
 });
 
@@ -71,8 +71,9 @@ Mathimata.mathimataSetup = function() {
 	dialog({
 		'autoOpen': false,
 		'position': {
-			'my': 'left+10 top+40',
-			'at': 'left top',
+			'my': 'right-10 top+20',
+			'at': 'right bottom',
+			'of': Mathimata.mathimaFormaDOM.first(),
 		},
 		'minHeight': 0,
 		'height': 'auto',
