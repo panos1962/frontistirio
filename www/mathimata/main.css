@@ -63,6 +63,12 @@
 
 #mathimaFormaTabs {
 	display: inline-block;
+	float: right;
+}
+
+#mathimaFormaTabs > .tab {
+	margin: 0 0.5em;
+	vertical-align: middle;
 }
 
 #mathimaFormaId {

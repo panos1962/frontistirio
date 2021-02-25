@@ -16,9 +16,7 @@ Selida.checkReady = function() {
 
 	Selida.
 	selidaSetup().
-	init.forEach(function(x) {
-		x();
-	});
+	init.forEach((x) => x());
 
 	return Selida;
 };
