@@ -3,13 +3,28 @@
 const Selida = {};
 Selida.init = [];
 
-$(document).ready(function() {
-	Selida.selidaSetup();
+Selida.readyCount = 0;
 
-	Selida.init.forEach(function(x) {
+Selida.checkReady = function() {
+	Selida.readyCount++;
+
+	if (Selida.readyCount !== 2)
+	return;
+
+	delete Selida.readyCount;
+	delete Selida.checkReady;
+
+	Selida.
+	selidaSetup().
+	init.forEach(function(x) {
 		x();
 	});
-});
+
+	return Selida;
+};
+
+$(document).ready(Selida.checkReady);
+$(window).ready(Selida.checkReady);
 
 Selida.selidaSetup = function() {
 	Selida.windowDOM = $(window);
@@ -21,6 +36,13 @@ Selida.selidaSetup = function() {
 	ofelimoSetup().
 	ribbonSetup().
 	ofelimoHeightSetup();
+
+	setTimeout(function() {
+		Selida.bodyDOM.css({
+			'visibility': 'visible',
+			'overflow-y': 'scroll',
+		});
+	}, 100);
 
 	return Selida;
 };

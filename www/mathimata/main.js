@@ -41,6 +41,7 @@ Mathimata.filtraSetup = function() {
 					domCreate().
 					appendTo(Mathimata.mathimataDOM));
 				});
+				Mathimata.perigrafiFiltroDOM.focus();
 			},
 			'fail': function(err) {
 				console.error(err);
@@ -76,7 +77,6 @@ Mathimata.mathimataSetup = function() {
 			'of': Mathimata.mathimaFormaDOM.first(),
 		},
 		'minHeight': 0,
-		'height': 'auto',
 		'width': '30em',
 		'resizable': false,
 		'modal': true,
@@ -129,7 +129,7 @@ Mathimata.mathimaSetup = function() {
 			'my': 'right top',
 			'at': 'right-10 top+40',
 		},
-		'width': '34em',
+		'width': 'auto',
 		'resizable': false,
 		'autoOpen': false,
 	});

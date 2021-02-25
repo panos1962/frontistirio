@@ -3,21 +3,24 @@
 body {
 	margin: 0;
 	height: 100%;
-	overflow-y: scroll;
-	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-	font-size: 1em;
+	overflow-y: hidden;
+	font-family: "Roboto Condensed", "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 17px;
+	visibility: hidden;
 }
 
 .ui-widget {
 	position: fixed;
-	font-size: 1em;
+	font-family: inherit;
+	font-size: inherit;
 	box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%),
 		0 3px 1px -2px rgb(0 0 0 / 20%),
 		0 1px 5px 0 rgb(0 0 0 / 12%);
 }
 
 input, textarea {
-	font-size: 90%;
+	font-family: inherit;
+	font-size: inherit;
 }
 
 input[type=radio] {
@@ -26,7 +29,8 @@ input[type=radio] {
 
 .ui-widget input,
 .ui-widget textarea {
-	font-size: 90%;
+	font-family: inherit;
+	font-size: inherit;
 }
 
 .ui-dialog .ui-dialog-content {
