@@ -36,11 +36,13 @@
 }
 
 #mathimata > tr:nth-child(odd) {
-	background-color: #fffae7;
+background-color: #fffae7;
+	background-color: #f9efbf;
 }
 
 #mathimata > tr:nth-child(even) {
-	background-color: #fff7d8;
+background-color: #fff7d8;
+	background-color: #fff7d1;
 }
 
 #mathimata > tr:hover {

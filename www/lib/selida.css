@@ -43,7 +43,8 @@ input, textarea {
 	display: grid;
 	grid-template-columns: auto auto;
 	padding: 4px;
-	background-color: #ffeaae;
+background-color: #ffeaae;
+background-color: ivory;
 	border-style: none none solid none;
 	border-width: 2px;
 	border-color: grey;
@@ -75,7 +76,8 @@ input, textarea {
 	display: grid;
 	grid-template-columns: auto auto;
 	padding: 4px;
-	background-color: #ffeaae;
+background-color: #ffeaae;
+background-color: ivory;
 	border-style: solid none none none;
 	border-width: 2px;
 	border-color: grey;
@@ -121,7 +123,8 @@ input, textarea {
 
 #ofelimo {
 	position: relative;
-	background-color: #e7fffe;
+background-color: #e7fffe;
+background-color: ivory;
 }
 
 /******************************************************************************/

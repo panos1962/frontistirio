@@ -39,16 +39,22 @@
 }
 
 #kathigites > tr:nth-child(odd) {
-	background-color: #fffae7;
+background-color: #fffae7;
+	background-color: #f9efbf;
 }
 
 #kathigites > tr:nth-child(even) {
-	background-color: #fff7d8;
+background-color: #fff7d8;
+	background-color: #fff7d1;
 }
 
 #kathigites > tr:hover {
 	background-color: #ffd67b;
 	cursor: pointer;
+}
+
+.kathigitisTrexon {
+	background-color: yellow !important;
 }
 
 #kathigitisFormaId {
@@ -69,8 +75,4 @@
 
 .kathigitisFormaImerominia {
 	width: 10em;
-}
-
-.kathigitisTrexon {
-	background-color: yellow !important;
 }
