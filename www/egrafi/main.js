@@ -23,6 +23,14 @@ Selida.init.push(function() {
 	}
 
 	Account.formaCreate();
+
+	setTimeout(function() {
+		if (Account.egrafiMode)
+		Account.loginDOM.focus();
+
+		else
+		Account.onomateponimoDOM.focus();
+	}, 100);
 });
 
 Account.formaCreate = function() {
@@ -90,6 +98,10 @@ Account.formaCreate = function() {
 		'type': 'button',
 		'value': 'Cancel',
 	}).on('click', function() {
+		if (Account.updateMode)
+		self.close();
+
+		else;
 		self.location = Selida.baseUrl;
 	}));
 
@@ -102,9 +114,8 @@ Account.formaCreate = function() {
 	Selida.widthFix(Account.formaDOM, '.prompt');
 
 	if (Account.updateMode)
-	return Account.formaFill();
+	Account.formaFill();
 
-	Account.loginDOM.focus();
 	return Account;
 };
 

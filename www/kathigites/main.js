@@ -7,7 +7,9 @@ Selida.init.push(function() {
 	kathigitesCreate().
 	kathigitisFormaSetup();
 
-	Kathigites.filtraDOM.trigger('submit');
+	setTimeout(function() {
+		Kathigites.eponimoFiltroDOM.focus();
+	}, 100);
 });
 
 Kathigites.filtraSetup = function() {
@@ -32,7 +34,7 @@ Kathigites.filtraSetup = function() {
 		else
 		data.katastasi = "oloi";
 
-		Kathigites.kathigitesDOM.empty();
+		Kathigites.kathigitesClear();
 		$.post({
 			'url': 'kathigites.php',
 			'data': data,
@@ -45,10 +47,22 @@ Kathigites.filtraSetup = function() {
 			},
 		});
 
+		Kathigites.eponimoFiltroDOM.focus();
 		return false;
+	}).
+	on('reset', function() {
+		Kathigites.kathigitesClear();
+		Kathigites.eponimoFiltroDOM.focus();
 	});
 
-	Kathigites.eponimoFiltroDOM.focus();
+	return Kathigites;
+};
+
+Kathigites.kathigitesClear = function() {
+	Kathigites.kathigitisDialogDOM.dialog('close');
+	delete Kathigites.kathigitisTrexonDOM;
+	Kathigites.kathigitesDOM.empty();
+
 	return Kathigites;
 };
 
@@ -100,7 +114,7 @@ Kathigites.kathigitisFormaSetup = function() {
 		'open': Kathigites.kathigitisDialogOpen,
 		'position': {
 			'my': 'right top', 
-			'at': 'right-10 top+40',
+			'at': 'right-10 top+80',
 		},
 		'width': '32em',
 		'resizable': false,

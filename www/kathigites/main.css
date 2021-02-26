@@ -7,19 +7,15 @@
 }
 
 #eponimoFiltro {
-	width: 10em;
+	width: 8em;
 }
 
 #onomaFiltro {
-	width: 10em;
+	width: 6em;
 }
 
 #patronimoFiltro {
-	width: 10em;
-}
-
-input {
-	margin: 0 8px;
+	width: 6em;
 }
 
 #kathigitesWrapper {

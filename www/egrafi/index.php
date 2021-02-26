@@ -1,21 +1,24 @@
 <?php
 require_once("../lib/selida.php");
 
-$update = array_key_exists("update", $_GET);
+if (array_key_exists("update", $_REQUEST)) {
+	$titlos = "Ενημέρωση";
+	$update = 1;
+}
+else {
+	$titlos = "Εγγραφή";
+	$update = 0;
+}
 
 Selida::
 anonimi_xrisi($update)::
 head_open();
-
-if ($update) {
 ?>
 <script>
-Account.updateMode = true;
+Account.updateMode = <?php print $update; ?>;
 </script>
 <?php
-}
-
 Selida::
-titlos($update ? "Ενημέρωση" : "Εγγραφή")::
+titlos($titlos)::
 head_close();
 ?>

@@ -25,8 +25,8 @@ body_open();
 <div class="prompt">Όλοι</div>
 <input name="katastasi" id="oloiFiltro" type="radio" value="oloi">
 
-<input id="clearFiltro" type="reset" value="Clear">
-<input id="submitFiltro" type="submit" value="Go!">
+<input class="panelButton" id="clearFiltro" type="reset" value="Clear">
+<input class="panelButton" id="submitFiltro" type="submit" value="Go!">
 
 </form>
 

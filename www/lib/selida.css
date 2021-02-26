@@ -23,10 +23,6 @@ input, textarea {
 	font-size: inherit;
 }
 
-input[type=radio] {
-	vertical-align: middle;
-}
-
 .ui-widget input,
 .ui-widget textarea {
 	font-family: inherit;
