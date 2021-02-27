@@ -27,6 +27,21 @@ define("DFLTROWS", 20);
 class Selida {
 ///////////////////////////////////////////////////////////////////////////////@
 
+public static $child = FALSE;
+
+public static function init() {
+	self::$child = array_key_exists("child", $_REQUEST);
+	return __CLASS__;
+}
+
+public static function is_child() {
+	return self::$child;
+}
+
+public static function aftonomi() {
+	return !self::is_child();
+}
+
 public static function is_post($tag, $strict = FALSE) {
 	if (!array_key_exists($tag, $_POST))
 	return FALSE;
@@ -71,7 +86,7 @@ public static function no_xristis() {
 	return !self::is_xristis();
 }
 
-public static function must_eponimi_xrisi() {
+public static function eponimi_xrisi_must() {
 	if (Selida::is_xristis())
 	return __CLASS__;
 
@@ -138,6 +153,16 @@ Selida.xristis = <?php print Selida::json_string($_SESSION["xristis"]); ?>;
 else {
 ?>
 delete Selida.xristis;
+<?php
+}
+if (self::is_child()) {
+?>
+Selida.child = true;
+<?php
+}
+else {
+?>
+Selida.child = false;
 <?php
 }
 ?>
@@ -291,6 +316,8 @@ public static function json_string($s) {
 
 ///////////////////////////////////////////////////////////////////////////////@
 }
+
+Selida::init();
 
 // Κατά την έξοδο από το πρόγραμμα κλείνουμε τυχόν σύνδεσή μας με την database.
 

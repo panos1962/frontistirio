@@ -1,5 +1,7 @@
 "use strict";
 
+const Main = {};
+
 const Selida = {};
 Selida.init = [];
 
@@ -54,50 +56,109 @@ Selida.toolbarSetup = function() {
 	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
 	append(Selida.toolbarRightDOM = $('<div>').attr('id', 'toolbarRight'));
 
+	return Selida;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Selida.arxikiTab = function(dom) {
+	if (!dom)
+	dom = Selida.toolbarLeftDOM;
+
+	dom.
+	append(Selida.arxikiTabDOM = Selida.tabCreate({
+		'href': Selida.baseUrl,
+		'text': 'Αρχική',
+	}));
+
+	return Selida;
+};
+
+Selida.klisimoTab = function(dom) {
+	if (!dom)
+	dom = Selida.toolbarRightDOM;
+
+	dom.
+	append(Selida.klisimoTabDOM = Selida.tabCreate({
+		'href': function() {
+			self.close();
+		},
+		'text': 'Κλείσιμο',
+	}));
+
+	return Selida;
+};
+
+Selida.egrafiTab = function() {
+	Selida.toolbarRightDOM.
+	append(Selida.egrafiTabDOM = Selida.tabCreate({
+		'text': 'Εγγραφή',
+		'href': Selida.baseUrl + '/egrafi',
+	}));
+
+	return Selida;
+};
+
+Selida.isodosTab = function() {
+	Selida.toolbarRightDOM.
+	append(Selida.isodosTabDOM = Selida.tabCreate({
+		'text': 'Είσοδος',
+		'href': Selida.baseUrl + '/isodos',
+	}));
+
+	return Selida;
+};
+
+Selida.xristisTab = function() {
+	Selida.toolbarRightDOM.
+	append(Selida.xristisTabDOM = Selida.tabCreate({
+		'text': Selida.xristis,
+		'href': Selida.baseUrl + '/egrafi?update',
+		'target': '_blank',
+	}));
+
+	return Selida;
+};
+
+Selida.exodosTab = function() {
+	Selida.toolbarRightDOM.
+	append(Selida.exodosTabDOM = Selida.tabCreate({
+		'text': 'Έξοδος',
+		'href': function() {
+			$.post({
+				'url': Selida.baseUrl + '/lib/exodos.php',
+				'success': function(rsp) {
+					if (rsp === 'OK')
+					self.location = Selida.baseUrl;
+				},
+				'fail': function(err) {
+					console.error(err);
+				},
+			});
+		},
+	}));
+
+	return Selida;
+};
+
+Selida.mathimataTab = function() {
 	Selida.toolbarLeftDOM.
-	append(Selida.arxikiTabDOM = Selida.arxikiTab());
+	append(Selida.tabCreate({
+		'text': 'Μαθήματα',
+		'href': Selida.baseUrl + '/mathimata',
+		'target': '_self',
+	}));
 
-	Selida.klisimoTabDOM = Selida.klisimoTab();
+	return Selida;
+};
 
-	if (Selida.isXristis()) {
-		Selida.toolbarLeftDOM.
-		append(Selida.mathimataTabDOM = Selida.mathimataTab()).
-		append(Selida.kathigitesTabDOM = Selida.kathigitesTab());
-
-		Selida.toolbarRightDOM.
-		append(Selida.xristisTabDOM = Selida.tabCreate({
-			'text': Selida.xristis,
-			'href': Selida.baseUrl + '/egrafi?update',
-			'target': '_blank',
-		})).
-		append(Selida.exodosTabDOM = Selida.tabCreate({
-			'text': 'Έξοδος',
-			'href': function() {
-				$.post({
-					'url': Selida.baseUrl + '/lib/exodos.php',
-					'success': function(rsp) {
-						if (rsp === 'OK')
-						self.location = Selida.baseUrl;
-					},
-					'fail': function(err) {
-						console.error(err);
-					},
-				});
-			},
-		}));
-	}
-
-	else {
-		Selida.toolbarRightDOM.
-		append(Selida.egrafiTabDOM = Selida.tabCreate({
-			'text': 'Εγγραφή',
-			'href': Selida.baseUrl + '/egrafi',
-		})).
-		append(Selida.isodosTabDOM = Selida.tabCreate({
-			'text': 'Είσοδος',
-			'href': Selida.baseUrl + '/isodos',
-		}));
-	}
+Selida.kathigitesTab = function() {
+	Selida.toolbarLeftDOM.
+	append(Selida.tabCreate({
+		'text': 'Καθηγητές',
+		'href': Selida.baseUrl + '/kathigites',
+		'target': '_self',
+	}));
 
 	return Selida;
 };
@@ -133,41 +194,7 @@ Selida.tabCreate = function(opts) {
 	return tab;
 };
 
-Selida.arxikiTab = function() {
-	return Selida.tabCreate({
-		'href': Selida.baseUrl,
-		'text': 'Αρχική',
-	});
-
-	return Selida;
-};
-
-Selida.klisimoTab = function() {
-	return Selida.tabCreate({
-		'href': function() {
-			self.close();
-		},
-		'text': 'Κλείσιμο',
-	});
-
-	return Selida;
-};
-
-Selida.mathimataTab = function() {
-	return Selida.tabCreate({
-		'text': 'Μαθήματα',
-		'href': Selida.baseUrl + '/mathimata',
-		'target': '_self',
-	}).appendTo(Selida.toolbarLeftDOM);
-};
-
-Selida.kathigitesTab = function() {
-	return Selida.tabCreate({
-		'text': 'Καθηγητές',
-		'href': Selida.baseUrl + '/kathigites',
-		'target': '_self',
-	}).appendTo(Selida.toolbarLeftDOM);
-};
+///////////////////////////////////////////////////////////////////////////////@
 
 Selida.ofelimoSetup = function() {
 	Selida.ofelimoDOM = $('<div>').
@@ -194,24 +221,22 @@ Selida.ribbonSetup = function() {
 };
 
 Selida.ofelimoHeightSetup = function() {
-	const pad = 1;
-
 	Selida.bodyDOM.css('overflow-y', 'scroll');
 	Selida.ofelimoDOM.css({
-		'padding-top': pad + 'px',
-		'padding-bottom': pad + 'px',
 		'min-height': 0,
 	});
 
 	const th = Selida.toolbarDOM.outerHeight();
 	const rh = Selida.ribbonDOM.outerHeight();
 	const wh = Selida.windowDOM.height();
-	const oh = wh - th - rh - pad - pad;
+	const oh = wh - th - rh;
 
 	Selida.ofelimoDOM.css('min-height', oh + 'px');
 
 	return Selida;
 };
+
+///////////////////////////////////////////////////////////////////////////////@
 
 Selida.isXristis = function() {
 	return Selida.xristis;
@@ -219,6 +244,26 @@ Selida.isXristis = function() {
 
 Selida.noXristis = function() {
 	return !Selida.isXristis();
+};
+
+Selida.isEponimiXrisi = Selida.isXristis;
+Selida.isAnonimiXrisi = Selida.noXristis;
+
+Selida.eponimiXrisiMust = function() {
+	if (Selida.isAnonimiXrisi())
+	self.location = Selida.baseUrl;
+
+	return Selida;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Selida.isChild = function() {
+	return Selida.child;
+};
+
+Selida.isAftonomi = function() {
+	return !Selida.isChild();
 };
 
 ///////////////////////////////////////////////////////////////////////////////@

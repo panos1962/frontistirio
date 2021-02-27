@@ -15,7 +15,7 @@ anonimi_xrisi($update)::
 head_open();
 ?>
 <script>
-Account.updateMode = <?php print $update; ?>;
+Main.updateMode = <?php print $update; ?>;
 </script>
 <?php
 Selida::

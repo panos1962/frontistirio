@@ -2,7 +2,7 @@
 require_once("../lib/selida.php");
 
 Selida::
-must_eponimi_xrisi()::
+eponimi_xrisi_must()::
 head_open()::
 titlos("Μαθήματα")::
 body_open();

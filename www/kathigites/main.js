@@ -1,117 +1,123 @@
-Kathigites = {};
+"use strict";
 
 Selida.init.push(function() {
-	Selida.kathigitesTabDOM.remove();
-	Kathigites.
+	Selida.
+	eponimiXrisiMust().
+	arxikiTab().
+	mathimataTab().
+	xristisTab().
+	exodosTab();
+
+	Main.
 	filtraSetup().
 	kathigitesCreate().
 	kathigitisFormaSetup();
 
 	setTimeout(function() {
-		Kathigites.eponimoFiltroDOM.focus();
+		Main.eponimoFiltroDOM.focus();
 	}, 100);
 });
 
-Kathigites.filtraSetup = function() {
-	Kathigites.filtraDOM = $('#formaFiltra');
-	Kathigites.eponimoFiltroDOM = $('#eponimoFiltro');
-	Kathigites.onomaFiltroDOM = $('#onomaFiltro');
-	Kathigites.patronimoFiltroDOM = $('#patronimoFiltro');
-	Kathigites.energosFiltroDOM = $('#energosFiltro');
+Main.filtraSetup = function() {
+	Main.filtraDOM = $('#formaFiltra');
+	Main.eponimoFiltroDOM = $('#eponimoFiltro');
+	Main.onomaFiltroDOM = $('#onomaFiltro');
+	Main.patronimoFiltroDOM = $('#patronimoFiltro');
+	Main.energosFiltroDOM = $('#energosFiltro');
 
 	Selida.ofelimoDOM.
-	append(Kathigites.filtraDOM).
+	append(Main.filtraDOM).
 	on('submit', function() {
 		const data = {};
 
-		data.eponimo = Kathigites.eponimoFiltroDOM.val();
-		data.onoma = Kathigites.onomaFiltroDOM.val();
-		data.patronimo = Kathigites.patronimoFiltroDOM.val();
+		data.eponimo = Main.eponimoFiltroDOM.val();
+		data.onoma = Main.onomaFiltroDOM.val();
+		data.patronimo = Main.patronimoFiltroDOM.val();
 
-		if (Kathigites.energosFiltroDOM.is(':checked'))
+		if (Main.energosFiltroDOM.is(':checked'))
 		data.katastasi = "energos";
 
 		else
 		data.katastasi = "oloi";
 
-		Kathigites.kathigitesClear();
+		Main.kathigitesClear();
 		$.post({
 			'url': 'kathigites.php',
 			'data': data,
 			'success': function(rsp) {
 				rsp.pop();
-				Kathigites.kathigitesDisplay(rsp);
+				Main.kathigitesDisplay(rsp);
 			},
 			'fail': function(err) {
 				console.error(err);
 			},
 		});
 
-		Kathigites.eponimoFiltroDOM.focus();
+		Main.eponimoFiltroDOM.focus();
 		return false;
 	}).
 	on('reset', function() {
-		Kathigites.kathigitesClear();
-		Kathigites.eponimoFiltroDOM.focus();
+		Main.kathigitesClear();
+		Main.eponimoFiltroDOM.focus();
 	});
 
-	return Kathigites;
+	return Main;
 };
 
-Kathigites.kathigitesClear = function() {
-	Kathigites.kathigitisDialogDOM.dialog('close');
-	delete Kathigites.kathigitisTrexonDOM;
-	Kathigites.kathigitesDOM.empty();
+Main.kathigitesClear = function() {
+	Main.kathigitisDialogDOM.dialog('close');
+	delete Main.kathigitisTrexonDOM;
+	Main.kathigitesDOM.empty();
 
-	return Kathigites;
+	return Main;
 };
 
-Kathigites.kathigitesCreate = function() {
+Main.kathigitesCreate = function() {
 	Selida.ofelimoDOM.
 	append($('<div>').attr('id', 'kathigitesWrapper').
-	append(Kathigites.kathigitesDOM = $('<table>').
+	append(Main.kathigitesDOM = $('<table>').
 	attr('id', 'kathigites')));
 
-	Kathigites.kathigitesDOM.
+	Main.kathigitesDOM.
 	on('click', 'tr', function() {
-		if (Kathigites.kathigitisTrexonDOM)
-		Kathigites.kathigitisTrexonDOM.removeClass('kathigitisTrexon');
+		if (Main.kathigitisTrexonDOM)
+		Main.kathigitisTrexonDOM.removeClass('kathigitisTrexon');
 
-		Kathigites.kathigitisTrexonDOM = $(this).addClass('kathigitisTrexon');
-		Kathigites.kathigitisDialogDOM.dialog('close').dialog('open');
+		Main.kathigitisTrexonDOM = $(this).addClass('kathigitisTrexon');
+		Main.kathigitisDialogDOM.dialog('close').dialog('open');
 	});
 
-	return Kathigites;
+	return Main;
 };
 
-Kathigites.kathigitisDialogOpen = function() {
-	const kathigitis = Kathigites.kathigitesDOM.
+Main.kathigitisDialogOpen = function() {
+	const kathigitis = Main.kathigitesDOM.
 	find('.kathigitisTrexon').data('kathigitis');
 
-	Kathigites.kathigitisFormaIdDOM.val(kathigitis.id);
-	Kathigites.kathigitisFormaEponimoDOM.val(kathigitis.eponimo);
-	Kathigites.kathigitisFormaOnomaDOM.val(kathigitis.onoma);
-	Kathigites.kathigitisFormaPatronimoDOM.val(kathigitis.patronimo);
-	Kathigites.kathigitisFormaGenisiDOM.val(kathigitis.genisi);
-	Kathigites.kathigitisFormaEgrafiDOM.val(kathigitis.egrafi);
-	Kathigites.kathigitisFormaApoxorisiDOM.val(kathigitis.apoxorisi);
+	Main.kathigitisFormaIdDOM.val(kathigitis.id);
+	Main.kathigitisFormaEponimoDOM.val(kathigitis.eponimo);
+	Main.kathigitisFormaOnomaDOM.val(kathigitis.onoma);
+	Main.kathigitisFormaPatronimoDOM.val(kathigitis.patronimo);
+	Main.kathigitisFormaGenisiDOM.val(kathigitis.genisi);
+	Main.kathigitisFormaEgrafiDOM.val(kathigitis.egrafi);
+	Main.kathigitisFormaApoxorisiDOM.val(kathigitis.apoxorisi);
 
-	Selida.fareaFix(Kathigites.kathigitisFormaDOM);
+	Selida.fareaFix(Main.kathigitisFormaDOM);
 };
 
-Kathigites.kathigitisFormaSetup = function() {
-	Kathigites.kathigitisFormaDOM = $('#kathigitisForma');
-	Kathigites.kathigitisFormaIdDOM = $('#kathigitisFormaId');
-	Kathigites.kathigitisFormaEponimoDOM = $('#kathigitisFormaEponimo');
-	Kathigites.kathigitisFormaOnomaDOM = $('#kathigitisFormaOnoma');
-	Kathigites.kathigitisFormaPatronimoDOM = $('#kathigitisFormaPatronimo');
-	Kathigites.kathigitisFormaGenisiDOM = $('#kathigitisFormaGenisi').datepicker();
-	Kathigites.kathigitisFormaEgrafiDOM = $('#kathigitisFormaEgrafi').datepicker();
-	Kathigites.kathigitisFormaApoxorisiDOM = $('#kathigitisFormaApoxorisi').datepicker();
+Main.kathigitisFormaSetup = function() {
+	Main.kathigitisFormaDOM = $('#kathigitisForma');
+	Main.kathigitisFormaIdDOM = $('#kathigitisFormaId');
+	Main.kathigitisFormaEponimoDOM = $('#kathigitisFormaEponimo');
+	Main.kathigitisFormaOnomaDOM = $('#kathigitisFormaOnoma');
+	Main.kathigitisFormaPatronimoDOM = $('#kathigitisFormaPatronimo');
+	Main.kathigitisFormaGenisiDOM = $('#kathigitisFormaGenisi').datepicker();
+	Main.kathigitisFormaEgrafiDOM = $('#kathigitisFormaEgrafi').datepicker();
+	Main.kathigitisFormaApoxorisiDOM = $('#kathigitisFormaApoxorisi').datepicker();
 
-	Kathigites.kathigitisDialogDOM = $('#kathigitisFormaDialog').
+	Main.kathigitisDialogDOM = $('#kathigitisFormaDialog').
 	dialog({
-		'open': Kathigites.kathigitisDialogOpen,
+		'open': Main.kathigitisDialogOpen,
 		'position': {
 			'my': 'right top', 
 			'at': 'right-10 top+80',
@@ -121,22 +127,22 @@ Kathigites.kathigitisFormaSetup = function() {
 		'autoOpen': false,
 	});
 
-	Kathigites.kathigitisFormaDOM.
-	on('submit', Kathigites.kathigitisFormaSubmit);
+	Main.kathigitisFormaDOM.
+	on('submit', Main.kathigitisFormaSubmit);
 
-	return Kathigites;
+	return Main;
 };
 
-Kathigites.kathigitisFormaSubmit = function() {
+Main.kathigitisFormaSubmit = function() {
 	const data = {};
 
-	data.id = Kathigites.kathigitisFormaIdDOM.val();
-	data.eponimo = Kathigites.kathigitisFormaEponimoDOM.val();
-	data.onoma = Kathigites.kathigitisFormaOnomaDOM.val();
-	data.patronimo = Kathigites.kathigitisFormaPatronimoDOM.val();
-	data.genisi = Kathigites.kathigitisFormaGenisiDOM.val();
-	data.egrafi = Kathigites.kathigitisFormaEgrafiDOM.val();
-	data.apoxorisi = Kathigites.kathigitisFormaApoxorisiDOM.val();
+	data.id = Main.kathigitisFormaIdDOM.val();
+	data.eponimo = Main.kathigitisFormaEponimoDOM.val();
+	data.onoma = Main.kathigitisFormaOnomaDOM.val();
+	data.patronimo = Main.kathigitisFormaPatronimoDOM.val();
+	data.genisi = Main.kathigitisFormaGenisiDOM.val();
+	data.egrafi = Main.kathigitisFormaEgrafiDOM.val();
+	data.apoxorisi = Main.kathigitisFormaApoxorisiDOM.val();
 
 	$.post({
 		'url': 'kathigitisUpdate.php',
@@ -146,7 +152,7 @@ Kathigites.kathigitisFormaSubmit = function() {
 			return;
 
 			const kathigitis = new Kathigitis(data);
-			kathigitis.domUpdate(Kathigites.kathigitisTrexonDOM);
+			kathigitis.domUpdate(Main.kathigitisTrexonDOM);
 		},
 		'fail': function(err) {
 			console.error(err);
@@ -156,7 +162,7 @@ Kathigites.kathigitisFormaSubmit = function() {
 	return false;
 };
 
-Kathigites.kathigitesDisplay = function(klist) {
+Main.kathigitesDisplay = function(klist) {
 	for (let i = 0; i < klist.length; i++) {
 		const kathigitis = new Kathigitis(klist[i]);
 		const dom = kathigitis.domCreate();
@@ -164,10 +170,10 @@ Kathigites.kathigitesDisplay = function(klist) {
 		kathigitis.domUpdate(dom);
 
 		dom.
-		appendTo(Kathigites.kathigitesDOM);
+		appendTo(Main.kathigitesDOM);
 	}
 
-	return Kathigites;
+	return Main;
 };
 
 ///////////////////////////////////////////////////////////////////////////////@

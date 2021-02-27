@@ -187,12 +187,10 @@ background-color: ivory;
 }
 */
 
-.mathimaApo {
-	width: 6em;
-}
-
+.mathimaApo,
 .mathimaEos {
-	width: 6em;
+	width: 5em;
+	text-align: center;
 }
 
 /******************************************************************************/
@@ -206,16 +204,11 @@ background-color: ivory;
 	width: 20em;
 }
 
-.kathigitisGenisi {
-	width: 6em;
-}
-
-.kathigitisEgrafi {
-	width: 6em;
-}
-
+.kathigitisGenisi,
+.kathigitisEgrafi,
 .kathigitisApoxorisi {
-	width: 6em;
+	width: 5em;
+	text-align: center;
 }
 
 /******************************************************************************/

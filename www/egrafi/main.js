@@ -1,70 +1,60 @@
 "use strict";
 
-const Account = {};
-
 Selida.init.push(function() {
-	if (Account.updateMode && Selida.noXristis())
+	if (Main.updateMode && Selida.noXristis())
 	return self.location = Selida.baseUrl;
 
-	Account.egrafiMode = !Account.updateMode;
+	Main.egrafiMode = !Main.updateMode;
 
-	if (Account.updateMode) {
-		Selida.xristisTabDOM.remove();
-		Selida.exodosTabDOM.remove();
-		Selida.arxikiTabDOM.remove();
-		Selida.mathimataTabDOM.remove();
-		Selida.kathigitesTabDOM.remove();
-		Selida.klisimoTabDOM.prependTo(Selida.toolbarRightDOM);
-	}
+	if (Main.updateMode)
+	Selida.klisimoTab();
 
-	else {
-		Selida.egrafiTabDOM.remove();
-		Selida.arxikiTabDOM.prependTo(Selida.toolbarRightDOM);
-	}
+	else
+	Selida.arxikiTab(Selida.toolbarRightDOM).isodosTab();
 
-	Account.formaCreate();
+	Main.formaCreate();
 
 	setTimeout(function() {
-		if (Account.egrafiMode)
-		Account.loginDOM.focus();
+		if (Main.egrafiMode)
+		Main.loginDOM.focus();
 
 		else
-		Account.onomateponimoDOM.focus();
+		Main.onomateponimoDOM.focus();
 	}, 100);
 });
 
-Account.formaCreate = function() {
-	Account.formaDOM = $('<form>').
+Main.formaCreate = function() {
+	Main.formaDOM = $('<form>').
 	addClass('forma').
 	attr('id', 'egrafiForma');
 
-	Account.formaDOM.
+	Main.formaDOM.
 	append($('<div>').addClass('prompt').text('Login')).
-	append(Account.loginDOM = $('<input>').attr('id', 'login')).
+	append(Main.loginDOM = $('<input>').attr('id', 'login')).
 	append($('<br>')).
 	append($('<div>').addClass('prompt').text('Ονοματεπώνυμο')).
-	append(Account.onomateponimoDOM = $('<input>').attr('id', 'onomateponimo')).
+	append(Main.onomateponimoDOM = $('<input>').attr('id', 'onomateponimo')).
 	append($('<br>'));
 
-	if (Account.updateMode)
-	Account.formaDOM.
+	if (Main.updateMode)
+	Main.formaDOM.
 	append($('<div>').addClass('prompt').text('Τρέχων κωδικός')).
-	append(Account.passwordDOM = $('<input>').attr({
+	append(Main.passwordDOM = $('<input>').attr({
 		'id': 'password',
 		'type': 'password'
 	})).
 	append($('<br>'));
 
-	Account.formaDOM.
+	Main.formaDOM.
 	append($('<div>').addClass('prompt').
-	text(Account.updateMode ? 'Νέος Κωδικός' : 'Κωδικός')).
-	append(Account.password1DOM = $('<input>').attr({
+	text(Main.updateMode ? 'Νέος Κωδικός' : 'Κωδικός')).
+	append(Main.password1DOM = $('<input>').attr({
 		'id': 'password1',
 		'type': 'password'
 	})).
 	append($('<br>')).
 	append($('<div>').addClass('prompt').text('Επανάληψη')).
-	append(Account.password2DOM = $('<input>').attr({
+	append(Main.password2DOM = $('<input>').attr({
 		'id': 'password2',
 		'type': 'password'
 	})).
@@ -73,70 +63,70 @@ Account.formaCreate = function() {
 	const panel = $('<div>').
 	addClass('formaPanel').
 	attr('id', 'panel').
-	appendTo(Account.formaDOM);
+	appendTo(Main.formaDOM);
 
 	panel.
 	append($('<input>').attr({
 		'type': 'submit',
 		'value': 'Submit',
 	})).
-	append(Account.clearDOM = $('<input>').attr({
+	append(Main.clearDOM = $('<input>').attr({
 		'type': 'reset',
 		'value': 'Clear',
 	}).on('click', function() {
-		if (Account.updateMode) {
+		if (Main.updateMode) {
 			setTimeout(function() {
-				Account.loginDOM.val(Selida.xristis);
+				Main.loginDOM.val(Selida.xristis);
 			}, 0);
-			Account.onomateponimoDOM.focus();
+			Main.onomateponimoDOM.focus();
 		}
 
 		else
-		Account.loginDOM.focus();
+		Main.loginDOM.focus();
 	})).
-	append(Account.cancelDOM = $('<input>').attr({
+	append(Main.cancelDOM = $('<input>').attr({
 		'type': 'button',
 		'value': 'Cancel',
 	}).on('click', function() {
-		if (Account.updateMode)
+		if (Main.updateMode)
 		self.close();
 
 		else;
 		self.location = Selida.baseUrl;
 	}));
 
-	Account.formaDOM.on('submit', function() {
-		Account.submitData();
+	Main.formaDOM.on('submit', function() {
+		Main.submitData();
 		return false;
 	});
 
-	Account.formaDOM.appendTo(Selida.ofelimoDOM);
-	Selida.widthFix(Account.formaDOM, '.prompt');
+	Main.formaDOM.appendTo(Selida.ofelimoDOM);
+	Selida.widthFix(Main.formaDOM, '.prompt');
 
-	if (Account.updateMode)
-	Account.formaFill();
+	if (Main.updateMode)
+	Main.formaFill();
 
-	return Account;
+	return Main;
 };
 
-Account.formaFill = function() {
-	Account.suspend(true);
-	Account.loginDOM.prop('disabled', true);
+Main.formaFill = function() {
+	Main.suspend(true);
+	Main.loginDOM.prop('disabled', true);
 	$.post({
 		'url': 'xristis.php',
 		'success': function(rsp) {
-			Account.formaDataFill(rsp);
+			Main.formaDataFill(rsp);
 		},
 		'fail': function(err) {
 			cosnole.error(err);
 		},
 	});
 
-	return Account;
+	return Main;
 };
 
-Account.formaDataFill = function(data) {
-	Account.cancelDOM.prop('disabled', false);
+Main.formaDataFill = function(data) {
+	Main.cancelDOM.prop('disabled', false);
 
 	if (data.hasOwnProperty('error'))
 	return;
@@ -147,53 +137,53 @@ Account.formaDataFill = function(data) {
 	if (data.login !== Selida.xristis)
 	return;
 
-	Account.suspend(false);
-	Account.loginDOM.val(data.login).prop('disabled', true);
-	Account.onomateponimoDOM.val(data.onomateponimo).focus();
+	Main.suspend(false);
+	Main.loginDOM.val(data.login).prop('disabled', true);
+	Main.onomateponimoDOM.val(data.onomateponimo).focus();
 };
 
-Account.submitData = function() {
-	const login = Account.loginDOM.val().trim();
+Main.submitData = function() {
+	const login = Main.loginDOM.val().trim();
 
 	if (login === '') {
-		Account.loginDOM.focus();
+		Main.loginDOM.focus();
 		return false;
 	}
 
 	if (!login.match(/^[A-Za-z][0-9a-zA-Z_@.-]*$/)) {
-		Account.loginDOM.focus();
+		Main.loginDOM.focus();
 		return false;
 	}
 
-	const onomateponimo = Account.onomateponimoDOM.val().trim();
+	const onomateponimo = Main.onomateponimoDOM.val().trim();
 
 	if (onomateponimo === '') {
-		Account.onomateponimoDOM.focus();
+		Main.onomateponimoDOM.focus();
 		return false;
 	}
 
 	let password;
 
-	if (Account.updateMode) {
-		password = Account.passwordDOM.val();
+	if (Main.updateMode) {
+		password = Main.passwordDOM.val();
 
 		if (password === '') {
-			Account.passwordDOM.focus();
+			Main.passwordDOM.focus();
 			return false;
 		}
 	}
 
-	const password1 = Account.password1DOM.val();
+	const password1 = Main.password1DOM.val();
 
 	if (Selida.egrafiMode && (password1 === '')) {
-		Account.password1DOM.focus();
+		Main.password1DOM.focus();
 		return false;
 	}
 
-	const password2 = Account.password2DOM.val();
+	const password2 = Main.password2DOM.val();
 
 	if (password1 !== password2) {
-		Account.password1DOM.focus();
+		Main.password1DOM.focus();
 		return false;
 	}
 
@@ -202,7 +192,7 @@ Account.submitData = function() {
 		'onomateponimo': onomateponimo,
 	};
 
-	if (Account.updateMode) {
+	if (Main.updateMode) {
 		data.mode = 'update';
 		data.password = password;
 		data.password1 = password1;
@@ -213,49 +203,49 @@ Account.submitData = function() {
 		data.password = password1;
 	}
 
-	Account.suspend(true);
+	Main.suspend(true);
 	$.post({
 		'url': 'egrafi.php',
 		'data': data,
 		'success': function(rsp) {
 			if (rsp === 'OK') {
-				if (Account.egrafiMode)
+				if (Main.egrafiMode)
 				return self.location = Selida.baseUrl;
 
-				Account.formaDOM.empty().
+				Main.formaDOM.empty().
 				append('Τα στοιχεία ενημερώθηκαν επιτυχώς!');
 				return;
 			}
 
-			Account.suspend(false);
+			Main.suspend(false);
 
-			if (Account.egrafiMode)
-			return Account.loginDOM.focus();
+			if (Main.egrafiMode)
+			return Main.loginDOM.focus();
 
-			Account.passwordDOM.focus();
+			Main.passwordDOM.focus();
 		},
 		'error': function(err) {
 			console.error(err);
 
-			Account.suspend(false);
+			Main.suspend(false);
 
-			if (Account.egrafiMode)
-			return Account.loginDOM.focus();
+			if (Main.egrafiMode)
+			return Main.loginDOM.focus();
 
-			return Account().passwordDOM.focus();
+			return Main().passwordDOM.focus();
 		},
 	});
 };
 
-Account.suspend = function(suspend) {
-	Selida.formSuspend(Account.formaDOM, suspend);
+Main.suspend = function(suspend) {
+	Selida.formSuspend(Main.formaDOM, suspend);
 
 	if (suspend)
-	return Account;
+	return Main;
 
-	if (Account.egrafiMode)
-	return Account;
+	if (Main.egrafiMode)
+	return Main;
 
-	Account.loginDOM.prop('disabled', true);
-	return Account;
+	Main.loginDOM.prop('disabled', true);
+	return Main;
 };
