@@ -1,0 +1,58 @@
+#mathima {
+	padding: 0.2em 1em;
+	background-color: #efe894;
+	border-style: none none solid none;
+	border-width: 1px;
+	border-color: grey;
+}
+
+#mathimaId {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#mathimaPerigrafi {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#mathimaPerigrafi:before {
+	content: '[';
+	margin-right: 0.2em;
+	font-weight: normal;
+}
+
+#mathimaPerigrafi:after {
+	content: ']';
+	margin-left: 0.2em;
+	font-weight: normal;
+}
+
+#mathimaDiastima {
+	display: inline-block;
+	white-space: nowrap;
+}
+
+#mathimaApo {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#mathimaApo:before {
+	content: 'Από';
+	margin-right: 0.2em;
+	font-weight: normal;
+	font-style: italic;
+}
+
+#mathimaEos {
+	display: inline-block;
+	font-weight: bold;
+}
+
+#mathimaEos:before {
+	content: 'Έως';
+	margin-right: 0.2em;
+	font-weight: normal;
+	font-style: italic;
+}
