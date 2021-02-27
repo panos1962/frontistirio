@@ -2,34 +2,68 @@
 header('Content-type: application/json; charset: utf8;');
 require_once("../lib/selida.php");
 
-$query = "SELECT * FROM `mathima` WHERE `id` = " . $_POST["mathima"];
+print '{';
+mathima();
+didaskalia();
+simetoxi();
+print '}';
 
-$result = Selida::query($query);
+function mathima() {
+	$query = "SELECT * FROM `mathima` WHERE `id` = " . $_POST["mathima"];
 
-if (!$result)
-lathos("SQL error");
+	$result = Selida::query($query);
 
-$mathima = $result->fetch_assoc();
-$result->close();
-
-if (!$mathima)
-lathos("mathima not found");
-
-print '{"mathima":' . Selida::json_string($mathima);
-
-print ',"didskalia":[';
-
-$query = "SELECT `id`, `eponimo`, `onoma`, `patronimo`" .
-	" FROM `kathigitis`" .
-	" WHERE `` = " . $_POST["mathima"] .
-	" ORDER BY `
-
-exit(0);
-
-function lathos($s) {
-	global $query;
-
-	print '{"error":' . Selida::json_string($s) . '}';
+	if (!$result)
 	exit(0);
+
+	$mathima = $result->fetch_assoc();
+	$result->close();
+
+	if (!$mathima)
+	exit(0);
+
+	print '"mathima":' . Selida::json_string($mathima);
+}
+
+function didaskalia() {
+	$query = "SELECT `id`, `eponimo`, `onoma`, `patronimo`" .
+		" FROM `didaskalia`" .
+		" LEFT JOIN `kathigitis` ON `kathigitis` = `id`" .
+		" WHERE `mathima` = " . $_POST["mathima"] .
+		" ORDER BY `eponimo`, `onoma`, `patronimo`, `id`";
+
+	$result = Selida::query($query);
+
+	if (!$result)
+	return;
+
+	print ',"didaskalia":[';
+
+	while ($mathima = $result->fetch_assoc())
+	print Selida::json_string($mathima) . ",";
+
+	$result->close();
+	print 'null]';
+}
+
+function simetoxi() {
+	$query = "SELECT `id`, `eponimo`, `onoma`, `patronimo`" .
+		" FROM `simetoxi`" .
+		" LEFT JOIN `mathitis` ON `mathitis` = `id`" .
+		" WHERE `mathima` = " . $_POST["mathima"] .
+		" ORDER BY `eponimo`, `onoma`, `patronimo`, `id`";
+
+	$result = Selida::query($query);
+
+	if (!$result)
+	return;
+
+	print ',"simetoxi":[';
+
+	while ($mathima = $result->fetch_assoc())
+	print Selida::json_string($mathima) . ",";
+
+	$result->close();
+	print 'null]';
 }
 ?>

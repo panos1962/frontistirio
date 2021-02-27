@@ -15,7 +15,7 @@ Selida.init.push(function() {
 			'mathima': Main.mathima,
 		},
 		'success': function(rsp) {
-			Main.init(new Mathima(rsp));
+			Main.processMathima(rsp);
 		},
 		'fail': function(err) {
 			console.error(err);
@@ -66,8 +66,9 @@ Main.mathimaSetup = function() {
 	return Main;
 };
 
-Main.init = function(mathima) {
-	Main.mathima = mathima;
+Main.processMathima = function(rsp) {
+	Main.mathima = new Mathima(rsp.mathima);
+
 	Main.mathimaIdDOM.text(Main.mathima.id);
 	Main.mathimaPerigrafiDOM.text(Main.mathima.perigrafi);
 	Main.mathimaApoDOM.text(Selida.ymd2dmy(Main.mathima.apo));
@@ -117,3 +118,5 @@ Main.simetoxiSetup = function() {
 
 	return Main;
 };
+
+///////////////////////////////////////////////////////////////////////////////@
