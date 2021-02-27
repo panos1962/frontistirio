@@ -27,6 +27,39 @@ Selida::body_open();
 <div id="mathimaEos"></div>
 </div>
 </div>
+
+<div id="didaskaliaWrapper">
+<table>
+<thead>
+<tr>
+<td>
+ID
+</td>
+<td>
+Ονοματεπώνυμο καθηγητή
+</td>
+</tr>
+</thead>
+<tbody id="didaskalia"></tbody>
+</table>
+</div>
+
+<div id="simetoxiWrapper">
+<table>
+<thead>
+<tr>
+<td>
+ID
+</td>
+<td>
+Ονοματεπώνυμο μαθητή
+</td>
+</tr>
+</thead>
+<tbody id="simetoxi"></tbody>
+</table>
+</div>
+
 <?php
 Selida::body_close();
 ?>

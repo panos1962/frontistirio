@@ -15,7 +15,15 @@ $result->close();
 if (!$mathima)
 lathos("mathima not found");
 
-print Selida::json_string($mathima);
+print '{"mathima":' . Selida::json_string($mathima);
+
+print ',"didskalia":[';
+
+$query = "SELECT `id`, `eponimo`, `onoma`, `patronimo`" .
+	" FROM `kathigitis`" .
+	" WHERE `` = " . $_POST["mathima"] .
+	" ORDER BY `
+
 exit(0);
 
 function lathos($s) {

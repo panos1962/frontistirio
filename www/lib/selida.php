@@ -166,6 +166,9 @@ Selida.child = false;
 <?php
 }
 ?>
+Selida.php_POST = <?php print Selida::json_string($_POST); ?>;
+Selida.php_GET = <?php print Selida::json_string($_GET); ?>;
+Selida.php_REQUEST = <?php print Selida::json_string($_REQUEST); ?>;
 </script>
 <?php
 	if (file_exists("main.css"))

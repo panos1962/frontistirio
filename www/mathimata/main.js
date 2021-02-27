@@ -177,24 +177,33 @@ Main.mathimaSetup = function() {
 Main.mathimaFormaTabsSetup = function() {
 	$('#mathimaFormaTabs').
 	append(Selida.tabCreate({
-		'href': Main.mathimaFormaMathimaOpen,
+		'href': function() {
+			Main.mathimaFormaMathimaOpen('didaskalia');
+		},
 		'text': 'Διδάσκοντες',
 	})).
 	append(Selida.tabCreate({
-		'href': Main.mathimaFormaMathimaOpen,
+		'href': function() {
+			Main.mathimaFormaMathimaOpen('simetoxi');
+		},
 		'text': 'Συμμετέχοντες',
 	}));
 
 	return Main;
 };
 
-Main.mathimaFormaMathimaOpen = function() {
+Main.mathimaFormaMathimaOpen = function(tag) {
 	const mathima = Main.mathimaFormaIdDOM.val();
 
 	if (!mathima)
 	return;
 
-	window.open(Selida.baseUrl + '/mathima?child&mathima=' + mathima, '_blank');
+	let url = Selida.baseUrl + '/mathima?child&mathima=' + mathima;
+
+	if (tag)
+	url += '&' + tag;
+
+	window.open(url, '_blank');
 };
 
 Main.mathimaFormaClear = function() {
