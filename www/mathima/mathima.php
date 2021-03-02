@@ -2,13 +2,16 @@
 header('Content-type: application/json; charset: utf8;');
 require_once("../lib/selida.php");
 
-print '{';
+print '{"dummy":true';
 mathima();
 didaskalia();
 simetoxi();
 print '}';
 
 function mathima() {
+	if (Selida::no_post("mathima"))
+	return;
+
 	$query = "SELECT * FROM `mathima` WHERE `id` = " . $_POST["mathima"];
 
 	$result = Selida::query($query);
@@ -22,14 +25,22 @@ function mathima() {
 	if (!$mathima)
 	exit(0);
 
-	print '"mathima":' . Selida::json_string($mathima);
+	print ',"mathima":' . Selida::json_string($mathima);
 }
 
 function didaskalia() {
+	$mathima = Selida::is_post("mathima");
+
+	if (!$mathima)
+	$mathima = Selida::is_post("didaskalia");
+
+	if (!$mathima)
+	return;
+
 	$query = "SELECT `id`, `eponimo`, `onoma`, `patronimo`" .
 		" FROM `didaskalia`" .
 		" LEFT JOIN `kathigitis` ON `kathigitis` = `id`" .
-		" WHERE `mathima` = " . $_POST["mathima"] .
+		" WHERE (`mathima` = " . $mathima . ")" .
 		" ORDER BY `eponimo`, `onoma`, `patronimo`, `id`";
 
 	$result = Selida::query($query);
@@ -47,10 +58,18 @@ function didaskalia() {
 }
 
 function simetoxi() {
+	$mathima = Selida::is_post("mathima");
+
+	if (!$mathima)
+	$mathima = Selida::is_post("simetoxi");
+
+	if (!$mathima)
+	return;
+
 	$query = "SELECT `id`, `eponimo`, `onoma`, `patronimo`" .
 		" FROM `simetoxi`" .
 		" LEFT JOIN `mathitis` ON `mathitis` = `id`" .
-		" WHERE `mathima` = " . $_POST["mathima"] .
+		" WHERE `mathima` = " . $mathima .
 		" ORDER BY `eponimo`, `onoma`, `patronimo`, `id`";
 
 	$result = Selida::query($query);

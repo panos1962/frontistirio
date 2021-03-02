@@ -290,13 +290,11 @@ Mathima.prototype.domCreate = function() {
 };
 
 Mathima.prototype.domUpdate = function(dom) {
-	dom.
+	return dom.
 	data('mathima', this).
 	empty().
 	append($('<td>').addClass('mathimaId').text(this.id)).
 	append($('<td>').addClass('mathimaPerigrafi').text(this.perigrafi)).
 	append($('<td>').addClass('mathimaApo').text(this.apo)).
 	append($('<td>').addClass('mathimaEos').text(this.eos));
-
-	return dom;
 };

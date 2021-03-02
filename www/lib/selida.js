@@ -431,3 +431,45 @@ Kathigitis.prototype.onomateponimoGet = function() {
 };
 
 ///////////////////////////////////////////////////////////////////////////////@
+
+const Didaskalia = function(attrs) {
+	for (let i in attrs) {
+		this[i] = attrs[i];
+	}
+};
+
+Didaskalia.prototype.onomateponimoGet = function() {
+	if (this.hasOwnProperty('onomateponimo'))
+	return this.onomateponimo;
+
+	let x = '';
+
+	x = Selida.strpush(x, this.eponimo);
+	x = Selida.strpush(x, this.onoma);
+	x = Selida.strpush(x, this.patronimo.substr(0, 3));
+
+	return x;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+const Simetoxi = function(attrs) {
+	for (let i in attrs) {
+		this[i] = attrs[i];
+	}
+};
+
+Simetoxi.prototype.onomateponimoGet = function() {
+	if (this.hasOwnProperty('onomateponimo'))
+	return this.onomateponimo;
+
+	let x = '';
+
+	x = Selida.strpush(x, this.eponimo);
+	x = Selida.strpush(x, this.onoma);
+	x = Selida.strpush(x, this.patronimo.substr(0, 3));
+
+	return x;
+};
+
+///////////////////////////////////////////////////////////////////////////////@

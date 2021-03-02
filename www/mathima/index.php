@@ -1,23 +1,11 @@
 <?php
 require_once('../lib/selida.php');
 
-if (!array_key_exists("mathima", $_REQUEST)) {
-	header('Location: ' . BASE_URL);
-	exit(0);
-}
-
 Selida::
 eponimi_xrisi_must()::
 head_open()::
-titlos("Μάθημα");
-
-?>
-<script>
-Main.mathima = <?php print Selida::json_string($_REQUEST["mathima"]); ?>;
-</script>
-<?php
-
-Selida::body_open();
+titlos("Μάθημα")::
+body_open();
 ?>
 <div id="mathima">
 <div id="mathimaId"></div>
@@ -29,35 +17,29 @@ Selida::body_open();
 </div>
 
 <div id="didaskaliaWrapper">
-<table>
-<thead>
-<tr>
-<td>
-ID
-</td>
-<td>
-Ονοματεπώνυμο καθηγητή
-</td>
-</tr>
-</thead>
-<tbody id="didaskalia"></tbody>
-</table>
+<div class="epikefalida">
+Διδάσκοντες
+</div>
+<form id="didaskaliaFiltraForma">
+<label for="didaskaliaFiltro">&#x1f50d;</label>
+<input id="didaskaliaFiltro">
+<input class="panelButton" type="reset" value="Clear">
+<input class="panelButton" type="submit" value="Go!">
+</form>
+<table id="didaskalia"></table>
 </div>
 
 <div id="simetoxiWrapper">
-<table>
-<thead>
-<tr>
-<td>
-ID
-</td>
-<td>
-Ονοματεπώνυμο μαθητή
-</td>
-</tr>
-</thead>
-<tbody id="simetoxi"></tbody>
-</table>
+<div class="epikefalida">
+Μαθητές
+</div>
+<form id="simetoxiFiltraForma">
+<label for="simetoxiFiltro">&#x1f50d;</label>
+<input id="simetoxiFiltro">
+<input class="panelButton" type="reset" value="Clear">
+<input class="panelButton" type="submit" value="Go!">
+</form>
+<table id="simetoxi"></table>
 </div>
 
 <?php

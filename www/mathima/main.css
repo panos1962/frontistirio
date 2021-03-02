@@ -60,7 +60,7 @@
 #didaskaliaWrapper,
 #simetoxiWrapper {
 	display: none;
-	padding: 1em;
+	padding: 0.5em;
 	border-style: none none solid none;
 	border-width: 1px;
 	border-color: grey;
@@ -74,6 +74,11 @@
 	border-collapse: collapse;
 }
 
+#didaskaliaWrapper > form,
+#simetoxiWrapper > form {
+	display: inline-block;
+}
+
 #didaskaliaWrapper th,
 #didaskaliaWrapper td,
 #simetoxiWrapper th,
@@ -81,4 +86,33 @@
 	border-style: solid;
 	border-width: 1px;
 	border-color: grey;
+}
+
+#didaskalia,
+#simetoxi {
+	margin-top: 1em;
+}
+
+#didaskalia td,
+#simetoxi td {
+	padding: 0.2em 0.5em;
+}
+
+#didaskalia > tr:nth-child(odd),
+#simetoxi > tr:nth-child(odd) {
+	background-color: #f9efbf;
+}
+
+#didaskalia > tr:nth-child(even),
+#simetoxi > tr:nth-child(even) {
+	background-color: #fbf5dc;
+}
+
+.epikefalida {
+	display: inline-block;
+	padding: 0 0.5em;
+	width: 6em;
+	text-align: right;
+	font-weight: bold;
+	font-style: italic;
 }
