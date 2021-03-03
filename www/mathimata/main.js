@@ -66,7 +66,7 @@ Main.mathimataSetup = function() {
 	$('#mathimataWrapper').appendTo(Selida.ofelimoDOM);
 
 	Main.mathimataDOM = $('#mathimata').
-	on('click', 'tr', function(e) {
+	on('click', 'tr', function() {
 		if (Main.mathimaTrexonDOM)
 		Main.mathimaTrexonDOM.removeClass('mathimaTrexon');
 
@@ -137,7 +137,6 @@ Main.mathimaSetup = function() {
 	Main.mathimaFormaEosDOM = $('#mathimaFormaEos');
 
 	Main.mathimaDialogDOM = $('#mathimaDialog').
-	appendTo(Selida.ofelimoDOM).
 	dialog({
 		'open': Main.mathimaDialogOpen,
 		'position': {
@@ -272,8 +271,7 @@ Main.mathimaInsert = function(mathima) {
 };
 
 Main.mathimaDialogOpen = function() {
-	const mathima = Main.mathimataDOM.
-	find('.mathimaTrexon').data('mathima');
+	const mathima = Main.mathimaTrexonDOM.data('mathima');
 
 	Main.mathimaFormaIdDOM.val(mathima.id);
 	Main.mathimaFormaPerigrafiDOM.val(mathima.perigrafi).focus();

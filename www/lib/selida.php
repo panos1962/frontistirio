@@ -136,21 +136,32 @@ public static function eponimi_xrisi_must() {
 // Η function "css" διαβάζει διευκολύνει την εμφύτευση css αρχείων στη σελίδα.
 // Πρόκειται για wrapper γύρω από την αντίστοιχη HTML εντολή.
 
-public static function css($file, $url = FALSE) {
-	$url = ($url === FALSE ? "" : $url . "/");
-?>
-<link rel="stylesheet" href="<?php print $url . $file; ?>.css">
-<?php
-
-	if (self::is_debug_mode()) {
-		$debug_file = $file . "Debug.css";
-
-		if (file_exists($debug_file)) {
-?>
-<link rel="stylesheet" href="<?php print $url . $debug_file; ?>">
-<?php
-		}
+public static function css($onoma) {
+	if (substr($onoma, 0, 1) === '/') {
+		$file = BASE_DIR . "/www" . $onoma;
+		$url = BASE_URL . $onoma;
 	}
+	else {
+		$file = $onoma;
+		$url = $onoma;
+	}
+
+?>
+<link rel="stylesheet" href="<?php print $url; ?>.css">
+<?php
+
+	if (self::no_debug_mode())
+	return __CLASS__;
+
+	$debug = "Debug.css";
+	$file .= $debug;
+
+	if (!file_exists($file))
+	return __CLASS__;
+
+?>
+<link rel="stylesheet" href="<?php print $url . $debug; ?>">
+<?php
 
 	return __CLASS__;
 }
@@ -187,7 +198,7 @@ public static function head_open() {
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <?php
 Selida::
-css("lib/selida", BASE_URL)::
+css("/lib/selida")::
 javascript(BASE_URL . "/lib/selida");
 ?>
 <script>
