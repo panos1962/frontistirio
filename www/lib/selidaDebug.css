@@ -1,0 +1,31 @@
+body {
+	background-color: red;
+}
+
+#toolbar {
+	background-color: teal;
+}
+
+#toolbarLeft {
+	background-color: #c2e8fb;
+}
+
+#toolbarRight {
+	background-color: #86da86;
+}
+
+#ofelimo {
+	background-color: gold;
+}
+
+#ribbon {
+	background-color: teal;
+}
+
+#ribbonLeft {
+	background-color: #c2e8fb;
+}
+
+#ribbonRight {
+	background-color: #86da86;
+}
