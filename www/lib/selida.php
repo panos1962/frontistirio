@@ -27,10 +27,39 @@ define("DFLTROWS", 20);
 class Selida {
 ///////////////////////////////////////////////////////////////////////////////@
 
+public static $debug = FALSE;
 public static $child = FALSE;
 
 public static function init() {
+	self::debug_init();
 	self::$child = array_key_exists("child", $_REQUEST);
+
+	return __CLASS__;
+}
+
+private static function debug_init() {
+	self::$debug = FALSE;
+
+	if (!array_key_exists("debug", $_GET))
+	return __CLASS__;
+
+	$debug = $_GET["debug"];
+
+	if ($debug === "") {
+		self::$debug = TRUE;
+		return __CLASS__;
+	}
+
+	if ($debug === "0")
+	return __CLASS__;
+
+	switch (strtoupper($debug)) {
+	case 'OFF':
+	case 'NO':
+		return __CLASS__;
+	}
+
+	self::$debug = TRUE;
 	return __CLASS__;
 }
 
