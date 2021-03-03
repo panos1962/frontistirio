@@ -63,6 +63,14 @@ private static function debug_init() {
 	return __CLASS__;
 }
 
+public static function is_debug_mode() {
+	return self::$debug;
+}
+
+public static function no_debug_mode() {
+	return !self::is_debug_mode();
+}
+
 public static function is_child() {
 	return self::$child;
 }
@@ -128,10 +136,22 @@ public static function eponimi_xrisi_must() {
 // Η function "css" διαβάζει διευκολύνει την εμφύτευση css αρχείων στη σελίδα.
 // Πρόκειται για wrapper γύρω από την αντίστοιχη HTML εντολή.
 
-public static function css($file) {
+public static function css($file, $url = FALSE) {
+	$url = ($url === FALSE ? "" : $url . "/");
 ?>
-<link rel="stylesheet" href="<?php print $file; ?>.css">
+<link rel="stylesheet" href="<?php print $url . $file; ?>.css">
 <?php
+
+	if (self::is_debug_mode()) {
+		$debug_file = $file . "Debug.css";
+
+		if (file_exists($debug_file)) {
+?>
+<link rel="stylesheet" href="<?php print $url . $debug_file; ?>">
+<?php
+		}
+	}
+
 	return __CLASS__;
 }
 
@@ -167,7 +187,7 @@ public static function head_open() {
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <?php
 Selida::
-css(BASE_URL . "/lib/selida")::
+css("lib/selida", BASE_URL)::
 javascript(BASE_URL . "/lib/selida");
 ?>
 <script>
