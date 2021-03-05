@@ -14,6 +14,12 @@ Selida.init.push(function() {
 	mathimataSetup();
 
 	setTimeout(function() {
+		if (Selida.debug) {
+			Main.idFiltroDOM.val('100002');
+			Main.filtraDOM.trigger('submit');
+		}
+
+		else
 		Main.perigrafiFiltroDOM.focus();
 	}, 100);
 });

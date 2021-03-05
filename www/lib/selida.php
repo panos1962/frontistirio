@@ -32,13 +32,21 @@ public static $child = FALSE;
 
 public static function init() {
 	self::debug_init();
+
+	if (isset($_SESSION))
+	$_SESSION["debug"] = self::is_debug_mode();
+
 	self::$child = array_key_exists("child", $_REQUEST);
 
 	return __CLASS__;
 }
 
 private static function debug_init() {
-	self::$debug = FALSE;
+	if (isset($_SESSION) && array_key_exists("debug", $_SESSION))
+	self::debug_mode_set($_SESSION["debug"]);
+
+	else
+	self::debug_mode_set(FALSE);
 
 	if (!array_key_exists("debug", $_GET))
 	return __CLASS__;
@@ -46,20 +54,30 @@ private static function debug_init() {
 	$debug = $_GET["debug"];
 
 	if ($debug === "") {
-		self::$debug = TRUE;
+		self::debug_mode_set(TRUE);
 		return __CLASS__;
 	}
 
-	if ($debug === "0")
-	return __CLASS__;
+	if ($debug === "0") {
+		self::debug_mode_set(FALSE);
+		return __CLASS__;
+	}
 
 	switch (strtoupper($debug)) {
 	case 'OFF':
 	case 'NO':
-		return __CLASS__;
+		self::debug_mode_set(FALSE);
+		break;
+	default:
+		self::debug_mode_set(TRUE);
+		break;
 	}
 
-	self::$debug = TRUE;
+	return __CLASS__;
+}
+
+public static function debug_mode_set($debug = TRUE) {
+	self::$debug = $debug;
 	return __CLASS__;
 }
 
@@ -195,6 +213,9 @@ public static function head_open() {
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<?php
+self::javascript_init();
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <?php
 Selida::
@@ -236,6 +257,20 @@ Selida.php_REQUEST = <?php print Selida::json_string($_REQUEST); ?>;
 
 	if (file_exists("main.js"))
 	Selida::javascript("main");
+
+	return __CLASS__;
+}
+
+public static function javascript_init() {
+?>
+<script>
+"use strict";
+
+const Selida = {};
+
+Selida.debug = <?php print self::is_debug_mode() ? 'true' : 'false'; ?>;
+</script>
+<?php
 
 	return __CLASS__;
 }

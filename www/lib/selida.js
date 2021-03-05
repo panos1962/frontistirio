@@ -1,10 +1,7 @@
 "use strict";
 
 const Main = {};
-
-const Selida = {};
 Selida.init = [];
-
 Selida.readyCount = 0;
 
 Selida.checkReady = function() {
