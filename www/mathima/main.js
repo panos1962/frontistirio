@@ -2,6 +2,7 @@
 
 Selida.init.push(function() {
 	Selida.eponimiXrisiMust();
+
 	Main.
 	mathimaMust().
 	toolbarSetup().
@@ -23,18 +24,6 @@ Selida.init.push(function() {
 		},
 	});
 });
-
-Main.postSetup = function() {
-	setTimeout(function() {
-		if (Selida.php_REQUEST.hasOwnProperty('simetoxi'))
-		Main.simetoxiFiltroDOM.focus();
-
-		if (Selida.php_REQUEST.hasOwnProperty('didaskalia'))
-		Main.didaskaliaFiltroDOM.focus();
-	}, 100);
-
-	return Main;
-};
 
 Main.mathimaMust = function() {
 	if (!Selida.php_REQUEST.hasOwnProperty('mathima'))
@@ -250,6 +239,20 @@ Main.simetoxiToggle = function() {
 
 	Main.simetoxiWrapperDOM.
 	css('display', display === 'none' ? 'block' : 'none');
+
+	return Main;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Main.postSetup = function() {
+	setTimeout(function() {
+		if (Selida.php_REQUEST.hasOwnProperty('simetoxi'))
+		Main.simetoxiFiltroDOM.focus();
+
+		if (Selida.php_REQUEST.hasOwnProperty('didaskalia'))
+		Main.didaskaliaFiltroDOM.focus();
+	}, 100);
 
 	return Main;
 };
