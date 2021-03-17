@@ -25,16 +25,18 @@ Selida.init.push(function() {
 	});
 });
 
+///////////////////////////////////////////////////////////////////////////////@
+
 Main.mathimaMust = function() {
 	if (!Selida.php_REQUEST.hasOwnProperty('mathima'))
 	return Main.noMathima();
 
 	Main.mathima = parseInt(Selida.php_REQUEST['mathima']);
 
-	if (!Main.mathima)
+	if (isNaN(Main.mathima))
 	return Main.noMathima();
 
-	if (isNaN(Main.mathima))
+	if (Main.mathima <= 0)
 	return Main.noMathima();
 
 	return Main;
@@ -44,6 +46,8 @@ Main.noMathima = function() {
 	self.location = Selida.baseUrl + '/error';
 	throw Error('error');
 };
+
+///////////////////////////////////////////////////////////////////////////////@
 
 Main.toolbarSetup = function() {
 	if (Selida.isChild())
@@ -69,8 +73,12 @@ Main.toolbarSetup = function() {
 	return Main;
 };
 
+///////////////////////////////////////////////////////////////////////////////@
+
 Main.mathimaSetup = function() {
-	Main.mathimaDOM = $('#mathima').appendTo(Selida.ofelimoDOM);
+	Main.mathimaDOM = $('#mathima').
+	appendTo(Selida.ofelimoDOM);
+
 	Main.mathimaIdDOM = $('#mathimaId');
 	Main.mathimaPerigrafiDOM = $('#mathimaPerigrafi');
 	Main.mathimaApoDOM = $('#mathimaApo');
@@ -78,6 +86,94 @@ Main.mathimaSetup = function() {
 
 	return Main;
 };
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Main.didaskaliaSetup = function() {
+	Main.didaskaliaWrapperDOM = $('#didaskaliaWrapper').
+	appendTo(Selida.ofelimoDOM);
+
+	Main.didaskaliaFiltroDOM = $('#didaskaliaFiltro');
+	Main.didaskaliaDOM = $('#didaskalia');
+
+	$('#didaskaliaFiltraForma').
+	on('submit', Main.didaskaliaRefresh);
+
+	return Main;
+};
+
+Main.didaskaliaRefresh = function() {
+	$.post({
+		'url': 'mathima.php',
+		'data': {
+			'didaskalia': Main.mathima.id,
+		},
+		'success': function(rsp) {
+			Main.didaskaliaProcess(rsp);
+		},
+		'fail': function(err) {
+			console.error(err);
+		},
+	});
+
+	return false;
+};
+
+Main.didaskaliaToggle = function() {
+	const display = Main.didaskaliaWrapperDOM.css('display');
+
+	if (display === 'none') {
+		Main.didaskaliaWrapperDOM.css('display', 'block');
+		Main.didaskaliaFiltroDOM.focus();
+		return Main;
+	}
+
+	Main.didaskaliaWrapperDOM.css('display', 'none');
+	return Main;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Main.simetoxiSetup = function() {
+	Main.simetoxiWrapperDOM = $('#simetoxiWrapper').
+	appendTo(Selida.ofelimoDOM);
+
+	Main.simetoxiFiltroDOM = $('#simetoxiFiltro');
+	Main.simetoxiDOM = $('#simetoxi');
+
+	$('#simetoxiFiltraForma').
+	on('submit', Main.simetoxiRefresh);
+
+	return Main;
+};
+
+Main.simetoxiRefresh = function() {
+	$.post({
+		'url': 'mathima.php',
+		'data': {
+			'simetoxi': Main.mathima.id,
+		},
+		'success': function(rsp) {
+			Main.simetoxiProcess(rsp);
+		},
+		'fail': function(err) {
+			console.error(err);
+		},
+	});
+
+	return false;
+};
+
+Main.simetoxiToggle = function() {
+	const display = Main.simetoxiWrapperDOM.css('display');
+
+	Main.simetoxiWrapperDOM.
+	css('display', display === 'none' ? 'block' : 'none');
+
+	return Main;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
 
 Main.mathimaProcess = function(data) {
 	Main.mathima = new Mathima(data.mathima);
@@ -153,92 +249,6 @@ Main.simetoxiProcess = function(data) {
 		Main.simetoxiDOM.
 		append(simetoxi.domCreate());
 	});
-
-	return Main;
-};
-
-///////////////////////////////////////////////////////////////////////////////@
-
-Main.didaskaliaSetup = function() {
-	Selida.ofelimoDOM.
-	append(Main.didaskaliaWrapperDOM = $('#didaskaliaWrapper'));
-
-	Main.didaskaliaFiltroDOM = $('#didaskaliaFiltro');
-	Main.didaskaliaDOM = $('#didaskalia');
-
-	$('#didaskaliaFiltraForma').
-	on('submit', Main.didaskaliaRefresh);
-
-	return Main;
-};
-
-Main.didaskaliaRefresh = function() {
-	$.post({
-		'url': 'mathima.php',
-		'data': {
-			'didaskalia': Main.mathima.id,
-		},
-		'success': function(rsp) {
-			Main.didaskaliaProcess(rsp);
-		},
-		'fail': function(err) {
-			console.error(err);
-		},
-	});
-
-	return false;
-};
-
-Main.didaskaliaToggle = function() {
-	const display = Main.didaskaliaWrapperDOM.css('display');
-
-	if (display === 'none') {
-		Main.didaskaliaWrapperDOM.css('display', 'block');
-		Main.didaskaliaFiltroDOM.focus();
-		return Main;
-	}
-
-	Main.didaskaliaWrapperDOM.css('display', 'none');
-	return Main;
-};
-
-///////////////////////////////////////////////////////////////////////////////@
-
-Main.simetoxiSetup = function() {
-	Selida.ofelimoDOM.
-	append(Main.simetoxiWrapperDOM = $('#simetoxiWrapper'));
-
-	Main.simetoxiFiltroDOM = $('#simetoxiFiltro');
-	Main.simetoxiDOM = $('#simetoxi');
-
-	$('#simetoxiFiltraForma').
-	on('submit', Main.simetoxiRefresh);
-
-	return Main;
-};
-
-Main.simetoxiRefresh = function() {
-	$.post({
-		'url': 'mathima.php',
-		'data': {
-			'simetoxi': Main.mathima.id,
-		},
-		'success': function(rsp) {
-			Main.simetoxiProcess(rsp);
-		},
-		'fail': function(err) {
-			console.error(err);
-		},
-	});
-
-	return false;
-};
-
-Main.simetoxiToggle = function() {
-	const display = Main.simetoxiWrapperDOM.css('display');
-
-	Main.simetoxiWrapperDOM.
-	css('display', display === 'none' ? 'block' : 'none');
 
 	return Main;
 };
