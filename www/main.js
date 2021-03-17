@@ -14,5 +14,7 @@ Selida.init.push(function() {
                'href': Selida.baseUrl + '/kathigites',
        }));
 
-	Selida.xristisTab().exodosTab();
+	Selida.
+	xristisTab().
+	exodosTab();
 });
