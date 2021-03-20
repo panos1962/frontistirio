@@ -10,12 +10,14 @@ Selida.init.push(function() {
 
 	Main.
 	filtraSetup().
-	kathigitesCreate().
+	kathigitesSetup().
 	kathigitisFormaSetup();
 
 	setTimeout(function() {
 		Main.eponimoFiltroDOM.focus();
 	}, 100);
+
+	//self.parent.Main[Selida.php_REQUEST['zoom']]();
 });
 
 Main.filtraSetup = function() {
@@ -72,7 +74,7 @@ Main.kathigitesClear = function() {
 	return Main;
 };
 
-Main.kathigitesCreate = function() {
+Main.kathigitesSetup = function() {
 	Selida.ofelimoDOM.
 	append($('<div>').attr('id', 'kathigitesWrapper').
 	append(Main.kathigitesDOM = $('<table>').
@@ -86,6 +88,19 @@ Main.kathigitesCreate = function() {
 		Main.kathigitisTrexonDOM = $(this).addClass('trexon');
 		Main.kathigitisDialogDOM.dialog('close').dialog('open');
 	});
+
+	if (Selida.isZoom())
+	Main.kathigitesDOM.
+	on('click', 'tr > .kathigitisId', function(e) {
+		e.stopPropagation();
+
+		const kathigitis = $(this).parent().data('kathigitis');
+		const zoom = self.parent.Main[Selida.php_REQUEST['zoom']](kathigitis);
+
+		if (zoom)
+		return self.parent.Main.kathigitisZoomDialogDOM.dialog('close');
+	});
+
 
 	return Main;
 };

@@ -1,6 +1,6 @@
 "use strict";
 
-const Main = {};
+var Main = {};
 Selida.init = [];
 Selida.readyCount = 0;
 

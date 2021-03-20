@@ -25,9 +25,6 @@ Selida.init.push(function() {
 			console.error(err);
 		},
 	});
-setTimeout(function() {
-	Main.kathigitisZoomDialogDOM.dialog('open');
-}, 1000);
 });
 
 ///////////////////////////////////////////////////////////////////////////////@
@@ -159,7 +156,14 @@ Main.didaskaliaInsert = function() {
 
 Main.didaskaliaFormaSetup = function() {
 	Main.didaskaliaFormaDOM = $('#didaskaliaForma');
-	Main.didaskaliaFormaIdDOM = $('#didaskaliaFormaId');
+	Main.didaskaliaFormaIdDOM = $('#didaskaliaFormaId').
+	on('keydown', function(e) {
+		if (e.ctrlKey && (e.keyCode == 90)) {
+			e.preventDefault();
+			Main.kathigitisZoomDialogDOM.dialog('open');
+			return false;
+		}
+	});
 	Main.didaskaliaFormaOnomateponimoDOM = $('#didaskaliaFormaOnomateponimo');
 
 	Main.didaskaliaDialogDOM = $('#didaskaliaDialog').
@@ -233,6 +237,10 @@ Main.didaskaliaFormaClear = function() {
 Main.kathigitisZoomSetup = function() {
 	Main.kathigitisZoomDialogDOM = $('#kathigitisZoomDialog').
 	dialog({
+		'open': Main.kathigitisZoomOpen,
+		'close': function() {
+			Main.kathigitisZoomDialogDOM.empty();
+		},
 		'position': {
 			'my': 'right top',
 			'at': 'right-80 top+50',
@@ -244,6 +252,22 @@ Main.kathigitisZoomSetup = function() {
 	});
 
 	return Main;
+};
+
+Main.kathigitisZoomOpen = function() {
+	$('<iframe>').
+	attr({
+		'id': 'kathigitisZoomIframe',
+		'src': Selida.baseUrl + '/kathigites?zoom=kathigitisZoomProcess',
+	}).
+	appendTo(Main.kathigitisZoomDialogDOM);
+
+	return Main;
+};
+
+Main.kathigitisZoomProcess = function (x) {
+	console.log('Zooooooom!', x);
+	return true;
 };
 
 ///////////////////////////////////////////////////////////////////////////////@
