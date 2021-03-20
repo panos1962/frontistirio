@@ -21,6 +21,7 @@ git:
 
 pull:
 	@git pull
+	@echo "Everything is ok. No need to run extra make!"
 
 dbrefresh:
 	@bash database/dbcreate.sh && bash database/dbload.sh
