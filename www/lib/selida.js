@@ -44,15 +44,21 @@ Selida.selidaSetup = function() {
 	return Selida;
 };
 
+Selida.isZoom = function() {
+	return Selida.php_REQUEST.hasOwnProperty('zoom');
+};
+
 Selida.toolbarSetup = function() {
-	Selida.toolbarDOM = $('<div>').
-	attr('id', 'toolbar').
-	appendTo(Selida.bodyDOM);
+	Selida.toolbarDOM = $('<div>').attr('id', 'toolbar');
+
+	if (Selida.isZoom())
+	Selida.toolbarDOM.css('display', 'none');
 
 	Selida.toolbarDOM.
 	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
 	append(Selida.toolbarRightDOM = $('<div>').attr('id', 'toolbarRight'));
 
+	Selida.bodyDOM.append(Selida.toolbarDOM);
 	return Selida;
 };
 
@@ -206,14 +212,16 @@ Selida.ofelimoSetup = function() {
 };
 
 Selida.ribbonSetup = function() {
-	Selida.ribbonDOM = $('<div>').
-	attr('id', 'ribbon').
-	appendTo(Selida.bodyDOM);
+	Selida.ribbonDOM = $('<div>').attr('id', 'ribbon');
+
+	if (Selida.isZoom())
+	Selida.ribbonDOM.css('display', 'none');
 
 	Selida.ribbonDOM.
 	append(Selida.ribbonLeftDOM = $('<div>').attr('id', 'ribbonLeft')).
 	append(Selida.ribbonRightDOM = $('<div>').attr('id', 'ribbonRight'));
 
+	Selida.bodyDOM.append(Selida.ribbonDOM);
 	return Selida;
 };
 
@@ -223,8 +231,8 @@ Selida.ofelimoHeightSetup = function() {
 		'min-height': 0,
 	});
 
-	const th = Selida.toolbarDOM.outerHeight();
-	const rh = Selida.ribbonDOM.outerHeight();
+	const th = Selida.isZoom() ? 0 : Selida.toolbarDOM.outerHeight();
+	const rh = Selida.isZoom() ? 0 : Selida.ribbonDOM.outerHeight();
 	const wh = Selida.windowDOM.height();
 	const oh = wh - th - rh;
 

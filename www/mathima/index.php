@@ -62,6 +62,17 @@ body_open();
 <!--
 -->
 
+<!--
+-->
+
+<div id="kathigitisZoomDialog" title="Πίνακας καθηγητών">
+<iframe id="kathigitisZoomIframe" src="<?php
+	print BASE_URL . '/kathigites?zoom'; ?>">
+</div>
+
+<!--
+-->
+
 <div id="simetoxiWrapper">
 <div class="epikefalida">
 Μαθητές

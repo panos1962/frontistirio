@@ -19,11 +19,13 @@ body_open();
 <div class="prompt">Πατρώνυμο</div>
 <input id="patronimoFiltro">
 
+<div style="display: inline-block; white-space: nowrap;">
 <div class="prompt">Ενεργοί</div>
 <input name="katastasi" id="energosFiltro" type="radio" value="energos" checked="yes">
 
 <div class="prompt">Όλοι</div>
 <input name="katastasi" id="oloiFiltro" type="radio" value="oloi">
+</div>
 
 <input class="panelButton" id="clearFiltro" type="reset" value="Clear">
 <input class="panelButton" id="submitFiltro" type="submit" value="Go!">

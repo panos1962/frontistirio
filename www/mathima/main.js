@@ -9,6 +9,7 @@ Selida.init.push(function() {
 	mathimaSetup().
 	didaskaliaSetup().
 	didaskaliaFormaSetup().
+	kathigitisZoomSetup().
 	simetoxiSetup().
 	postSetup();
 
@@ -24,6 +25,9 @@ Selida.init.push(function() {
 			console.error(err);
 		},
 	});
+setTimeout(function() {
+	Main.kathigitisZoomDialogDOM.dialog('open');
+}, 1000);
 });
 
 ///////////////////////////////////////////////////////////////////////////////@
@@ -220,6 +224,24 @@ Main.didaskaliaDialogOpen = function() {
 Main.didaskaliaFormaClear = function() {
 	Main.didaskaliaFormaIdDOM.val('');
 	Main.didaskaliaFormaOnomateponimoDOM.val('');
+
+	return Main;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Main.kathigitisZoomSetup = function() {
+	Main.kathigitisZoomDialogDOM = $('#kathigitisZoomDialog').
+	dialog({
+		'position': {
+			'my': 'right top',
+			'at': 'right-80 top+50',
+		},
+		'width': 800,
+		'height': 600,
+		'resizable': false,
+		'autoOpen': false,
+	});
 
 	return Main;
 };
