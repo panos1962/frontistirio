@@ -35,25 +35,6 @@
 	border-color: #000000;
 }
 
-#mathimata > tr:nth-child(odd) {
-background-color: #fffae7;
-	background-color: #f9efbf;
-}
-
-#mathimata > tr:nth-child(even) {
-background-color: #fff7d8;
-	background-color: #fbf5dc;
-}
-
-#mathimata > tr:hover {
-	background-color: #ffd67b;
-	cursor: pointer;
-}
-
-.mathimaTrexon {
-	background-color: yellow !important;
-}
-
 #mathimaDialog {
 	padding: 0.2em;
 	background-color: #fffeee;

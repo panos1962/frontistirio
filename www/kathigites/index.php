@@ -70,7 +70,7 @@ body_open();
 
 <div class="formaPanel">
 <input type="submit" class="panelButton" value="Υποβολή">
-<input type="button" class="panelButton" id="mathimaFormaInsert" value="Νέος">
+<input type="button" class="panelButton" id="mathimaFormaInsert" value="Κλώνος">
 <input type="button" class="panelButton" id="mathimaFormaDelete" value="Διαγραφή">
 <input type="button" class="panelButton" id="mathimaFormaCancel" value="Άκυρο">
 </div>

@@ -97,12 +97,15 @@ Main.didaskaliaSetup = function() {
 	Main.didaskaliaDOM = $('#didaskalia');
 
 	$('#didaskaliaFiltraForma').
+	on('reset', () => Main.didaskaliaFiltroDOM.focus()).
 	on('submit', Main.didaskaliaRefresh);
 
 	return Main;
 };
 
 Main.didaskaliaRefresh = function() {
+	Main.didaskaliaFiltroDOM.focus();
+
 	$.post({
 		'url': 'mathima.php',
 		'data': {
@@ -142,12 +145,15 @@ Main.simetoxiSetup = function() {
 	Main.simetoxiDOM = $('#simetoxi');
 
 	$('#simetoxiFiltraForma').
+	on('reset', () => Main.simetoxiFiltroDOM.focus()).
 	on('submit', Main.simetoxiRefresh);
 
 	return Main;
 };
 
 Main.simetoxiRefresh = function() {
+	Main.simetoxiFiltroDOM.focus();
+
 	$.post({
 		'url': 'mathima.php',
 		'data': {
@@ -270,7 +276,7 @@ Main.postSetup = function() {
 ///////////////////////////////////////////////////////////////////////////////@
 
 Didaskalia.prototype.domCreate = function() {
-	return this.domUpdate($('<tr>'));
+	return this.domUpdate($('<tr>').addClass('zebra'));
 };
 
 Didaskalia.prototype.domUpdate = function(dom) {
@@ -291,7 +297,7 @@ Didaskalia.prototype.filtroMatch = function(filtro) {
 ///////////////////////////////////////////////////////////////////////////////@
 
 Simetoxi.prototype.domCreate = function() {
-	return this.domUpdate($('<tr>'));
+	return this.domUpdate($('<tr>').addClass('zebra'));
 };
 
 Simetoxi.prototype.domUpdate = function(dom) {

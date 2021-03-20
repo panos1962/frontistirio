@@ -81,9 +81,9 @@ Main.kathigitesCreate = function() {
 	Main.kathigitesDOM.
 	on('click', 'tr', function() {
 		if (Main.kathigitisTrexonDOM)
-		Main.kathigitisTrexonDOM.removeClass('kathigitisTrexon');
+		Main.kathigitisTrexonDOM.removeClass('trexon');
 
-		Main.kathigitisTrexonDOM = $(this).addClass('kathigitisTrexon');
+		Main.kathigitisTrexonDOM = $(this).addClass('trexon');
 		Main.kathigitisDialogDOM.dialog('close').dialog('open');
 	});
 
@@ -91,8 +91,7 @@ Main.kathigitesCreate = function() {
 };
 
 Main.kathigitisDialogOpen = function() {
-	const kathigitis = Main.kathigitesDOM.
-	find('.kathigitisTrexon').data('kathigitis');
+	const kathigitis = Main.kathigitisTrexonDOM.data('kathigitis');
 
 	Main.kathigitisFormaIdDOM.val(kathigitis.id);
 	Main.kathigitisFormaEponimoDOM.val(kathigitis.eponimo);
@@ -164,12 +163,8 @@ Main.kathigitisFormaSubmit = function() {
 
 Main.kathigitesDisplay = function(klist) {
 	for (let i = 0; i < klist.length; i++) {
-		const kathigitis = new Kathigitis(klist[i]);
-		const dom = kathigitis.domCreate();
-
-		kathigitis.domUpdate(dom);
-
-		dom.
+		new Kathigitis(klist[i]).
+		domCreate().
 		appendTo(Main.kathigitesDOM);
 	}
 
@@ -179,7 +174,7 @@ Main.kathigitesDisplay = function(klist) {
 ///////////////////////////////////////////////////////////////////////////////@
 
 Kathigitis.prototype.domCreate = function() {
-	return $('<tr>');
+	return this.domUpdate($('<tr>').addClass('zebra'));
 };
 
 Kathigitis.prototype.domUpdate = function(dom) {

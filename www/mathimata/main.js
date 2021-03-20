@@ -47,9 +47,9 @@ Main.filtraSetup = function() {
 				rsp.forEach(function(x) {
 					x.apo = Selida.ymd2dmy(x.apo);
 					x.eos = Selida.ymd2dmy(x.eos);
-					(new Mathima(x).
+					new Mathima(x).
 					domCreate().
-					appendTo(Main.mathimataDOM));
+					appendTo(Main.mathimataDOM);
 				});
 				Main.perigrafiFiltroDOM.focus();
 			},
@@ -74,9 +74,9 @@ Main.mathimataSetup = function() {
 	Main.mathimataDOM = $('#mathimata').
 	on('click', 'tr', function() {
 		if (Main.mathimaTrexonDOM)
-		Main.mathimaTrexonDOM.removeClass('mathimaTrexon');
+		Main.mathimaTrexonDOM.removeClass('trexon');
 
-		Main.mathimaTrexonDOM = $(this).addClass('mathimaTrexon');
+		Main.mathimaTrexonDOM = $(this).addClass('trexon');
 		Main.mathimaDialogDOM.dialog('close').dialog('open');
 	});
 
@@ -159,7 +159,7 @@ Main.mathimaSetup = function() {
 
 	$('#mathimaFormaInsert').on('click', function() {
 		if (Main.mathimaTrexonDOM)
-		Main.mathimaTrexonDOM.removeClass('mathimaTrexon');
+		Main.mathimaTrexonDOM.removeClass('trexon');
 
 		delete Main.mathimaTrexonDOM;
 		Main.mathimaFormaClear();
@@ -271,7 +271,7 @@ Main.mathimaInsert = function(mathima) {
 	Main.mathimaFormaIdDOM.val(mathima.id);
 	Main.mathimaTrexonDOM = mathima.
 	domCreate().
-	addClass('mathimaTrexon').
+	addClass('trexon').
 	appendTo(Main.mathimataDOM);
 	Selida.windowDOM.scrollTop(10000);
 };
@@ -290,7 +290,7 @@ Main.mathimaDialogOpen = function() {
 ///////////////////////////////////////////////////////////////////////////////@
 
 Mathima.prototype.domCreate = function() {
-	return this.domUpdate($('<tr>'));
+	return this.domUpdate($('<tr>').addClass('zebra'));
 };
 
 Mathima.prototype.domUpdate = function(dom) {

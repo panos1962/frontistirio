@@ -219,3 +219,24 @@ background-color: ivory;
 .zebra1 {
 	background-color: #fbf5dc;
 }
+
+.zebra:nth-child(odd) {
+	background-color: #f9efbf;
+}
+
+.zebra:nth-child(even) {
+	background-color: #fbf5dc;
+}
+
+.zebra:hover {
+	background-color: #ffd67b;
+	cursor: pointer;
+}
+
+.trexon:nth-child(odd) {
+	background-color: yellow
+}
+
+.trexon:nth-child(even) {
+	background-color: yellow
+}
