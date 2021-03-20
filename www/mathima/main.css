@@ -106,3 +106,11 @@
 	font-weight: bold;
 	font-style: italic;
 }
+
+#didaskaliaFormaId {
+	width: 5em;
+}
+
+#didaskaliaFormaOnomateponimo {
+	width: 20em;
+}

@@ -25,9 +25,42 @@ body_open();
 <input id="didaskaliaFiltro">
 <input class="panelButton" type="reset" value="Clear">
 <input class="panelButton" type="submit" value="Go!">
+<input class="panelButton" id="didaskaliaInsert" type="button" value="Προσθήκη">
 </form>
-<table id="didaskalia"></table>
+<table id="didaskalia">
+</table>
 </div>
+
+<!--
+Ακολουθεί η φόρμα διαλόγου ενημέρωσης στοιχείων διδάσκοντος. Σ' αυτή τη φόρμα
+ο χρήστης μπορεί να ενημερώσει τα στοιχεία διδάσκοντος, να διαγράψει κάποιον
+διδάσκοντα, ή να προσθέσει νέο διδάσκοντα.
+-->
+
+<div id="didaskaliaDialog" title="Φόρμα ενημέρωσης διδάσκοντος">
+<form id="didaskaliaForma">
+
+<div class="formaInputLine">
+<div class="prompt farea_A">Id</div>
+<input id="didaskaliaFormaId">
+</div>
+
+<div class="formaInputLine">
+<div class="prompt farea_A">Ονοματεπώνυμο</div>
+<input id="didaskaliaFormaOnomateponimo" disabled="yes">
+</div>
+
+<div class="formaPanel">
+<input type="submit" class="panelButton" value="Υποβολή">
+<input type="button" class="panelButton" id="didaskaliaFormaDelete" value="Διαγραφή">
+<input type="button" class="panelButton" id="didaskaliaFormaCancel" value="Άκυρο">
+</div>
+
+</form>
+</div>
+
+<!--
+-->
 
 <div id="simetoxiWrapper">
 <div class="epikefalida">

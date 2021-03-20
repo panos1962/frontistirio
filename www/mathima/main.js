@@ -8,6 +8,7 @@ Selida.init.push(function() {
 	toolbarSetup().
 	mathimaSetup().
 	didaskaliaSetup().
+	didaskaliaFormaSetup().
 	simetoxiSetup().
 	postSetup();
 
@@ -100,6 +101,18 @@ Main.didaskaliaSetup = function() {
 	on('reset', () => Main.didaskaliaFiltroDOM.focus()).
 	on('submit', Main.didaskaliaRefresh);
 
+	$('#didaskaliaInsert').
+	on('click', Main.didaskaliaInsert);
+
+	Main.didaskaliaDOM.
+	on('click', 'tr', function() {
+		if (Main.didaskaliaTrexonDOM)
+		Main.didaskaliaTrexonDOM.removeClass('trexon');
+
+		Main.didaskaliaTrexonDOM = $(this).addClass('trexon');
+		Main.didaskaliaDialogDOM.dialog('close').dialog('open');
+	});
+
 	return Main;
 };
 
@@ -132,6 +145,82 @@ Main.didaskaliaToggle = function() {
 	}
 
 	Main.didaskaliaWrapperDOM.css('display', 'none');
+	return Main;
+};
+
+Main.didaskaliaInsert = function() {
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Main.didaskaliaFormaSetup = function() {
+	Main.didaskaliaFormaDOM = $('#didaskaliaForma');
+	Main.didaskaliaFormaIdDOM = $('#didaskaliaFormaId');
+	Main.didaskaliaFormaOnomateponimoDOM = $('#didaskaliaFormaOnomateponimo');
+
+	Main.didaskaliaDialogDOM = $('#didaskaliaDialog').
+	dialog({
+		'open': Main.didaskaliaDialogOpen,
+		'position': {
+			'my': 'left top',
+			'at': 'left+300 top+120',
+		},
+		'width': 'auto',
+		'resizable': false,
+		'autoOpen': false,
+	});
+
+	Main.didaskaliaFormaDOM.
+	on('submit', Main.didaskaliaFormaSubmit);
+
+	$('#didaskaliaInsert').on('click', function() {
+		if (Main.didaskaliaTrexonDOM)
+		Main.didaskaliaTrexonDOM.removeClass('trexon');
+
+		delete Main.didaskaliaTrexonDOM;
+		Main.
+		didaskaliaFormaClear().
+		didaskaliaDialogDOM.dialog('close').dialog('open');
+	});
+
+	$('#didaskaliaFormaDelete').on('click', function() {
+		if (Main.didaskaliaTrexonDOM)
+		Main.confirmDeleteDOM.dialog('open');
+	});
+
+	Main.didaskaliaFormaCancelDOM = $('#didaskaliaFormaCancel').
+	on('click', function() {
+		Main.didaskaliaDialogDOM.dialog('close');
+	});
+
+	return Main;
+};
+
+Main.didaskaliaDialogOpen = function() {
+	Selida.fareaFix(Main.didaskaliaFormaDOM);
+
+	if (Main.didaskaliaTrexonDOM) {
+		const didaskalia = Main.didaskaliaTrexonDOM.data('didaskalia');
+		Main.didaskaliaFormaIdDOM.
+		prop('disabled', true).
+		val(didaskalia.id);
+		Main.didaskaliaFormaOnomateponimoDOM.
+		val(didaskalia.onomateponimoGet());
+	}
+
+	else {
+		Main.didaskaliaFormaIdDOM.
+		prop('disabled', false).
+		focus();
+	}
+
+	return Main;
+};
+
+Main.didaskaliaFormaClear = function() {
+	Main.didaskaliaFormaIdDOM.val('');
+	Main.didaskaliaFormaOnomateponimoDOM.val('');
+
 	return Main;
 };
 
