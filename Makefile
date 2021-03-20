@@ -17,7 +17,7 @@ push:
 	@git push
 
 git:
-	@if git commit -m "modifications" .; then git push; else exit 0; fi
+	@git commit -m "modifications" .; git push
 
 pull:
 	@git pull
