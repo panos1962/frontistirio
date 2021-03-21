@@ -48,6 +48,10 @@ Selida.isZoom = function() {
 	return Selida.php_REQUEST.hasOwnProperty('zoom');
 };
 
+Selida.noZoom = function() {
+	return !Selida.isZoom();
+};
+
 Selida.toolbarSetup = function() {
 	Selida.toolbarDOM = $('<div>').attr('id', 'toolbar');
 

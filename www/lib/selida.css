@@ -37,6 +37,20 @@ input, textarea {
 	width: 8em;
 }
 
+.mazi {
+	display: inline-block;
+	white-space: nowrap;
+}
+
+.zoom {
+	overflow: hidden !important;
+}
+
+.zoomReturnEndixi {
+	background-color: cyan;
+	cursor: crosshair;
+}
+
 /******************************************************************************/
 
 #toolbar {

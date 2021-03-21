@@ -247,7 +247,7 @@ Main.kathigitisZoomSetup = function() {
 		},
 		'width': 800,
 		'height': 600,
-		'resizable': false,
+		'resizable': true,
 		'autoOpen': false,
 	});
 
@@ -266,8 +266,9 @@ Main.kathigitisZoomOpen = function() {
 };
 
 Main.kathigitisZoomProcess = function (x) {
-	console.log('Zooooooom!', x);
-	return true;
+	Main.didaskaliaFormaIdDOM.val(x.id);
+	Main.didaskaliaFormaOnomateponimoDOM.val(x.onomateponimoGet());
+	Main.kathigitisZoomDialogDOM.dialog('close');
 };
 
 ///////////////////////////////////////////////////////////////////////////////@

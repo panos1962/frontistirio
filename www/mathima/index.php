@@ -65,7 +65,7 @@ body_open();
 <!--
 -->
 
-<div id="kathigitisZoomDialog" title="Πίνακας καθηγητών">
+<div id="kathigitisZoomDialog" class="zoom" title="Πίνακας καθηγητών">
 </div>
 
 <!--

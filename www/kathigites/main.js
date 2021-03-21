@@ -16,8 +16,6 @@ Selida.init.push(function() {
 	setTimeout(function() {
 		Main.eponimoFiltroDOM.focus();
 	}, 100);
-
-	//self.parent.Main[Selida.php_REQUEST['zoom']]();
 });
 
 Main.filtraSetup = function() {
@@ -89,18 +87,29 @@ Main.kathigitesSetup = function() {
 		Main.kathigitisDialogDOM.dialog('close').dialog('open');
 	});
 
-	if (Selida.isZoom())
+	Main.kathigitesZoomSetup();
+	return Main;
+};
+
+Main.kathigitesZoomSetup = function() {
+	if (Selida.noZoom())
+	return Main;
+
+	Selida.zoom = self.parent.Main[Selida.php_REQUEST['zoom']];
+
 	Main.kathigitesDOM.
-	on('click', 'tr > .kathigitisId', function(e) {
+	on('mouseenter', '.zoomReturn', function(e) {
 		e.stopPropagation();
-
-		const kathigitis = $(this).parent().data('kathigitis');
-		const zoom = self.parent.Main[Selida.php_REQUEST['zoom']](kathigitis);
-
-		if (zoom)
-		return self.parent.Main.kathigitisZoomDialogDOM.dialog('close');
+		$(this).addClass('zoomReturnEndixi');
+	}).
+	on('mouseleave', '.zoomReturn', function(e) {
+		e.stopPropagation();
+		$(this).removeClass('zoomReturnEndixi');
+	}).
+	on('click', '.zoomReturn', function(e) {
+		e.stopPropagation();
+		Selida.zoom($(this).parent().data('kathigitis'));
 	});
-
 
 	return Main;
 };
@@ -196,7 +205,7 @@ Kathigitis.prototype.domUpdate = function(dom) {
 	dom.
 	data('kathigitis', this).
 	empty().
-	append($('<td>').addClass('kathigitisId').text(this.id)).
+	append($('<td>').addClass('kathigitisId zoomReturn').text(this.id)).
 	append($('<td>').addClass('kathigitisEgrafi').text(this.egrafi)).
 	append($('<td>').addClass('kathigitiOnomateponimo').text(this.onomateponimoGet())).
 	append($('<td>').addClass('kathigitisGenisi').text(this.genisi)).
