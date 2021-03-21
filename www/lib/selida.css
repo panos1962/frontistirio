@@ -1,9 +1,15 @@
 /******************************************************************************/
 
+html {
+	height: 100%;
+	background-color: salmon;
+}
+
 body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
 	margin: 0;
 	height: 100%;
-	overflow-y: hidden;
 	font-family: "Roboto Condensed", "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 17px;
 	visibility: hidden;

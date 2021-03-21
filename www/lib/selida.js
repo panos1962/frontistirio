@@ -31,8 +31,7 @@ Selida.selidaSetup = function() {
 	Selida.
 	toolbarSetup().
 	ofelimoSetup().
-	ribbonSetup().
-	ofelimoHeightSetup();
+	ribbonSetup();
 
 	setTimeout(function() {
 		Selida.bodyDOM.css({
@@ -208,10 +207,6 @@ Selida.ofelimoSetup = function() {
 	attr('id', 'ofelimo').
 	appendTo(Selida.bodyDOM);
 
-	Selida.windowDOM.on('resize', function() {
-		Selida.ofelimoHeightSetup();
-	});
-
 	return Selida;
 };
 
@@ -226,22 +221,6 @@ Selida.ribbonSetup = function() {
 	append(Selida.ribbonRightDOM = $('<div>').attr('id', 'ribbonRight'));
 
 	Selida.bodyDOM.append(Selida.ribbonDOM);
-	return Selida;
-};
-
-Selida.ofelimoHeightSetup = function() {
-	Selida.bodyDOM.css('overflow-y', 'scroll');
-	Selida.ofelimoDOM.css({
-		'min-height': 0,
-	});
-
-	const th = Selida.isZoom() ? 0 : Selida.toolbarDOM.outerHeight();
-	const rh = Selida.isZoom() ? 0 : Selida.ribbonDOM.outerHeight();
-	const wh = Selida.windowDOM.height();
-	const oh = wh - th - rh;
-
-	Selida.ofelimoDOM.css('min-height', oh + 'px');
-
 	return Selida;
 };
 
