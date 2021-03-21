@@ -33,13 +33,6 @@ Selida.selidaSetup = function() {
 	ofelimoSetup().
 	ribbonSetup();
 
-	setTimeout(function() {
-		Selida.bodyDOM.css({
-			'visibility': 'visible',
-			'overflow-y': 'scroll',
-		});
-	}, 100);
-
 	return Selida;
 };
 
@@ -55,7 +48,7 @@ Selida.toolbarSetup = function() {
 	Selida.toolbarDOM = $('<div>').attr('id', 'toolbar');
 
 	if (Selida.isZoom())
-	Selida.toolbarDOM.css('display', 'none');
+	Selida.toolbarDOM.addClass('zoomHide');
 
 	Selida.toolbarDOM.
 	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
@@ -214,7 +207,7 @@ Selida.ribbonSetup = function() {
 	Selida.ribbonDOM = $('<div>').attr('id', 'ribbon');
 
 	if (Selida.isZoom())
-	Selida.ribbonDOM.css('display', 'none');
+	Selida.ribbonDOM.addClass('zoomHide');
 
 	Selida.ribbonDOM.
 	append(Selida.ribbonLeftDOM = $('<div>').attr('id', 'ribbonLeft')).

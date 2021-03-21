@@ -12,7 +12,6 @@ body {
 	height: 100%;
 	font-family: "Roboto Condensed", "Trebuchet MS", Arial, Helvetica, sans-serif;
 	font-size: 17px;
-	visibility: hidden;
 }
 
 .ui-widget {
@@ -52,9 +51,29 @@ input, textarea {
 	overflow: hidden !important;
 }
 
+/*
+** Η κλάση "zoomReturnEndixi" προστίθεται σε zoom iframes στα πεδία στα οποία
+** το κλικ σηματοδοτεί την επιστροφή στην πατρική σελίδα.
+*/
+
 .zoomReturnEndixi {
 	background-color: cyan;
 	cursor: crosshair;
+}
+
+/*
+** H κλάση "zoomHide" χρησιμοποιείται σχεδόν αποκλειστικά για την απόκρυψη του
+** toolbar και του ribbon σε zoom iframes. Θα μπορούσαμε να χρησιμοποιήσουμε
+** display none, αλλά για λόγους που δεν είναι προφανείς χαλάει η αυτόματη
+** καθ' ύψος έκταση του "ofelimo".
+*/
+
+.zoomHide {
+	padding: 0 !important;
+	margin: 0 !important;
+	border-style: none !important;
+	height: 0 !important;
+	overflow: hidden !important;
 }
 
 /******************************************************************************/
