@@ -66,8 +66,11 @@ input, textarea {
 	padding: 2px;
 	margin: 0 4px;
 
-	transform: rotateY(180deg);
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 
+	transform: rotateY(180deg);
 	background-color: lightgrey;
 	border-radius: 2px;
 	box-shadow: 0.5px 0.5px 1px #000,

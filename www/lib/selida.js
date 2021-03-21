@@ -33,6 +33,38 @@ Selida.selidaSetup = function() {
 	ofelimoSetup().
 	ribbonSetup();
 
+	Selida.bodyDOM.
+	on('keydown', '.zoomInput', function(e) {
+		if (!e.ctrlKey)
+		return true;
+
+		if (e.keyCode != 90)
+		return true;
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		const dialogDOM = $(this).data('zoomDialog');
+
+		if (dialogDOM.dialog('isOpen'))
+		dialogDOM.dialog('close');
+
+		else
+		dialogDOM.dialog('open');
+	}).
+	on('click', '.zoomHandler', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		const dialogDOM = $(this).data('zoomDialog');
+
+		if (dialogDOM.dialog('isOpen'))
+		dialogDOM.dialog('close');
+
+		else
+		dialogDOM.dialog('open');
+	});
+
 	return Selida;
 };
 
@@ -304,37 +336,14 @@ Selida.formSuspend = function(forma, suspend) {
 
 Selida.zoomSet = function(inputDOM, dialogDOM, click = true) {
 	inputDOM.
-	on('keydown', function(e) {
-		if (!e.ctrlKey)
-		return true;
-
-		if (e.keyCode != 90)
-		return true;
-
-		e.preventDefault();
-		e.stopPropagation();
-
-		if (dialogDOM.dialog('isOpen'))
-		dialogDOM.dialog('close');
-
-		else
-		dialogDOM.dialog('open');
-	});
+	data('zoomDialog', dialogDOM).
+	addClass('zoomInput');
 
 	if (click)
 	$('<div>').
+	data('zoomDialog', dialogDOM).
 	addClass('zoomHandler').
 	html('&#8689;').
-	on('click', function(e) {
-		e.preventDefault();
-		e.stopPropagation();
-
-		if (dialogDOM.dialog('isOpen'))
-		dialogDOM.dialog('close');
-
-		else
-		dialogDOM.dialog('open');
-	}).
 	insertAfter(inputDOM);
 
 	return Selida;
