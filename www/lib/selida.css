@@ -6,14 +6,8 @@ html {
 
 body {
 	display: grid;
-	grid-template-areas:
-		'toolbar'
-		'ofelimo'
-		'ribbon';
-	grid-template-rows:
-		auto
-		1fr
-		auto;
+	grid-template-areas: 'toolbar' 'ofelimo' 'ribbon';
+	grid-template-rows: auto 1fr auto;
 	margin: 0;
 	height: 100%;
 	font-family: "Roboto Condensed", "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -67,15 +61,29 @@ input, textarea {
 	cursor: crosshair;
 }
 
+.zoomHandler {
+	display: inline-block;
+	padding: 2px;
+	margin: 0 4px;
+
+	transform: rotateY(180deg);
+
+	background-color: lightgrey;
+	border-radius: 2px;
+	box-shadow: 0.5px 0.5px 1px #000,
+		-0.5px -0.5px 1px #9c9c9c;
+
+	cursor: pointer;
+}
+
 /******************************************************************************/
 
 #toolbar {
 	grid-area: toolbar;
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-areas: 'left center right';
+	grid-template-columns: auto 1fr auto;
 	padding: 4px;
-background-color: #ffeaae;
-background-color: ivory;
 	border-style: none none solid none;
 	border-width: 2px;
 	border-color: grey;
@@ -86,17 +94,21 @@ background-color: ivory;
 }
 
 #toolbarLeft {
+	grid-area: left;
 	text-align: left;
 }
 
-#toolbarLeft:before {
-	content: '\200B';
+#toolbarCenter {
+	grid-area: center;
+	text-align: center;
 }
 
 #toolbarRight {
+	grid-area: right;
 	text-align: right;
 }
 
+#toolbarLeft:before,
 #toolbarRight:after {
 	content: '\200B';
 }
@@ -106,10 +118,9 @@ background-color: ivory;
 #ribbon {
 	grid-area: ribbon;
 	display: grid;
-	grid-template-columns: auto auto;
+	grid-template-areas: 'left center right';
+	grid-template-columns: auto 1fr auto;
 	padding: 4px;
-background-color: #ffeaae;
-background-color: ivory;
 	border-style: solid none none none;
 	border-width: 2px;
 	border-color: grey;
@@ -120,17 +131,21 @@ background-color: ivory;
 }
 
 #ribbonLeft {
+	grid-area: left;
 	text-align: left;
 }
 
-#ribbonLeft:before {
-	content: '\200B';
+#ribbonCenter {
+	grid-area: center;
+	text-align: center;
 }
 
 #ribbonRight {
+	grid-area: right;
 	text-align: right;
 }
 
+#ribbonLeft:before,
 #toolbarRight:after {
 	content: '\200B';
 }
@@ -156,8 +171,12 @@ background-color: ivory;
 #ofelimo {
 	grid-area: ofelimo;
 	position: relative;
-background-color: #e7fffe;
-background-color: ivory;
+}
+
+#toolbar,
+#ribbon,
+#ofelimo {
+	background-color: ivory;
 }
 
 /******************************************************************************/

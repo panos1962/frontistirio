@@ -6,10 +6,10 @@ Selida.init.push(function() {
 	Main.
 	mathimaMust().
 	toolbarSetup().
+	kathigitisZoomSetup().
 	mathimaSetup().
 	didaskaliaSetup().
 	didaskaliaFormaSetup().
-	kathigitisZoomSetup().
 	simetoxiSetup().
 	postSetup();
 
@@ -73,6 +73,45 @@ Main.toolbarSetup = function() {
 	}));
 
 	return Main;
+};
+
+///////////////////////////////////////////////////////////////////////////////@
+
+Main.kathigitisZoomSetup = function() {
+	Main.kathigitisZoomDialogDOM = $('#kathigitisZoomDialog').
+	dialog({
+		'open': Main.kathigitisZoomOpen,
+		'close': function() {
+			Main.kathigitisZoomDialogDOM.empty();
+		},
+		'position': {
+			'my': 'right top',
+			'at': 'right-80 top+50',
+		},
+		'width': 800,
+		'height': 600,
+		'resizable': true,
+		'autoOpen': false,
+	});
+
+	return Main;
+};
+
+Main.kathigitisZoomOpen = function() {
+	$('<iframe>').
+	attr({
+		'id': 'kathigitisZoomIframe',
+		'src': Selida.baseUrl + '/kathigites?zoom=kathigitisZoomProcess',
+	}).
+	appendTo(Main.kathigitisZoomDialogDOM);
+
+	return Main;
+};
+
+Main.kathigitisZoomProcess = function (x) {
+	Main.didaskaliaFormaIdDOM.val(x.id);
+	Main.didaskaliaFormaOnomateponimoDOM.val(x.onomateponimoGet());
+	Main.kathigitisZoomDialogDOM.dialog('close');
 };
 
 ///////////////////////////////////////////////////////////////////////////////@
@@ -156,14 +195,8 @@ Main.didaskaliaInsert = function() {
 
 Main.didaskaliaFormaSetup = function() {
 	Main.didaskaliaFormaDOM = $('#didaskaliaForma');
-	Main.didaskaliaFormaIdDOM = $('#didaskaliaFormaId').
-	on('keydown', function(e) {
-		if (e.ctrlKey && (e.keyCode == 90)) {
-			e.preventDefault();
-			Main.kathigitisZoomDialogDOM.dialog('open');
-			return false;
-		}
-	});
+	Main.didaskaliaFormaIdDOM = $('#didaskaliaFormaId');
+	Selida.zoomSet(Main.didaskaliaFormaIdDOM, Main.kathigitisZoomDialogDOM);
 	Main.didaskaliaFormaOnomateponimoDOM = $('#didaskaliaFormaOnomateponimo');
 
 	Main.didaskaliaDialogDOM = $('#didaskaliaDialog').
@@ -230,45 +263,6 @@ Main.didaskaliaFormaClear = function() {
 	Main.didaskaliaFormaOnomateponimoDOM.val('');
 
 	return Main;
-};
-
-///////////////////////////////////////////////////////////////////////////////@
-
-Main.kathigitisZoomSetup = function() {
-	Main.kathigitisZoomDialogDOM = $('#kathigitisZoomDialog').
-	dialog({
-		'open': Main.kathigitisZoomOpen,
-		'close': function() {
-			Main.kathigitisZoomDialogDOM.empty();
-		},
-		'position': {
-			'my': 'right top',
-			'at': 'right-80 top+50',
-		},
-		'width': 800,
-		'height': 600,
-		'resizable': true,
-		'autoOpen': false,
-	});
-
-	return Main;
-};
-
-Main.kathigitisZoomOpen = function() {
-	$('<iframe>').
-	attr({
-		'id': 'kathigitisZoomIframe',
-		'src': Selida.baseUrl + '/kathigites?zoom=kathigitisZoomProcess',
-	}).
-	appendTo(Main.kathigitisZoomDialogDOM);
-
-	return Main;
-};
-
-Main.kathigitisZoomProcess = function (x) {
-	Main.didaskaliaFormaIdDOM.val(x.id);
-	Main.didaskaliaFormaOnomateponimoDOM.val(x.onomateponimoGet());
-	Main.kathigitisZoomDialogDOM.dialog('close');
 };
 
 ///////////////////////////////////////////////////////////////////////////////@

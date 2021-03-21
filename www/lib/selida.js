@@ -52,6 +52,7 @@ Selida.toolbarSetup = function() {
 
 	Selida.toolbarDOM.
 	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
+	append(Selida.toolbarCenterDOM = $('<div>').attr('id', 'toolbarCenter')).
 	append(Selida.toolbarRightDOM = $('<div>').attr('id', 'toolbarRight'));
 
 	Selida.bodyDOM.append(Selida.toolbarDOM);
@@ -211,6 +212,7 @@ Selida.ribbonSetup = function() {
 
 	Selida.ribbonDOM.
 	append(Selida.ribbonLeftDOM = $('<div>').attr('id', 'ribbonLeft')).
+	append(Selida.ribbonCenterDOM = $('<div>').attr('id', 'ribbonCenter')).
 	append(Selida.ribbonRightDOM = $('<div>').attr('id', 'ribbonRight'));
 
 	Selida.bodyDOM.append(Selida.ribbonDOM);
@@ -298,6 +300,45 @@ Selida.formSuspend = function(forma, suspend) {
 	forma.find('input').prop('disabled', suspend);
 };
 
+///////////////////////////////////////////////////////////////////////////////@
+
+Selida.zoomSet = function(inputDOM, dialogDOM, click = true) {
+	inputDOM.
+	on('keydown', function(e) {
+		if (!e.ctrlKey)
+		return true;
+
+		if (e.keyCode != 90)
+		return true;
+
+		e.preventDefault();
+		e.stopPropagation();
+
+		if (dialogDOM.dialog('isOpen'))
+		dialogDOM.dialog('close');
+
+		else
+		dialogDOM.dialog('open');
+	});
+
+	if (click)
+	$('<div>').
+	addClass('zoomHandler').
+	html('&#8689;').
+	on('click', function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+
+		if (dialogDOM.dialog('isOpen'))
+		dialogDOM.dialog('close');
+
+		else
+		dialogDOM.dialog('open');
+	}).
+	insertAfter(inputDOM);
+
+	return Selida;
+};
 
 ///////////////////////////////////////////////////////////////////////////////@
 

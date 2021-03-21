@@ -10,6 +10,10 @@ body {
 	background-color: #c2e8fb;
 }
 
+#toolbarCenter {
+	background-color: #e2926b;
+}
+
 #toolbarRight {
 	background-color: #86da86;
 }
@@ -24,6 +28,10 @@ body {
 
 #ribbonLeft {
 	background-color: #c2e8fb;
+}
+
+#ribbonCenter {
+	background-color: #e2926b;
 }
 
 #ribbonRight {
