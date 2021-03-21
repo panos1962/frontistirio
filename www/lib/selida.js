@@ -48,7 +48,7 @@ Selida.toolbarSetup = function() {
 	Selida.toolbarDOM = $('<div>').attr('id', 'toolbar');
 
 	if (Selida.isZoom())
-	Selida.toolbarDOM.addClass('zoomHide');
+	Selida.toolbarDOM.css('display', 'none');
 
 	Selida.toolbarDOM.
 	append(Selida.toolbarLeftDOM = $('<div>').attr('id', 'toolbarLeft')).
@@ -207,7 +207,7 @@ Selida.ribbonSetup = function() {
 	Selida.ribbonDOM = $('<div>').attr('id', 'ribbon');
 
 	if (Selida.isZoom())
-	Selida.ribbonDOM.addClass('zoomHide');
+	Selida.ribbonDOM.css('display', 'none');
 
 	Selida.ribbonDOM.
 	append(Selida.ribbonLeftDOM = $('<div>').attr('id', 'ribbonLeft')).

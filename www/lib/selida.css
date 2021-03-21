@@ -2,12 +2,18 @@
 
 html {
 	height: 100%;
-	background-color: salmon;
 }
 
 body {
 	display: grid;
-	grid-template-rows: auto 1fr auto;
+	grid-template-areas:
+		'toolbar'
+		'ofelimo'
+		'ribbon';
+	grid-template-rows:
+		auto
+		1fr
+		auto;
 	margin: 0;
 	height: 100%;
 	font-family: "Roboto Condensed", "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -61,24 +67,10 @@ input, textarea {
 	cursor: crosshair;
 }
 
-/*
-** H κλάση "zoomHide" χρησιμοποιείται σχεδόν αποκλειστικά για την απόκρυψη του
-** toolbar και του ribbon σε zoom iframes. Θα μπορούσαμε να χρησιμοποιήσουμε
-** display none, αλλά για λόγους που δεν είναι προφανείς χαλάει η αυτόματη
-** καθ' ύψος έκταση του "ofelimo".
-*/
-
-.zoomHide {
-	padding: 0 !important;
-	margin: 0 !important;
-	border-style: none !important;
-	height: 0 !important;
-	overflow: hidden !important;
-}
-
 /******************************************************************************/
 
 #toolbar {
+	grid-area: toolbar;
 	display: grid;
 	grid-template-columns: auto auto;
 	padding: 4px;
@@ -112,6 +104,7 @@ background-color: ivory;
 /******************************************************************************/
 
 #ribbon {
+	grid-area: ribbon;
 	display: grid;
 	grid-template-columns: auto auto;
 	padding: 4px;
@@ -161,6 +154,7 @@ background-color: ivory;
 /******************************************************************************/
 
 #ofelimo {
+	grid-area: ofelimo;
 	position: relative;
 background-color: #e7fffe;
 background-color: ivory;
