@@ -14,7 +14,6 @@ body_open();
 <div id="mathimaApo"></div>
 <div id="mathimaEos"></div>
 </div>
-</div>
 
 <div id="didaskaliaWrapper">
 <div class="epikefalida">
@@ -27,8 +26,7 @@ body_open();
 <input class="panelButton" type="submit" value="Go!">
 <input class="panelButton" id="didaskaliaInsert" type="button" value="Προσθήκη">
 </form>
-<table id="didaskalia">
-</table>
+<table id="didaskalia"></table>
 </div>
 
 <!--

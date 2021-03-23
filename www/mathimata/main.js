@@ -12,16 +12,12 @@ Selida.init.push(function() {
 	filtraSetup().
 	mathimaSetup().
 	mathimataSetup();
+	Main.perigrafiFiltroDOM.focus();
 
-	setTimeout(function() {
-		if (Selida.debug) {
-			Main.idFiltroDOM.val('100002');
-			Main.filtraDOM.trigger('submit');
-		}
-
-		else
-		Main.perigrafiFiltroDOM.focus();
-	}, 100);
+	if (Selida.debug) {
+		Main.idFiltroDOM.val('100002');
+		Main.filtraDOM.trigger('submit');
+	}
 });
 
 Main.filtraSetup = function() {
